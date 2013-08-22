@@ -70,7 +70,7 @@ body h5 {text-transform: none; font-size:13px; line-height: 0px;}
 
 .tagline { color: #34495e; font-weight: 400;}
 .post h2 {font-weight:500; font-size: 40px; margin-top: 0;}
-.post article {padding-left: 0; padding-right: 0;}
+.post article {padding: 0 0 0 10px;}
 .date-time {
   font-size: 16px;
   color: #34495e;
@@ -82,7 +82,7 @@ body h5 {text-transform: none; font-size:13px; line-height: 0px;}
 }
 
 .post header { margin: 1em 0 0; }
-.post, .article footer {
+.post {
   border-top: 1px solid #e69411;
   padding: 1em 0;
 }
