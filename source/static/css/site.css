@@ -55,6 +55,9 @@ body h5 {text-transform: none; font-size:13px; line-height: 0px;}
   padding-top: 20px;
   color: #fff;
 }
+.navbar-nav>li {
+  float: left;
+}
 .navbar-nav > li > a {
   margin-top: 10px;
   color: #fff;}
