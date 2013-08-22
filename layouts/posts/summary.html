@@ -1,0 +1,19 @@
+<div class="post col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+  <article>
+    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
+      <h2><a href='{{ .Permalink }}'>{{ .Title }}</a></h2>
+       <p>{{ .Summary }}</p>
+    </div>
+    <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
+      {{ template "shortcodes/datetime.html" . }}
+      {{ range .Params.categories }}
+        <a href="/categories/{{ . }}/"><span class="badge">{{ . }}</span></a>
+      {{ end }}
+    </div>
+    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
+      <footer>
+        <a href='{{ .Permalink }}' class="pull-right"><nobr>Read more <i class="icon-long-arrow-right"></i></nobr></a>
+      </footer>
+    </div>
+  </article>
+</div>

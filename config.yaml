@@ -1,0 +1,10 @@
+---
+indexes:
+  posts: "posts"
+  categories: "categories"
+baseurl: 'http://rosslawley.co.uk'
+contentdir: "source"
+staticdir: "source/static"
+layoutdir: "layouts"
+publishdir: "public"
+...
