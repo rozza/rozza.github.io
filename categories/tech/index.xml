@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Tech on  </title>
+    <link>http://rosslawley.co.uk/categories/tech/index.xml</link>
+    <language>en-gb</language>
+    <author>Ross Lawley</author>
+    <rights>Copyright (c) 2013, Ross Lawley; all rights reserved.</rights>
+    <updated>2013-07-31 00:00:00 &#43;0000 UTC</updated>
+    
+    <item>
+      <title>Switching to Sublime Text 3</title>
+      <link>http://rosslawley.co.uk/posts/switching-to-sublimetext-3</link>
+      <pubDate>Wed, 31 Jul 2013 00:00:00 UTC</pubDate>
+      <author>Ross Lawley</author>
+      <guid>http://rosslawley.co.uk/posts/switching-to-sublimetext-3</guid>
+      <description>&lt;p&gt;For a long while I&amp;rsquo;ve been a huge fan of &lt;a href=&#34;http://www.sublimetext.com/&#34;&gt;Sublime Text 2&lt;/a&gt;,
+its easy to use and has a wealth of features that can be installed by the
+awesome &lt;a href=&#34;http://wbond.net/sublime_packages/package_control&#34;&gt;package control&lt;/a&gt;
+system. I use it for all python development and any adhoc file work, infact I
+only abandon it for my scala work - where IntelliJ wins.&lt;/p&gt;
+
+&lt;p&gt;Sublime Text 3 (ST3) has been in beta for six months, and over that time its
+plugin ecosystem has matured.  After experiencing some slow downs in
+Sublime Text 2 (ST2) I thought it was time to upgrade to an even more
+sublime experience.&lt;/p&gt;
+
+&lt;h2&gt;5 step migration to Sublime Text 3&lt;/h2&gt;
+
+&lt;p&gt;First off there is &lt;strong&gt;no risk&lt;/strong&gt; in trying to upgrade, it has a different app
+name to ST2 and its configurations are in a different directory. In short you
+can have both installed and living happily.&lt;/p&gt;
+
+&lt;h3&gt;1. Can I upgrade?&lt;/h3&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Goto the awesome &lt;a href=&#34;http://www.caniswitchtosublimetext3.com/&#34;&gt;Can I Switch To Sublime Text 3?&lt;/a&gt;
+website and check your packages.  Its probably not a goer if your most used
+plugin doesn&amp;rsquo;t work in ST3, but do check out alternatives as many packages
+have already been updated and do now work with ST3.  My results were as
+follows:&lt;/p&gt;
+
+&lt;p class=&#34;text-center&#34;&gt;
+&lt;img src=&#34;http://rosslawley.co.uk/images/ready_for_sublime.png&#34;
+&lt;/p&gt;
+
+&lt;p&gt;I had one fail but when looking at the package reposititory it suggested an
+ST3 alternative for a python code intel tool that would work (SublimeJEDI) -
+so I was good to go.&lt;/p&gt;
+
+&lt;h3&gt;2. Install package control and packages&lt;/h3&gt;
+
+&lt;p&gt;Its easy to install package control, just checkout the
+&lt;a href=&#34;http://wbond.net/sublime_packages/package_control/installation#ST3&#34;&gt;instructions&lt;/a&gt;.
+Once installed, open package control and install all the green packages
+mentioned on the can I switch website.&lt;/p&gt;
+
+&lt;p&gt;Don&amp;rsquo;t be tempted to use package control for the yellow packages - as it will
+install the ST2 versions which won&amp;rsquo;t work.  Instead you will need to
+manually install - this usually is simple and only involves cloning the
+plugin repository into your packages directory and then checking out an
+ST3 compatible branch.  Its no real hardship - so go for it.&lt;/p&gt;
+
+&lt;h3&gt;3. Migrate settings&lt;/h3&gt;
+
+&lt;p&gt;Once all the packages are installed, its time to get ST3 as comfy as you had
+ST2.  To do this copy and paste your user settings from:
+&lt;code&gt;Preferences -&amp;gt; Settings -&amp;gt; User&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Then copy any language specific settings and snippets you have from the User
+directory of ST2 into the User directory of ST3 eg:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cp ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User/Python.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Python.sublime-settings
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;4. Update the subl helper:&lt;/h3&gt;
+
+&lt;p&gt;Remove / rename any symlinked helpers then:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo ln -s &amp;quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&amp;quot; /usr/bin/subl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;5. Profit!&lt;/h3&gt;
+
+&lt;p&gt;Easy eh?  You now have ST3 configured as you are used to and if anything
+is buggy (&lt;em&gt;it is still in a beta&lt;/em&gt;) you can easily switch back to ST2.&lt;/p&gt;
+
+&lt;p&gt;My initial impressions are its &lt;strong&gt;&lt;em&gt;much faster&lt;/em&gt;&lt;/strong&gt; and I haven&amp;rsquo;t hit any bugs yet,
+so I&amp;rsquo;m a happy bunny. But if you need more convincing - heres some extra reasons
+to make the switch:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Speed.
+Startup time, file load time, and Replace All have all been
+significantly improved.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Improved Project and Pane management.
+Working with multiple panes is now more efficient, with commands to
+create and destroy panes, and quickly move files between panes.  Also
+you can now have multiple workspaces per project.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Better Symbol Indexing.
+Allows goto definitions and goto symbol in a project, as well as new
+jump forward and jump back features.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Need some more reasons? Check out the original
+&lt;a href=&#34;http://www.sublimetext.com/blog/articles/sublime-text-3-beta&#34;&gt;Sublime Text 3 announcement&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;So if you are on Sublime Text 2 then download Sublime Text 3 and see if
+you can make the switch today.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using MongoDB to find the most popular pub names!</title>
+      <link>http://rosslawley.co.uk/posts/the-most-popular-pub-name</link>
+      <pubDate>Tue, 23 Jul 2013 00:00:00 UTC</pubDate>
+      <author>Ross Lawley</author>
+      <guid>http://rosslawley.co.uk/posts/the-most-popular-pub-name</guid>
+      <description>&lt;p&gt;Earlier in the year I gave a talk at &lt;a href=&#34;http://www.10gen.com/events/mongodb-london-2013&#34;&gt;MongoDB London&lt;/a&gt;
+about the different aggregation options with MongoDB.  The topic recently came up again
+in conversation at a user group, so I thought it deserved a blog post.&lt;/p&gt;
+
+&lt;h2&gt;Gathering ideas for the talk&lt;/h2&gt;
+
+&lt;p&gt;I wanted to give a more interesting aggregation talk than the standard
+&amp;ldquo;counting words in text&amp;rdquo;, and as the &lt;a href=&#34;http://docs.mongodb.org/manual/core/aggregation/&#34;&gt;aggregation framework&lt;/a&gt; gained shiny &lt;a href=&#34;http://docs.mongodb.org/manual/core/2dsphere/&#34;&gt;2dsphere geo&lt;/a&gt; support in
+&lt;a href=&#34;http://docs.mongodb.org/manual/release-notes/2.4/#new-geospatial-indexes-with-geojson-and-improved-spherical-geometry&#34;&gt;2.4&lt;/a&gt;, I figured I&amp;rsquo;d use that. I just needed a topic&amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;What are us Brits focused on?&lt;/h3&gt;
+
+&lt;p&gt;Two things immediately sprang to mind: &lt;strong&gt;weather&lt;/strong&gt; and &lt;strong&gt;beer&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;I opted to focus on something close to my heart: &lt;strong&gt;beer&lt;/strong&gt; :)
+But what to aggregate about beer? Then I remembered an old pub quiz favourite&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the most popular pub name in the UK?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I know there is some great open data, including a wealth of information
+on pubs available from the awesome &lt;a href=&#34;http://www.openstreetmap.org/&#34;&gt;open street map&lt;/a&gt;
+project.  I just need to get at it and happily the &lt;a href=&#34;http://www.overpass-api.de&#34;&gt;Overpass-api&lt;/a&gt;
+provides a simple &amp;ldquo;xapi&amp;rdquo; interface for OSM data.
+All I needed was anything tagged with &lt;code&gt;amenity=pub&lt;/code&gt; within in the
+bounds of the UK and with their xapi interface this is as simple as a wget:
+&lt;code&gt;http://www.overpass-api.de/api/xapi?*[amenity=pub][bbox=-10.5,49.78,1.78,59]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Once I had an osm file I used the &lt;a href=&#34;http://imposm.org/&#34;&gt;imposm python library&lt;/a&gt; to
+parse the xml and then convert it to following GeoJSON format:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&#34;javascript&#34;&gt;{
+  &#34;_id&#34; : 451152,
+  &#34;amenity&#34; : &#34;pub&#34;,
+  &#34;name&#34; : &#34;The Dignity&#34;,
+  &#34;addr:housenumber&#34; : &#34;363&#34;,
+  &#34;addr:street&#34; : &#34;Regents Park Road&#34;,
+  &#34;addr:city&#34; : &#34;London&#34;,
+  &#34;addr:postcode&#34; : &#34;N3 1DH&#34;,
+  &#34;toilets&#34; : &#34;yes&#34;,
+  &#34;toilets:access&#34; : &#34;customers&#34;,
+  &#34;location&#34; : {
+      &#34;type&#34; : &#34;Point&#34;,
+      &#34;coordinates&#34; : [-0.1945732, 51.6008172]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then it was a case of simply inserting it as a document into MongoDB. I
+quickly noticed that the data needed a little cleaning, as I was seeing duplicate
+pub names, for example: &amp;ldquo;The Red Lion&amp;rdquo; and &amp;ldquo;Red Lion&amp;rdquo;.  Because I wanted to make
+a wordle I normalised all the pub names.&lt;/p&gt;
+
+&lt;p&gt;If you want to know more about the importing process, the full loading code is
+available on github: &lt;a href=&#34;https://github.com/rozza/pubnames/blob/master/osm2mongo.py&#34;&gt;osm2mongo.py&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Top pub names&lt;/h2&gt;
+
+&lt;p&gt;It turns out finding the most popular pub names is very simple with the
+aggregation framework.  Just group by the name and then sum up all the occurrences.
+To get the top five most popular pub names we sort by the summed value and then
+limit to 5:&lt;/p&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;col-md-6 col-lg-6&#34;&gt;
+&lt;pre&gt;
+&lt;code class=&#34;javascript&#34;&gt;db.pubs.aggregate([
+  {&#34;$group&#34;:
+     {&#34;_id&#34;: &#34;$name&#34;,
+      &#34;value&#34;: {&#34;$sum&#34;: 1}
+     }
+  },
+  {&#34;$sort&#34;: {&#34;value&#34;: -1}},
+  {&#34;$limit&#34;: 5}
+]);
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;col-md-6 col-lg-6&#34;&gt;
+For the whole of the UK this returns:
+
+&lt;ol&gt;
+&lt;li&gt;The Red Lion&lt;/li&gt;
+&lt;li&gt;The Royal Oak&lt;/li&gt;
+&lt;li&gt;The Crown&lt;/li&gt;
+&lt;li&gt;The White Hart&lt;/li&gt;
+&lt;li&gt;The White Horse&lt;/li&gt;
+&lt;/ol&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p class=&#34;text-center&#34;&gt;
+  &lt;img src=&#34;http://rosslawley.co.uk/images/pubs_wordle.png&#34;&lt;br&gt;
+&lt;/p&gt;
+
+&lt;h2&gt;Top pub names near you&lt;/h2&gt;
+
+&lt;p&gt;At MongoDB London I thought that was too easy, so filtered to find the top pub
+names near the conference and showing off some of the geo functionality that became
+available in MongoDB 2.4.  To limit the result set match and ensure the
+location is within a 2 mile radius by using &lt;code&gt;$centreSphere&lt;/code&gt;. Just provide the
+coordinates &lt;code&gt;[ &amp;lt;long&amp;gt;, &amp;lt;lat&amp;gt; ]&lt;/code&gt; and a radius of roughly 2 miles
+(3959 is approximately the radius of the earth, so divide it by 2):
+&lt;pre&gt;
+&lt;code class=&#34;javascript&#34;&gt;db.pubs.aggregate([
+    { &amp;ldquo;$match&amp;rdquo; : { &amp;ldquo;location&amp;rdquo;:
+                 { &amp;ldquo;$within&amp;rdquo;:
+                   { &amp;ldquo;$text-centerSphere&amp;rdquo;: [[-0.12, 51.516], 2 / 3959] }}}
+    },
+    { &amp;ldquo;$group&amp;rdquo; :
+       { &amp;ldquo;_id&amp;rdquo; : &amp;ldquo;$name&amp;rdquo;,
+         &amp;ldquo;value&amp;rdquo; : { &amp;ldquo;$sum&amp;rdquo; : 1 } }
+    },
+    { &amp;ldquo;$sort&amp;rdquo; : { &amp;ldquo;value&amp;rdquo; : -1 } },
+    { &amp;ldquo;$limit&amp;rdquo; : 5 }
+  ]);
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+
+&lt;h2&gt;What about where I live?&lt;/h2&gt;
+
+&lt;p&gt;At the conference I looked the most popular pub name near the conference.  Thats
+great if you happen to live in the centre of London but what about everyone else
+in the UK? So for this blog post I decided to update the demo code and make it
+dynamic based on where you live.&lt;/p&gt;
+
+&lt;p&gt;See: &lt;a href=&#34;http://pubnames.rosslawley.co.uk&#34;&gt;pubnames.rosslawley.co.uk&lt;/a&gt; &lt;br&gt;(It may take
+some time for the heroku dyno to wake, so please be patient!)&lt;/p&gt;
+
+&lt;p&gt;Apologies for those outside the UK - the demo app doesn&amp;rsquo;t have data for the
+whole world - its surely possible to do, I just lacked the patience to download
+it all!&lt;/p&gt;
+
+&lt;h2&gt;Cheers&lt;/h2&gt;
+
+&lt;p class=&#34;text-center&#34;&gt;
+  &lt;img src=&#34;http://rosslawley.co.uk/images/almurray.jpg&#34; title=&#34;Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946&#34; /&gt; &lt;br&gt;
+  &lt;small&gt; Source: &lt;a href=&#34;http://www.flickr.com/photos/bradfordtheatres/3063899946&#34;/&gt;http://www.flickr.com/photos/bradfordtheatres/3063899946&lt;/a&gt;&lt;/small&gt;
+&lt;/p&gt;
+
+&lt;p&gt;All the code is available in my repo on &lt;a href=&#34;https://github.com/rozza/pubnames&#34;&gt;github&lt;/a&gt;
+including the bson file of the pubs and the wordle code - so fork it and start
+playing with MongoDB&amp;rsquo;s great geo features!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>mongoengine 0.8.0</title>
+      <link>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-dot-0</link>
+      <pubDate>Mon, 20 May 2013 00:00:00 UTC</pubDate>
+      <author>Ross Lawley</author>
+      <guid>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-dot-0</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m really pleased to annouce the release of
+&lt;a href=&#34;https://pypi.python.org/pypi/mongoengine/0.8.0&#34;&gt;MongoEngine 0.8.0&lt;/a&gt;.
+Its been a &lt;em&gt;long process&lt;/em&gt; due to work and life commitments but the latest version
+of MongoEngine is here.&lt;/p&gt;
+
+&lt;h2&gt;Whats changed?&lt;/h2&gt;
+
+&lt;p&gt;There have been loads of fixes, improvements and changes in 0.8.
+The headliners are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Minimum requirements are python 2.6+ and pymongo 2.5+&lt;/li&gt;
+&lt;li&gt;Inheritance now off by default&lt;/li&gt;
+&lt;li&gt;Inherited documents store &lt;code&gt;_cls&lt;/code&gt; not &lt;code&gt;_types&lt;/code&gt; (preventing auto creation of
+multikey indexes)&lt;/li&gt;
+&lt;li&gt;Querysets are immutable and now return clones&lt;/li&gt;
+&lt;li&gt;New Geo Fields supporting mongodb 2.4 new &amp;ldquo;2dSphere&amp;rdquo; indexes&lt;/li&gt;
+&lt;li&gt;New context managers for switching collections or databases on the fly as
+well as turning off dereferencing&lt;/li&gt;
+&lt;li&gt;Django support improved (now supports Django 1.5.1, groups and permissions)&lt;/li&gt;
+&lt;li&gt;Performance improvements, back to the same performance as 0.4&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And much, much more!&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;See the full &lt;a href=&#34;http://docs.mongoengine.org/en/latest/changelog.html#changes-in-0-8-0&#34;&gt;changelog&lt;/a&gt;
+for all changes or check &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/&#34;&gt;github&lt;/a&gt; to see the
+&lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;amp;page=1&amp;amp;state=closed&#34;&gt;96 tickets&lt;/a&gt;
+that have been fixed as part of this release.&lt;/p&gt;
+
+&lt;h2&gt;Whats next?&lt;/h2&gt;
+
+&lt;p&gt;There are a number of ideas on &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=6&#34;&gt;github&lt;/a&gt; for 0.9.  I&amp;rsquo;m looking for people to help with the administration and coding
+of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>MongoEngine 0.8 RC1 Released</title>
+      <link>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-rc1-released</link>
+      <pubDate>Wed, 01 May 2013 00:00:00 UTC</pubDate>
+      <author>Ross Lawley</author>
+      <guid>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-rc1-released</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Notice:&lt;/strong&gt; 0.8.0RC3 has been released fixing a couple of small bugs and extra improvements.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Notice:&lt;/strong&gt; 0.8.0RC2 has been released fixing an obscure queryset cursor cloning issue.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m really pleased to annouce the release candidate for &lt;a href=&#34;https://pypi.python.org/pypi/mongoengine/0.8.0RC1&#34;&gt;MongoEngine 0.8&lt;/a&gt;!
+Its been a &lt;em&gt;long process&lt;/em&gt; due to work and life commitments but the latest version
+of MongoEngine is ready for testing and feedback.&lt;/p&gt;
+
+&lt;h2&gt;Why a release candidate?&lt;/h2&gt;
+
+&lt;p&gt;There have been massive changes in the internals, requiring thought and
+&lt;strong&gt;testing&lt;/strong&gt; before upgrading and releasing to the wild - so please
+read the &lt;a href=&#34;http://docs.mongoengine.org/en/latest/upgrade.html#to-0-8&#34;&gt;upgrade&lt;/a&gt;
+docs carefully!&lt;/p&gt;
+
+&lt;p&gt;The changes are worth it and make using &lt;a href=&#34;http://mongoengine.org&#34;&gt;MongoEngine&lt;/a&gt;
+even better.&lt;/p&gt;
+
+&lt;p&gt;Please test 0.8.0RC1 on your test systems and staging systems and any feedback
+please email the &lt;a href=&#34;https://groups.google.com/group/mongoengine-users&#34;&gt;user group&lt;/a&gt;
+or if you&amp;rsquo;d prefer to message me directly you can via
+&lt;a href=&#34;https://github.com/rozza&#34;&gt;https://github.com/rozza&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Whats changed?&lt;/h2&gt;
+
+&lt;p&gt;There have been loads of fixes, improvements and changes in 0.8.
+The headliners are:&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Minimum requirements are python 2.6+ and pymongo 2.5+&lt;/li&gt;
+&lt;li&gt;Inheritance now off by default&lt;/li&gt;
+&lt;li&gt;Inherited documents store &lt;code&gt;_cls&lt;/code&gt; not &lt;code&gt;_types&lt;/code&gt; (preventing auto creation of
+multikey indexes)&lt;/li&gt;
+&lt;li&gt;Querysets are immutable and now return clones&lt;/li&gt;
+&lt;li&gt;New Geo Fields supporting mongodb 2.4 new &amp;ldquo;2dSphere&amp;rdquo; indexes&lt;/li&gt;
+&lt;li&gt;New context managers for switching collections or databases on the fly as
+well as turning off dereferencing&lt;/li&gt;
+&lt;li&gt;Django support improved (now supports Django 1.5.1, groups and permissions)&lt;/li&gt;
+&lt;li&gt;Performance improvements, back to the same performance as 0.4&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And much, much more! See the full &lt;a href=&#34;http://docs.mongoengine.org/en/latest/changelog.html#changes-in-0-8-0&#34;&gt;changelog&lt;/a&gt;
+for all changes or check &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/&#34;&gt;github&lt;/a&gt; to see the
+&lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;amp;page=1&amp;amp;state=closed&#34;&gt;84 tickets&lt;/a&gt;
+that have been fixed as part of this release.&lt;/p&gt;
+
+&lt;h2&gt;Try it now!&lt;/h2&gt;
+
+&lt;p&gt;Please test it, try it out and report any issues back!
+All being well 0.8.0RC1 will be released as 0.8.0 in a week.&lt;/p&gt;
+
+&lt;p&gt;&lt;small&gt;* Want to get involved in MongoEngine? We&amp;rsquo;re looking for help so please ping me!&lt;/small&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automate all the things</title>
+      <link>http://rosslawley.co.uk/posts/automate-all-the-things</link>
+      <pubDate>Wed, 20 Mar 2013 00:00:00 UTC</pubDate>
+      <author>Ross Lawley</author>
+      <guid>http://rosslawley.co.uk/posts/automate-all-the-things</guid>
+      <description>&lt;h1&gt;Disaster Strikes&lt;/h1&gt;
+
+&lt;p&gt;Last week my Mac book ran out of space again, this had been going on for some time and I&amp;rsquo;d had enough.
+I was spending an ever increasing amount of much time hunting down rogue space invaders on my small 120gb hard drive.  So &lt;strong&gt;something&lt;/strong&gt; had to be done.&lt;/p&gt;
+
+&lt;p class=&#34;text-center&#34;&gt;
+    &lt;strong&gt;In times like this there is only one solution!&lt;/strong&gt;&lt;br&gt;
+    &lt;img src=&#34;http://rosslawley.co.uk/images/mrragequit.jpg&#34; title=&#34;Original image: http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&#34; /&gt; &lt;br&gt;
+    &lt;small&gt; Source: &lt;a href=&#34;http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&#34;/&gt;http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&lt;/a&gt;&lt;/small&gt;
+&lt;/p&gt;
+
+&lt;p&gt;When upgrading to Mountain Lion I decided to start afresh and reformat my hard drive.
+Normally starting from scratch would be a royal pain in the backside, taking many days to get things installed and allow me to get back to coding.
+Then I remembered hearing about &lt;a href=&#34;http://boxen.github.com&#34;&gt;boxen&lt;/a&gt; which could give me an easy way to rebuild and &lt;em&gt;maintain&lt;/em&gt; the software on my Mac and hatched a plan of devops style automation!&lt;/p&gt;
+
+&lt;h1&gt;My automation trifecta&lt;/h1&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2&gt;Boxen&lt;/h2&gt;
+
+&lt;p&gt;Boxen is built on top of &lt;a href=&#34;https://puppetlabs.com/&#34;&gt;puppet&lt;/a&gt; and it allows you to describe in code your Mac configuration and what software to install on it. To get started just copy githubs&amp;rsquo; starter &lt;a href=&#34;https://github.com/boxen/our-boxen&#34;&gt;boxen repo&lt;/a&gt; and then add your requirements.
+I had to do two things to get my software stack automated:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;In the main puppetfile link to the github sources and versions&lt;/li&gt;
+&lt;li&gt;In my personal puppet manifest (modules/people/manifests/rozza.pp) include the classes for the software I want installed.&lt;/li&gt;
+&lt;li&gt;Profit?!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Check it into github and run boxen. Volia a few minutes later my initial stack comprising; &lt;em&gt;Adium, Chrome, Dropbox, Intellij, Iterm2, Skype, Slate, Spotify, Sublime Text 2, Vagrant, Virtualbox, wget and Zsh&lt;/em&gt; were all installed and ready to use.
+No wasting time hunting down .dmgs and navigating through their respective websites to download them.
+If you want to know more about boxen then check out this &lt;a href=&#34;https://speakerdeck.com/wfarr/boxen&#34;&gt;presentation&lt;/a&gt;.
+All my configuration is now on github &lt;a href=&#34;https://github.com/rozza/my-boxen/&#34;&gt;my-boxen&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;dotfiles&lt;/h2&gt;
+
+&lt;p&gt;Boxen is great as it automates the software installed on my mac but what about my general configuration? I could use Boxen and puppet to define and create &lt;em&gt;all&lt;/em&gt; my configuration files - but that seems unnecessarily complex and to me there is a separation of concerns. So when I asked on twitter what other folk do &lt;a href=&#34;http://intranation.com&#34;&gt;Brad Wright&lt;/a&gt; pointed me to his dotfiles.&lt;/p&gt;
+
+&lt;p&gt;After a quick investigation I duly &lt;span style=&#34;text-decoration:line-through;&#34;&gt;raided and plundered&lt;/span&gt; took inspiration from and now I have all my personal dot file configurations for things like &lt;em&gt;github, slate and zsh&lt;/em&gt; backed up on github.  What about private configuration files? Where it makes sense any files with a &lt;code&gt;.local_&lt;/code&gt; prefix will be sourced by their respective core configuration file.  That way I can have different configrations across machines - I can have a core &lt;code&gt;.bashrc&lt;/code&gt; and a local version on each machine eg &lt;code&gt;.local_bashrc&lt;/code&gt;.  All my public &lt;a href=&#34;https://github.com/rozza/dotfiles&#34;&gt;dotfiles&lt;/a&gt; are on github so plunder away!&lt;/p&gt;
+
+&lt;h2&gt;Vagrant&lt;/h2&gt;
+
+&lt;p&gt;The final piece in my automation puzzle is Vagrant.
+I&amp;rsquo;ve been a huge fan of using vm&amp;rsquo;s for development for years and more recently &lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;vagrant&lt;/a&gt; has been my tool of choice.
+Installing things with apt-get on a linux vm just saves me time and pre-&lt;a href=&#34;http://10gen.com&#34;&gt;10gen&lt;/a&gt; my vms used to mirror my production environment.
+As its a vm all I had to do is back it up before I wiped the hard drive and I could use that to get up and running
+(I know its vagrant and had I been more diligent all I would have needed was the vagrant file and base box).&lt;/p&gt;
+
+&lt;p&gt;When working on a vm, I still like to use sublime text on my mac to code.  So the way to achieve this is to nfs the code directory from the Mac into the vm - I used to do it the other way round, but having the code local to the mac makes editing very snappy.  The last thing to do was back up my code directory - I was surprised that all my checked out code weighs in at a hefty 13 gigs!&lt;/p&gt;
+
+&lt;h1&gt;Automation heaven&lt;/h1&gt;
+
+&lt;p class=&#34;text-center&#34;&gt;
+    &lt;img src=&#34;http://rosslawley.co.uk/images/make-a-boxen.png&#34; /&gt;&lt;br&gt;
+    &lt;small&gt; Source: &lt;a href=&#34;https://speakerdeck.com/wfarr/boxen&#34;/&gt;https://speakerdeck.com/wfarr/boxen&lt;/a&gt;&lt;/small&gt;
+&lt;/p&gt;
+
+&lt;p&gt;By using a combination of boxen, vagrant and dotfiles I massively reduced the time needed to rebuild my mac and get productive.
+By backing up 13gb of source code, it meant I managed to reformat, install Mountain Lion and configure my Mac and get coding again in under 3 hours!
+That included the time it took me to learn how to use boxen and setup dotfiles!&lt;/p&gt;
+
+&lt;p&gt;Of course I will tweak those repositories overtime but all my core configuration for my Mac is now in a git repo on github &lt;a href=&#34;https://github.com/rozza/my-boxen/&#34;&gt;my-boxen&lt;/a&gt; for the software and &lt;a href=&#34;https://github.com/rozza/dotfiles&#34;&gt;dotfiles&lt;/a&gt; for configuration.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m loving this adventure and if want to backup your software configuration or you&amp;rsquo;re getting a new Mac, then jump on board and automate all the things&amp;trade;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;. Feel free to clone / copy my repo&amp;rsquo;s all I ask is if you add something cool you either comment below or &lt;a href=&#34;http://twitter.com/RossC0&#34;&gt;tweet me&lt;/a&gt; so I can use it to should I need to!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

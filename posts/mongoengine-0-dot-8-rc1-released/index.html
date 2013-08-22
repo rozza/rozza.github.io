@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Ross Lawley">
+    <link href="/favicon.png" rel="icon">
+
+    <title>MongoEngine 0.8 RC1 Released</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/site.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      
+        <h1><a class="navbar-brand" href="/">Ross Lawley</a></h1>
+      
+    </div>
+      <ul class="nav navbar-nav pull-right">
+        <li>
+          <a href="http://github.com/rozza" title="Github Profile" target="_blank">
+            <i class="icon-github-sign social-navbar"></i>
+          </a>
+        </li>
+        <li>
+          <a href="http://linkedin.com/in/rosslawley" title="Linkedin Profile" target="_blank">
+            <i class="icon-linkedin-sign social-navbar"></i>
+          </a>
+        </li>
+        <li>
+          <a href="http://twitter.com/RossC0" title="Twitter Profile" target="_blank">
+            <i class="icon-twitter-sign social-navbar"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    <div class="container">
+<div class="article col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+<article role="article">
+  <header>
+  <div class="jumbotron">
+    <div class="container">
+    <h1>MongoEngine 0.8 RC1 Released</h1>
+    <h5 class="date-time"><i class="icon-calendar-empty"></i> <time datetime="2013-05-01 00:00:00 &#43;0000 UTC" pubdate="" data-updated="true">Wed 05, 2013</time></h5>
+    </div>
+  </div>
+  </header>
+    <div class="container">
+    <p><strong>Notice:</strong> 0.8.0RC3 has been released fixing a couple of small bugs and extra improvements.</p>
+
+<p><strong>Notice:</strong> 0.8.0RC2 has been released fixing an obscure queryset cursor cloning issue.</p>
+
+<p>I&rsquo;m really pleased to annouce the release candidate for <a href="https://pypi.python.org/pypi/mongoengine/0.8.0RC1">MongoEngine 0.8</a>!
+Its been a <em>long process</em> due to work and life commitments but the latest version
+of MongoEngine is ready for testing and feedback.</p>
+
+<h2>Why a release candidate?</h2>
+
+<p>There have been massive changes in the internals, requiring thought and
+<strong>testing</strong> before upgrading and releasing to the wild - so please
+read the <a href="http://docs.mongoengine.org/en/latest/upgrade.html#to-0-8">upgrade</a>
+docs carefully!</p>
+
+<p>The changes are worth it and make using <a href="http://mongoengine.org">MongoEngine</a>
+even better.</p>
+
+<p>Please test 0.8.0RC1 on your test systems and staging systems and any feedback
+please email the <a href="https://groups.google.com/group/mongoengine-users">user group</a>
+or if you&rsquo;d prefer to message me directly you can via
+<a href="https://github.com/rozza">https://github.com/rozza</a></p>
+
+<h2>Whats changed?</h2>
+
+<p>There have been loads of fixes, improvements and changes in 0.8.
+The headliners are:</p>
+
+<!--more-->
+
+<ul>
+<li>Minimum requirements are python 2.6+ and pymongo 2.5+</li>
+<li>Inheritance now off by default</li>
+<li>Inherited documents store <code>_cls</code> not <code>_types</code> (preventing auto creation of
+multikey indexes)</li>
+<li>Querysets are immutable and now return clones</li>
+<li>New Geo Fields supporting mongodb 2.4 new &ldquo;2dSphere&rdquo; indexes</li>
+<li>New context managers for switching collections or databases on the fly as
+well as turning off dereferencing</li>
+<li>Django support improved (now supports Django 1.5.1, groups and permissions)</li>
+<li>Performance improvements, back to the same performance as 0.4</li>
+</ul>
+
+<p>And much, much more! See the full <a href="http://docs.mongoengine.org/en/latest/changelog.html#changes-in-0-8-0">changelog</a>
+for all changes or check <a href="https://github.com/MongoEngine/mongoengine/">github</a> to see the
+<a href="https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;page=1&amp;state=closed">84 tickets</a>
+that have been fixed as part of this release.</p>
+
+<h2>Try it now!</h2>
+
+<p>Please test it, try it out and report any issues back!
+All being well 0.8.0RC1 will be released as 0.8.0 in a week.</p>
+
+<p><small>* Want to get involved in MongoEngine? We&rsquo;re looking for help so please ping me!</small></p>
+
+    </div>
+  <footer>
+  <p>
+  
+    <a href="/categories/mongodb/"><span class="badge">mongodb</span></a>
+  
+    <a href="/categories/mongoengine/"><span class="badge">mongoengine</span></a>
+  
+    <a href="/categories/tech/"><span class="badge">tech</span></a>
+  
+    <a href="/categories/nosql/"><span class="badge">nosql</span></a>
+  
+    <a href="/categories/python/"><span class="badge">python</span></a>
+  
+  </p>
+  
+    <a class="previous" href="http://rosslawley.co.uk/posts/mongoengine-0-dot-8-dot-0">
+      <span class="glyphicon glyphicon-backward"></span>
+      mongoengine 0.8.0
+    </a>
+  
+  
+    <a class="next pull-right" href="http://rosslawley.co.uk/posts/automate-all-the-things">
+      Automate all the things
+      <span class="glyphicon glyphicon-forward"></span>
+    </a>
+  
+  </footer>
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rozza';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+</div>
+  </div>
+  <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+  <div class="row">
+    <footer class="footer-page" role="contentinfo">
+      <p>
+        Copyright &copy; 2013 - Ross Lawley - <a href="/posts">Site Archive</a>
+      </p>
+      <p>
+        <span class="credit">Powered by <a href="http://hugo.spf13.com/">Hugo</a></span>
+         
+      </p>
+    </footer>
+  </div>
+  </div>
+  </body>
+</html>
