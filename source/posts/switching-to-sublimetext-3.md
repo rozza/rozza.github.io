@@ -35,7 +35,7 @@ have already been updated and do now work with ST3.  My results were as
 follows:
 
 <p class="text-center">
-<img src="/images/ready_for_sublime.png"
+<img src="/images/ready_for_sublime.png">
 </p>
 
 I had one fail but when looking at the package reposititory it suggested an
