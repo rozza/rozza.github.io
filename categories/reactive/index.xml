@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Reactive on  </title>
+    <link>http://rosslawley.co.uk/categories/reactive/index.xml</link>
+    <language>en-gb</language>
+    <author>Ross Lawley</author>
+    <rights>Copyright (c) 2013, Ross Lawley; all rights reserved.</rights>
+    <updated>2013-09-24 00:00:00 &#43;0000 UTC</updated>
+    
+    <item>
+      <title>Typesafe&#39;s Activator</title>
+      <link>http://rosslawley.co.uk/posts/typesafe_activator</link>
+      <pubDate>Tue, 24 Sep 2013 00:00:00 UTC</pubDate>
+      <author>Ross Lawley</author>
+      <guid>http://rosslawley.co.uk/posts/typesafe_activator</guid>
+      <description>&lt;p&gt;Yesterday the &lt;a href=&#34;http://typesafe.com/blog/announcing-activator-10-create-reactive-apps-in-minutes&#34;&gt;Typesafe Activator&lt;/a&gt;
+hit 1.0. If you haven&amp;rsquo;t heard about it and use scala or the jvm then take five
+minutes and check it out - its worth it.&lt;/p&gt;
+
+&lt;h1&gt;What is it?&lt;/h1&gt;
+
+&lt;p&gt;My recommendation alone not enough and you what to know more about it before
+installing it?  No problems, let me convince you.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Typesafe Activator is a local web &amp;amp; command-line tool that helps developers
+get started with the Typesafe Platform.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Whats that give you?  Basically, a real nice UI in the browser for creating web
+applications from templates.  The &lt;a href=&#34;http://typesafe.com/activator/templates&#34;&gt;templates&lt;/a&gt;
+cover &amp;ldquo;hello world&amp;rdquo; in scala to using &lt;a href=&#34;http://akka.io&#34;&gt;Akka&lt;/a&gt;, &lt;a href=&#34;http://playframework.com&#34;&gt;
+Play&lt;/a&gt; and &lt;a href=&#34;http://www.scala-lang.org/&#34;&gt;Scala&lt;/a&gt; to create
+modern scalable reactive web sites.&lt;/p&gt;
+
+&lt;p&gt;Its quick and easy to get going - I chose the
+&lt;a href=&#34;http://typesafe.com/activator/template/play-mongo-knockout&#34;&gt;Play Reactive Mongo and knockout.js&lt;/a&gt;
+template&lt;/p&gt;
+
+&lt;p class=&#34;text-center&#34;&gt;
+&lt;img src=&#34;http://rosslawley.co.uk/images/activator-loading.png&#34;&gt;
+&lt;/p&gt;
+
+&lt;p&gt;In the background it downloads all the resources you need to create the project
+from the template.  Starting a new project is extremely simple and once the
+project is loaded you get to use the Web UI in anger.&lt;/p&gt;
+
+&lt;p class=&#34;text-center&#34;&gt;
+&lt;img src=&#34;http://rosslawley.co.uk/images/activator-orientation.png&#34;&gt;
+&lt;/p&gt;
+
+&lt;h1&gt;The tutorial&lt;/h1&gt;
+
+&lt;p&gt;Once loaded, you get the tutorial for this template:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The world is going reactive&lt;/p&gt;
+
+&lt;p&gt;Not long ago, response times in the seconds were considered appropriate. Browser
+refreshes were the norm in web applications. Systems would go down for hours of
+maintenance, or even be rebooted nightly, and this was ok because people only
+expected the systems to be up during business hours..&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;Exciting stuff!&lt;/em&gt;  So not only can you code, compile and test your application
+all in the browser - there&amp;rsquo;s a tutorial to guide you through the various new
+concepts as well.&lt;/p&gt;
+
+&lt;p&gt;The reactive mongo tutorial, gets you up and running using creating a reactive
+Play web application with a rich front end and scalable backend.  It uses
+&lt;a href=&#34;http://reactivemongo.org&#34;&gt;Reactive Mongo&lt;/a&gt; an asynchronous non blocking scala
+mongodb driver for the database.  The play framework for the webserver,
+&lt;a href=&#34;http://coffeescript.org&#34;&gt;coffeescript&lt;/a&gt; and &lt;a href=&#34;http://knockoutjs.com&#34;&gt;knockout.js&lt;/a&gt;
+for the frontend.&lt;/p&gt;
+
+&lt;p&gt;The tutorial walks you through how the various parts of the app work together and
+links through to the code.  Next it sets tasks to update parts of the app, extending
+it and adding functionality.&lt;/p&gt;
+
+&lt;p&gt;This quickly, gets you up to speed, so if you are interested in any of the
+Typesafe stack then download activator now and you&amp;rsquo;ll be up and running in minutes!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
