@@ -6,7 +6,54 @@
     <language>en-gb</language>
     <author>Ross Lawley</author>
     <rights>Copyright (c) 2013, Ross Lawley; all rights reserved.</rights>
-    <updated>2013-09-24 00:00:00 &#43;0000 UTC</updated>
+    <updated>2013-11-06 00:00:00 &#43;0000 UTC</updated>
+    
+    <item>
+      <title>RxJava - understandably reactive</title>
+      <link>http://rosslawley.co.uk/posts/rx-java</link>
+      <pubDate>Wed, 06 Nov 2013 00:00:00 UTC</pubDate>
+      <author>Ross Lawley</author>
+      <guid>http://rosslawley.co.uk/posts/rx-java</guid>
+      <description>&lt;p&gt;Reactive programing is hot stuff at the moment and the
+&lt;a href=&#34;https://www.coursera.org/course/reactive&#34;&gt;Coursera Principles of Reactive Programming&lt;/a&gt;
+course has &lt;strong&gt;just&lt;/strong&gt; started (its not too late to enroll).&lt;/p&gt;
+
+&lt;p&gt;Recently, I&amp;rsquo;ve been hearing good things about &lt;a href=&#34;https://github.com/Netflix/RxJava&#34;&gt;RxJava&lt;/a&gt; (
+a port of .Net&amp;rsquo;s &lt;a href=&#34;http://msdn.microsoft.com/en-gb/data/gg577609.aspx&#34;&gt;Reactive extensions&lt;/a&gt;
+) so I wanted to learn some more. Then I stumbled upon a video from a recent
+&lt;a href=&#34;http://www.meetup.com/SF-Scala/&#34;&gt;SF Scala&lt;/a&gt; meetup
+which covered what it is and how they implemented the core and then added
+support for other JVM languages.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Two things immediately struck me:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Observables are not opnionated about how the backend works.  It could be
+concurrent or swapped out with a thread pool, an actor
+or an nio event &amp;amp; event loop&amp;hellip; Pretty cool, this means there is a single way
+of handling the code no matter if the backend is synchronus or asynchronus.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The methods for manipulating multiple observers, chaining or nesting
+is extremely powerful, yet easy to understand.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I&amp;rsquo;m really looking forward to using it, to me its an easier abstraction to
+understand for handling streams of data and seemly less complex than using Plays
+excellent &lt;code&gt;Iteratee.Concurrent&lt;/code&gt; library.&lt;/p&gt;
+
+&lt;p&gt;Enjoy:&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;embed video-player&#34;&gt;
+&lt;iframe class=&#34;youtube-player&#34; type=&#34;text/html&#34;
+    width=&#34;640&#34; height=&#34;385&#34;
+    src=&#34;http://www.youtube.com/embed/tOMK_FYJREw&#34;
+    allowfullscreen frameborder=&#34;0&#34;&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Typesafe&#39;s Activator</title>
