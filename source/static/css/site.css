@@ -143,3 +143,8 @@ li.category {list-style: none;}
   font-weight: 300;
   border-top: 1px solid #053ECF;
 }
+
+.embed {
+  text-align: center;
+  padding: 20px 0;
+}
