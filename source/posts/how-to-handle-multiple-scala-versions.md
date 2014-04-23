@@ -5,7 +5,7 @@ comments: true
 categories:
 - tech
 - mongodb
-- libary
+- library
 - scala
 ---
 
