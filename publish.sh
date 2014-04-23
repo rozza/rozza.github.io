@@ -6,7 +6,7 @@ echo " ======================= "
 
 if git diff-index --quiet HEAD --; then
     rm -rf public
-    rm -rf .pubic
+    rm -rf .public
 
     hugo
     mv public .public
