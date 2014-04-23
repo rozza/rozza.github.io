@@ -60,7 +60,7 @@ The sbt documentation covers the basics nicely in their [cross build](http://www
 
     The fix in Casbah was to simply add a `beans.scala` for the scala specific versions and create a `BeanInfo` type which points to the correct scala package. Problem solved.
 
-Sbt allow you to run any command against multiple versions of Scala. `./sbt ++test` will test against all your `crossScalaVersions` of Scala and hopefully confirm the code works as expected.  If I want to test a specific version just add it to the arguments eg: `./sbt ++ 2.9.3 test`.
+Sbt allow you to run any command against multiple versions of Scala. `./sbt +test` will test against all your `crossScalaVersions` of Scala and hopefully confirm the code works as expected.  If I want to test a specific version use a double plus sign and add the version string to the arguments eg: `./sbt ++ 2.9.3 test`.
 
 ## Final thoughts
 
