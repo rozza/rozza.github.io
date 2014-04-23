@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Ross Lawley">
-    <link href="/favicon.png" rel="icon">
+    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
 
     <title>Using MongoDB to find the most popular pub names!</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/site.css" rel="stylesheet">
+    <link href="http://rosslawley.co.uk/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://rosslawley.co.uk/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://rosslawley.co.uk/css/site.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   </head>
@@ -21,7 +21,7 @@
   <div class="container">
     <div class="navbar-header">
       
-        <h1><a class="navbar-brand" href="/">Ross Lawley</a></h1>
+        <h1><a class="navbar-brand" href="http://rosslawley.co.uk/">Ross Lawley</a></h1>
       
     </div>
       <ul class="nav navbar-nav pull-right">
@@ -55,21 +55,21 @@
   </div>
   </header>
     <div class="container">
-    <p>Earlier in the year I gave a talk at <a href="http://www.10gen.com/events/mongodb-london-2013">MongoDB London</a>
+    
+
+<p>Earlier in the year I gave a talk at <a href="http://www.10gen.com/events/mongodb-london-2013">MongoDB London</a>
 about the different aggregation options with MongoDB.  The topic recently came up again
 in conversation at a user group, so I thought it deserved a blog post.</p>
 
-<h2>Gathering ideas for the talk</h2>
+<h2 id="toc_0">Gathering ideas for the talk</h2>
 
 <p>I wanted to give a more interesting aggregation talk than the standard
 &ldquo;counting words in text&rdquo;, and as the <a href="http://docs.mongodb.org/manual/core/aggregation/">aggregation framework</a> gained shiny <a href="http://docs.mongodb.org/manual/core/2dsphere/">2dsphere geo</a> support in
 <a href="http://docs.mongodb.org/manual/release-notes/2.4/#new-geospatial-indexes-with-geojson-and-improved-spherical-geometry">2.4</a>, I figured I&rsquo;d use that. I just needed a topic&hellip;</p>
 
-<h3>What are us Brits focused on?</h3>
+<h3 id="toc_1">What are us Brits focused on?</h3>
 
 <p>Two things immediately sprang to mind: <strong>weather</strong> and <strong>beer</strong>.</p>
-
-<!--more-->
 
 <p>I opted to focus on something close to my heart: <strong>beer</strong> :)
 But what to aggregate about beer? Then I remembered an old pub quiz favourite&hellip;</p>
@@ -113,7 +113,7 @@ a wordle I normalised all the pub names.</p>
 <p>If you want to know more about the importing process, the full loading code is
 available on github: <a href="https://github.com/rozza/pubnames/blob/master/osm2mongo.py">osm2mongo.py</a></p>
 
-<h2>Top pub names</h2>
+<h2 id="toc_2">Top pub names</h2>
 
 <p>It turns out finding the most popular pub names is very simple with the
 aggregation framework.  Just group by the name and then sum up all the occurrences.
@@ -151,7 +151,7 @@ For the whole of the UK this returns:
   <img src="http://rosslawley.co.uk/images/pubs_wordle.png"<br>
 </p>
 
-<h2>Top pub names near you</h2>
+<h2 id="toc_3">Top pub names near you</h2>
 
 <p>At MongoDB London I thought that was too easy, so filtered to find the top pub
 names near the conference and showing off some of the geo functionality that became
@@ -174,7 +174,7 @@ coordinates <code>[ &lt;long&gt;, &lt;lat&gt; ]</code> and a radius of roughly 2
   ]);
 </code></pre></p>
 
-<h2>What about where I live?</h2>
+<h2 id="toc_4">What about where I live?</h2>
 
 <p>At the conference I looked the most popular pub name near the conference.  Thats
 great if you happen to live in the centre of London but what about everyone else
@@ -188,7 +188,7 @@ some time for the heroku dyno to wake, so please be patient!)</p>
 whole world - its surely possible to do, I just lacked the patience to download
 it all!</p>
 
-<h2>Cheers</h2>
+<h2 id="toc_5">Cheers</h2>
 
 <p class="text-center">
   <img src="http://rosslawley.co.uk/images/almurray.jpg" title="Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946" /> <br>
@@ -203,15 +203,15 @@ playing with MongoDB&rsquo;s great geo features!</p>
   <footer>
   <p>
   
-    <a href="/categories/mongodb/"><span class="badge">mongodb</span></a>
+    <a href="http://rosslawley.co.uk/categories/mongodb/"><span class="badge">mongodb</span></a>
   
-    <a href="/categories/aggregation/"><span class="badge">aggregation</span></a>
+    <a href="http://rosslawley.co.uk/categories/aggregation/"><span class="badge">aggregation</span></a>
   
-    <a href="/categories/demo/"><span class="badge">demo</span></a>
+    <a href="http://rosslawley.co.uk/categories/demo/"><span class="badge">demo</span></a>
   
-    <a href="/categories/tech/"><span class="badge">tech</span></a>
+    <a href="http://rosslawley.co.uk/categories/tech/"><span class="badge">tech</span></a>
   
-    <a href="/categories/geo/"><span class="badge">geo</span></a>
+    <a href="http://rosslawley.co.uk/categories/geo/"><span class="badge">geo</span></a>
   
   </p>
   
@@ -243,7 +243,7 @@ playing with MongoDB&rsquo;s great geo features!</p>
   <div class="row">
     <footer class="footer-page" role="contentinfo">
       <p>
-        Copyright &copy; 2013 - Ross Lawley - <a href="/posts">Site Archive</a>
+        Copyright &copy; 2013 - Ross Lawley - <a href="http://rosslawley.co.uk/posts">Site Archive</a>
       </p>
       <p>
         <span class="credit">Powered by <a href="http://hugo.spf13.com/">Hugo</a></span>

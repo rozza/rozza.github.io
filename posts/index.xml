@@ -6,7 +6,80 @@
     <language>en-gb</language>
     <author>Ross Lawley</author>
     <rights>Copyright (c) 2013, Ross Lawley; all rights reserved.</rights>
-    <updated>2013-11-06 00:00:00 &#43;0000 UTC</updated>
+    <updated>2014-04-23 00:00:00 &#43;0000 UTC</updated>
+    
+    <item>
+      <title>How to: Handle multiple Scala versions</title>
+      <link>http://rosslawley.co.uk/posts/how-to-handle-multiple-scala-versions</link>
+      <pubDate>Wed, 23 Apr 2014 00:00:00 UTC</pubDate>
+      <author>Ross Lawley</author>
+      <guid>http://rosslawley.co.uk/posts/how-to-handle-multiple-scala-versions</guid>
+      <description>
+
+&lt;p&gt;I recently upgraded &lt;a href=&#34;http://mongodb.github.io/casbah/&#34;&gt;Casbah&lt;/a&gt; to support the latest Scala 2.11 release and for the first time when supporting multiple Scala versions I hit a stumbling block.  If you&amp;rsquo;re writing a library that wants to support multiple versions of Scala in a single code base, it&amp;rsquo;s generally easy isn&amp;rsquo;t it? Thankfully, it is as &lt;a href=&#34;http://www.scala-sbt.org/&#34;&gt;sbt&lt;/a&gt; can do the heavy lifting for you.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Three steps to success&lt;/h2&gt;
+
+&lt;p&gt;The sbt documentation covers the basics nicely in their &lt;a href=&#34;http://www.scala-sbt.org/release/docs/Detailed-Topics/Cross-Build.html&#34;&gt;cross build&lt;/a&gt; documentation.  But what&amp;rsquo;s the path to success?&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Choose the Scala&amp;rsquo;s you are going to support.&lt;/p&gt;
+
+&lt;p&gt;Set the &lt;code&gt;crossScalaVersions&lt;/code&gt; setting in your build file to define the Scala versions you want to support. In Casbah we support: &lt;code&gt;crossScalaVersions := Seq(&amp;quot;2.11.0&amp;quot;, &amp;quot;2.10.4&amp;quot;, &amp;quot;2.9.3&amp;quot;)&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Configure libraries&lt;/p&gt;
+
+&lt;p&gt;Here it can get hairy because third party libraries may not support all your favoured scala builds in their latest release.  If they do, then happy days but if not you may have to pick out each library version as needed.  Here is an example from the Casbah build:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// In the build settings append to the library dependencies
+libraryDependencies &amp;lt;++= scalaVersion (sv =&amp;gt; Seq(specs2(sv), scalatime(sv)))
+
+
+// Helper method to pattern match against the scala version and return the correct specs version
+def specs2(scalaVersion: String) =
+  (scalaVersion match {
+    case &amp;quot;2.9.3&amp;quot;   =&amp;gt; &amp;quot;org.specs2&amp;quot; %% &amp;quot;specs2&amp;quot; % &amp;quot;1.12.4.1&amp;quot;
+    case _ =&amp;gt; &amp;quot;org.specs2&amp;quot; %% &amp;quot;specs2&amp;quot; % &amp;quot;2.3.11&amp;quot;
+  }) % &amp;quot;test&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As the latest Specs build &lt;code&gt;2.3.11&lt;/code&gt; doesn&amp;rsquo;t support Scala 2.9.3 we have to use the older &lt;code&gt;1.12.4.1&lt;/code&gt; version for 2.9.3.  The downside is we can&amp;rsquo;t yet use some of the nicer newer features of the Specs library in our test suite.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Scala version specific code.&lt;/p&gt;
+
+&lt;p&gt;This is the real challenge, what do you do if you need specific code for a specific version of Scala?  Hopefully, you&amp;rsquo;ll never need to but this isn&amp;rsquo;t always the case as I found with Casbah.  We use &lt;code&gt;BeanInfo&lt;/code&gt; annotation and it lives in &lt;code&gt;scala.reflection&lt;/code&gt; in Scala 2.9.3 and in &lt;code&gt;scala.beans&lt;/code&gt; in 2.11.&lt;/p&gt;
+
+&lt;p&gt;So how can we get round this? Luckily, Scala 2.10 gave me a hint as &lt;code&gt;BeanInfo&lt;/code&gt; had been depreciated in &lt;code&gt;scala.reflection&lt;/code&gt; but they had mirrored it in a &lt;a href=&#34;https://github.com/scala/scala/blob/v2.10.4/src/library/scala/reflect/package.scala#L55-L56&#34;&gt;package object&lt;/a&gt;. I could use the same trick in Casbah! However, I would need a version for Scala 2.9.3 to point to &lt;code&gt;scala.reflect.BeanInfo&lt;/code&gt; and a version for 2.10 &amp;amp; 2.11. Then update all the code to point to the scala specific package object.&lt;/p&gt;
+
+&lt;p&gt;As the code would be version specific it couldn&amp;rsquo;t live in the &lt;code&gt;src/main/scala&lt;/code&gt; directory as it wouldn&amp;rsquo;t compile. So instead I created specific Scala directories in &lt;code&gt;src/main&lt;/code&gt; like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./scala
+./scala_2.9.3  // Scala 2.9.3 specific code
+./scala_2.10   // Scala 2.10 specific code
+./scala_2.11   // Scala 2.11 specific code
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As Scala 2.10 &amp;amp; 2.11 point versions will be binary compatible I only need a top level directory for them.  Then alls that&amp;rsquo;s needed is to add these source directories to the build:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;unmanagedSourceDirectories in Compile &amp;lt;+= (sourceDirectory in Compile, scalaBinaryVersion){
+  (s, v) =&amp;gt; s / (&amp;quot;scala_&amp;quot;+v)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This adds extra source directories to the compile step and using &lt;code&gt;scalaBinaryVersion&lt;/code&gt; I get the binary compatible versions (so it&amp;rsquo;s 2.11 for all 2.11 releases but would be 2.9.3, 2.9.2, 2.9.1 for the non compatible point releases from the 2.9 series).&lt;/p&gt;
+
+&lt;p&gt;The fix in Casbah was to simply add a &lt;code&gt;beans.scala&lt;/code&gt; for the scala specific versions and create a &lt;code&gt;BeanInfo&lt;/code&gt; type which points to the correct scala package. Problem solved.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Sbt allow you to run any command against multiple versions of Scala. &lt;code&gt;./sbt +test&lt;/code&gt; will test against all your &lt;code&gt;crossScalaVersions&lt;/code&gt; of Scala and hopefully confirm the code works as expected.  If I want to test a specific version use a double plus sign and add the version string to the arguments eg: &lt;code&gt;./sbt ++ 2.9.3 test&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Final thoughts&lt;/h2&gt;
+
+&lt;p&gt;Scala is a relatively fast moving ecosystem with new major releases every 13 months or so.  When I took over Casbah it supported 6 binary incompatible versions of Scala! From 2.8.1 to 2.9.3. Happily, Scala patch versions from 2.10.0 on have become binary compatible making supporting multiple versions of Scala easier.  However, one of the key issues for maintaining a library is to know when to end of life an old Scala version, so to keep the library fresh.&lt;/p&gt;
+
+&lt;p&gt;In Casbah supporting the current and last major versions of Scala gives users support for the latest MongoDB version and allows them some flexibility when it comes to updating Scala. Generally, this has been a trouble free process and as shown above problems are solvable in just three easy steps.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>RxJava - understandably reactive</title>
@@ -24,8 +97,6 @@ a port of .Net&amp;rsquo;s &lt;a href=&#34;http://msdn.microsoft.com/en-gb/data/
 &lt;a href=&#34;http://www.meetup.com/SF-Scala/&#34;&gt;SF Scala&lt;/a&gt; meetup
 which covered what it is and how they implemented the core and then added
 support for other JVM languages.&lt;/p&gt;
-
-&lt;!--more--&gt;
 
 &lt;p&gt;Two things immediately struck me:&lt;/p&gt;
 
@@ -45,13 +116,13 @@ excellent &lt;code&gt;Iteratee.Concurrent&lt;/code&gt; library.&lt;/p&gt;
 
 &lt;p&gt;Enjoy:&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;embed video-player&#34;&gt;
+&lt;div class=&#34;embed video-player&#34;&gt;
 &lt;iframe class=&#34;youtube-player&#34; type=&#34;text/html&#34;
     width=&#34;640&#34; height=&#34;385&#34;
     src=&#34;http://www.youtube.com/embed/tOMK_FYJREw&#34;
     allowfullscreen frameborder=&#34;0&#34;&gt;
 &lt;/iframe&gt;
-&lt;/div&gt;&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
@@ -61,11 +132,13 @@ excellent &lt;code&gt;Iteratee.Concurrent&lt;/code&gt; library.&lt;/p&gt;
       <pubDate>Tue, 24 Sep 2013 00:00:00 UTC</pubDate>
       <author>Ross Lawley</author>
       <guid>http://rosslawley.co.uk/posts/typesafe_activator</guid>
-      <description>&lt;p&gt;Yesterday the &lt;a href=&#34;http://typesafe.com/blog/announcing-activator-10-create-reactive-apps-in-minutes&#34;&gt;Typesafe Activator&lt;/a&gt;
+      <description>
+
+&lt;p&gt;Yesterday the &lt;a href=&#34;http://typesafe.com/blog/announcing-activator-10-create-reactive-apps-in-minutes&#34;&gt;Typesafe Activator&lt;/a&gt;
 hit 1.0. If you haven&amp;rsquo;t heard about it and use scala or the jvm then take five
 minutes and check it out - its worth it.&lt;/p&gt;
 
-&lt;h1&gt;What is it?&lt;/h1&gt;
+&lt;h1 id=&#34;toc_0&#34;&gt;What is it?&lt;/h1&gt;
 
 &lt;p&gt;My recommendation alone not enough and you what to know more about it before
 installing it?  No problems, let me convince you.&lt;/p&gt;
@@ -74,8 +147,6 @@ installing it?  No problems, let me convince you.&lt;/p&gt;
 &lt;p&gt;Typesafe Activator is a local web &amp;amp; command-line tool that helps developers
 get started with the Typesafe Platform.&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;!--more--&gt;
 
 &lt;p&gt;Whats that give you?  Basically, a real nice UI in the browser for creating web
 applications from templates.  The &lt;a href=&#34;http://typesafe.com/activator/templates&#34;&gt;templates&lt;/a&gt;
@@ -88,7 +159,7 @@ modern scalable reactive web sites.&lt;/p&gt;
 template&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-&lt;img src=&#34;http://rosslawley.co.uk/images/activator-loading.png&#34;&gt;
+&lt;img src=&#34;/images/activator-loading.png&#34;&gt;
 &lt;/p&gt;
 
 &lt;p&gt;In the background it downloads all the resources you need to create the project
@@ -96,10 +167,10 @@ from the template.  Starting a new project is extremely simple and once the
 project is loaded you get to use the Web UI in anger.&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-&lt;img src=&#34;http://rosslawley.co.uk/images/activator-orientation.png&#34;&gt;
+&lt;img src=&#34;/images/activator-orientation.png&#34;&gt;
 &lt;/p&gt;
 
-&lt;h1&gt;The tutorial&lt;/h1&gt;
+&lt;h1 id=&#34;toc_1&#34;&gt;The tutorial&lt;/h1&gt;
 
 &lt;p&gt;Once loaded, you get the tutorial for this template:&lt;/p&gt;
 
@@ -138,7 +209,9 @@ Typesafe stack then download activator now and you&amp;rsquo;ll be up and runnin
       <pubDate>Wed, 31 Jul 2013 00:00:00 UTC</pubDate>
       <author>Ross Lawley</author>
       <guid>http://rosslawley.co.uk/posts/switching-to-sublimetext-3</guid>
-      <description>&lt;p&gt;For a long while I&amp;rsquo;ve been a huge fan of &lt;a href=&#34;http://www.sublimetext.com/&#34;&gt;Sublime Text 2&lt;/a&gt;,
+      <description>
+
+&lt;p&gt;For a long while I&amp;rsquo;ve been a huge fan of &lt;a href=&#34;http://www.sublimetext.com/&#34;&gt;Sublime Text 2&lt;/a&gt;,
 its easy to use and has a wealth of features that can be installed by the
 awesome &lt;a href=&#34;http://wbond.net/sublime_packages/package_control&#34;&gt;package control&lt;/a&gt;
 system. I use it for all python development and any adhoc file work, infact I
@@ -149,15 +222,13 @@ plugin ecosystem has matured.  After experiencing some slow downs in
 Sublime Text 2 (ST2) I thought it was time to upgrade to an even more
 sublime experience.&lt;/p&gt;
 
-&lt;h2&gt;5 step migration to Sublime Text 3&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;5 step migration to Sublime Text 3&lt;/h2&gt;
 
 &lt;p&gt;First off there is &lt;strong&gt;no risk&lt;/strong&gt; in trying to upgrade, it has a different app
 name to ST2 and its configurations are in a different directory. In short you
 can have both installed and living happily.&lt;/p&gt;
 
-&lt;h3&gt;1. Can I upgrade?&lt;/h3&gt;
-
-&lt;!--more--&gt;
+&lt;h3 id=&#34;toc_1&#34;&gt;1. Can I upgrade?&lt;/h3&gt;
 
 &lt;p&gt;Goto the awesome &lt;a href=&#34;http://www.caniswitchtosublimetext3.com/&#34;&gt;Can I Switch To Sublime Text 3?&lt;/a&gt;
 website and check your packages.  Its probably not a goer if your most used
@@ -166,14 +237,14 @@ have already been updated and do now work with ST3.  My results were as
 follows:&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-&lt;img src=&#34;http://rosslawley.co.uk/images/ready_for_sublime.png&#34;&gt;
+&lt;img src=&#34;/images/ready_for_sublime.png&#34;&gt;
 &lt;/p&gt;
 
 &lt;p&gt;I had one fail but when looking at the package reposititory it suggested an
 ST3 alternative for a python code intel tool that would work (SublimeJEDI) -
 so I was good to go.&lt;/p&gt;
 
-&lt;h3&gt;2. Install package control and packages&lt;/h3&gt;
+&lt;h3 id=&#34;toc_2&#34;&gt;2. Install package control and packages&lt;/h3&gt;
 
 &lt;p&gt;Its easy to install package control, just checkout the
 &lt;a href=&#34;http://wbond.net/sublime_packages/package_control/installation#ST3&#34;&gt;instructions&lt;/a&gt;.
@@ -186,7 +257,7 @@ manually install - this usually is simple and only involves cloning the
 plugin repository into your packages directory and then checking out an
 ST3 compatible branch.  Its no real hardship - so go for it.&lt;/p&gt;
 
-&lt;h3&gt;3. Migrate settings&lt;/h3&gt;
+&lt;h3 id=&#34;toc_3&#34;&gt;3. Migrate settings&lt;/h3&gt;
 
 &lt;p&gt;Once all the packages are installed, its time to get ST3 as comfy as you had
 ST2.  To do this copy and paste your user settings from:
@@ -198,14 +269,14 @@ directory of ST2 into the User directory of ST3 eg:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cp ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User/Python.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Python.sublime-settings
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3&gt;4. Update the subl helper:&lt;/h3&gt;
+&lt;h3 id=&#34;toc_4&#34;&gt;4. Update the subl helper:&lt;/h3&gt;
 
 &lt;p&gt;Remove / rename any symlinked helpers then:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;sudo ln -s &amp;quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&amp;quot; /usr/bin/subl
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3&gt;5. Profit!&lt;/h3&gt;
+&lt;h3 id=&#34;toc_5&#34;&gt;5. Profit!&lt;/h3&gt;
 
 &lt;p&gt;Easy eh?  You now have ST3 configured as you are used to and if anything
 is buggy (&lt;em&gt;it is still in a beta&lt;/em&gt;) you can easily switch back to ST2.&lt;/p&gt;
@@ -243,21 +314,21 @@ you can make the switch today.&lt;/p&gt;
       <pubDate>Tue, 23 Jul 2013 00:00:00 UTC</pubDate>
       <author>Ross Lawley</author>
       <guid>http://rosslawley.co.uk/posts/the-most-popular-pub-name</guid>
-      <description>&lt;p&gt;Earlier in the year I gave a talk at &lt;a href=&#34;http://www.10gen.com/events/mongodb-london-2013&#34;&gt;MongoDB London&lt;/a&gt;
+      <description>
+
+&lt;p&gt;Earlier in the year I gave a talk at &lt;a href=&#34;http://www.10gen.com/events/mongodb-london-2013&#34;&gt;MongoDB London&lt;/a&gt;
 about the different aggregation options with MongoDB.  The topic recently came up again
 in conversation at a user group, so I thought it deserved a blog post.&lt;/p&gt;
 
-&lt;h2&gt;Gathering ideas for the talk&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;Gathering ideas for the talk&lt;/h2&gt;
 
 &lt;p&gt;I wanted to give a more interesting aggregation talk than the standard
 &amp;ldquo;counting words in text&amp;rdquo;, and as the &lt;a href=&#34;http://docs.mongodb.org/manual/core/aggregation/&#34;&gt;aggregation framework&lt;/a&gt; gained shiny &lt;a href=&#34;http://docs.mongodb.org/manual/core/2dsphere/&#34;&gt;2dsphere geo&lt;/a&gt; support in
 &lt;a href=&#34;http://docs.mongodb.org/manual/release-notes/2.4/#new-geospatial-indexes-with-geojson-and-improved-spherical-geometry&#34;&gt;2.4&lt;/a&gt;, I figured I&amp;rsquo;d use that. I just needed a topic&amp;hellip;&lt;/p&gt;
 
-&lt;h3&gt;What are us Brits focused on?&lt;/h3&gt;
+&lt;h3 id=&#34;toc_1&#34;&gt;What are us Brits focused on?&lt;/h3&gt;
 
 &lt;p&gt;Two things immediately sprang to mind: &lt;strong&gt;weather&lt;/strong&gt; and &lt;strong&gt;beer&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;!--more--&gt;
 
 &lt;p&gt;I opted to focus on something close to my heart: &lt;strong&gt;beer&lt;/strong&gt; :)
 But what to aggregate about beer? Then I remembered an old pub quiz favourite&amp;hellip;&lt;/p&gt;
@@ -301,7 +372,7 @@ a wordle I normalised all the pub names.&lt;/p&gt;
 &lt;p&gt;If you want to know more about the importing process, the full loading code is
 available on github: &lt;a href=&#34;https://github.com/rozza/pubnames/blob/master/osm2mongo.py&#34;&gt;osm2mongo.py&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2&gt;Top pub names&lt;/h2&gt;
+&lt;h2 id=&#34;toc_2&#34;&gt;Top pub names&lt;/h2&gt;
 
 &lt;p&gt;It turns out finding the most popular pub names is very simple with the
 aggregation framework.  Just group by the name and then sum up all the occurrences.
@@ -336,10 +407,10 @@ For the whole of the UK this returns:
 &lt;/div&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-  &lt;img src=&#34;http://rosslawley.co.uk/images/pubs_wordle.png&#34;&lt;br&gt;
+  &lt;img src=&#34;/images/pubs_wordle.png&#34;&lt;br&gt;
 &lt;/p&gt;
 
-&lt;h2&gt;Top pub names near you&lt;/h2&gt;
+&lt;h2 id=&#34;toc_3&#34;&gt;Top pub names near you&lt;/h2&gt;
 
 &lt;p&gt;At MongoDB London I thought that was too easy, so filtered to find the top pub
 names near the conference and showing off some of the geo functionality that became
@@ -362,7 +433,7 @@ coordinates &lt;code&gt;[ &amp;lt;long&amp;gt;, &amp;lt;lat&amp;gt; ]&lt;/code&g
   ]);
 &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
 
-&lt;h2&gt;What about where I live?&lt;/h2&gt;
+&lt;h2 id=&#34;toc_4&#34;&gt;What about where I live?&lt;/h2&gt;
 
 &lt;p&gt;At the conference I looked the most popular pub name near the conference.  Thats
 great if you happen to live in the centre of London but what about everyone else
@@ -376,10 +447,10 @@ some time for the heroku dyno to wake, so please be patient!)&lt;/p&gt;
 whole world - its surely possible to do, I just lacked the patience to download
 it all!&lt;/p&gt;
 
-&lt;h2&gt;Cheers&lt;/h2&gt;
+&lt;h2 id=&#34;toc_5&#34;&gt;Cheers&lt;/h2&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-  &lt;img src=&#34;http://rosslawley.co.uk/images/almurray.jpg&#34; title=&#34;Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946&#34; /&gt; &lt;br&gt;
+  &lt;img src=&#34;/images/almurray.jpg&#34; title=&#34;Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946&#34; /&gt; &lt;br&gt;
   &lt;small&gt; Source: &lt;a href=&#34;http://www.flickr.com/photos/bradfordtheatres/3063899946&#34;/&gt;http://www.flickr.com/photos/bradfordtheatres/3063899946&lt;/a&gt;&lt;/small&gt;
 &lt;/p&gt;
 
@@ -395,12 +466,14 @@ playing with MongoDB&amp;rsquo;s great geo features!&lt;/p&gt;
       <pubDate>Mon, 20 May 2013 00:00:00 UTC</pubDate>
       <author>Ross Lawley</author>
       <guid>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-dot-0</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m really pleased to annouce the release of
+      <description>
+
+&lt;p&gt;I&amp;rsquo;m really pleased to annouce the release of
 &lt;a href=&#34;https://pypi.python.org/pypi/mongoengine/0.8.0&#34;&gt;MongoEngine 0.8.0&lt;/a&gt;.
 Its been a &lt;em&gt;long process&lt;/em&gt; due to work and life commitments but the latest version
 of MongoEngine is here.&lt;/p&gt;
 
-&lt;h2&gt;Whats changed?&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;Whats changed?&lt;/h2&gt;
 
 &lt;p&gt;There have been loads of fixes, improvements and changes in 0.8.
 The headliners are:&lt;/p&gt;
@@ -420,14 +493,12 @@ well as turning off dereferencing&lt;/li&gt;
 
 &lt;p&gt;And much, much more!&lt;/p&gt;
 
-&lt;!--more--&gt;
-
 &lt;p&gt;See the full &lt;a href=&#34;http://docs.mongoengine.org/en/latest/changelog.html#changes-in-0-8-0&#34;&gt;changelog&lt;/a&gt;
 for all changes or check &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/&#34;&gt;github&lt;/a&gt; to see the
 &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;amp;page=1&amp;amp;state=closed&#34;&gt;96 tickets&lt;/a&gt;
 that have been fixed as part of this release.&lt;/p&gt;
 
-&lt;h2&gt;Whats next?&lt;/h2&gt;
+&lt;h2 id=&#34;toc_1&#34;&gt;Whats next?&lt;/h2&gt;
 
 &lt;p&gt;There are a number of ideas on &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=6&#34;&gt;github&lt;/a&gt; for 0.9.  I&amp;rsquo;m looking for people to help with the administration and coding
 of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p&gt;
@@ -440,7 +511,9 @@ of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p
       <pubDate>Wed, 01 May 2013 00:00:00 UTC</pubDate>
       <author>Ross Lawley</author>
       <guid>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-rc1-released</guid>
-      <description>&lt;p&gt;&lt;strong&gt;Notice:&lt;/strong&gt; 0.8.0RC3 has been released fixing a couple of small bugs and extra improvements.&lt;/p&gt;
+      <description>
+
+&lt;p&gt;&lt;strong&gt;Notice:&lt;/strong&gt; 0.8.0RC3 has been released fixing a couple of small bugs and extra improvements.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Notice:&lt;/strong&gt; 0.8.0RC2 has been released fixing an obscure queryset cursor cloning issue.&lt;/p&gt;
 
@@ -448,7 +521,7 @@ of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p
 Its been a &lt;em&gt;long process&lt;/em&gt; due to work and life commitments but the latest version
 of MongoEngine is ready for testing and feedback.&lt;/p&gt;
 
-&lt;h2&gt;Why a release candidate?&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;Why a release candidate?&lt;/h2&gt;
 
 &lt;p&gt;There have been massive changes in the internals, requiring thought and
 &lt;strong&gt;testing&lt;/strong&gt; before upgrading and releasing to the wild - so please
@@ -463,12 +536,10 @@ please email the &lt;a href=&#34;https://groups.google.com/group/mongoengine-use
 or if you&amp;rsquo;d prefer to message me directly you can via
 &lt;a href=&#34;https://github.com/rozza&#34;&gt;https://github.com/rozza&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2&gt;Whats changed?&lt;/h2&gt;
+&lt;h2 id=&#34;toc_1&#34;&gt;Whats changed?&lt;/h2&gt;
 
 &lt;p&gt;There have been loads of fixes, improvements and changes in 0.8.
 The headliners are:&lt;/p&gt;
-
-&lt;!--more--&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Minimum requirements are python 2.6+ and pymongo 2.5+&lt;/li&gt;
@@ -488,7 +559,7 @@ for all changes or check &lt;a href=&#34;https://github.com/MongoEngine/mongoeng
 &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;amp;page=1&amp;amp;state=closed&#34;&gt;84 tickets&lt;/a&gt;
 that have been fixed as part of this release.&lt;/p&gt;
 
-&lt;h2&gt;Try it now!&lt;/h2&gt;
+&lt;h2 id=&#34;toc_2&#34;&gt;Try it now!&lt;/h2&gt;
 
 &lt;p&gt;Please test it, try it out and report any issues back!
 All being well 0.8.0RC1 will be released as 0.8.0 in a week.&lt;/p&gt;
@@ -503,14 +574,16 @@ All being well 0.8.0RC1 will be released as 0.8.0 in a week.&lt;/p&gt;
       <pubDate>Wed, 20 Mar 2013 00:00:00 UTC</pubDate>
       <author>Ross Lawley</author>
       <guid>http://rosslawley.co.uk/posts/automate-all-the-things</guid>
-      <description>&lt;h1&gt;Disaster Strikes&lt;/h1&gt;
+      <description>
+
+&lt;h1 id=&#34;toc_0&#34;&gt;Disaster Strikes&lt;/h1&gt;
 
 &lt;p&gt;Last week my Mac book ran out of space again, this had been going on for some time and I&amp;rsquo;d had enough.
 I was spending an ever increasing amount of much time hunting down rogue space invaders on my small 120gb hard drive.  So &lt;strong&gt;something&lt;/strong&gt; had to be done.&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
     &lt;strong&gt;In times like this there is only one solution!&lt;/strong&gt;&lt;br&gt;
-    &lt;img src=&#34;http://rosslawley.co.uk/images/mrragequit.jpg&#34; title=&#34;Original image: http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&#34; /&gt; &lt;br&gt;
+    &lt;img src=&#34;/images/mrragequit.jpg&#34; title=&#34;Original image: http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&#34; /&gt; &lt;br&gt;
     &lt;small&gt; Source: &lt;a href=&#34;http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&#34;/&gt;http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&lt;/a&gt;&lt;/small&gt;
 &lt;/p&gt;
 
@@ -518,11 +591,9 @@ I was spending an ever increasing amount of much time hunting down rogue space i
 Normally starting from scratch would be a royal pain in the backside, taking many days to get things installed and allow me to get back to coding.
 Then I remembered hearing about &lt;a href=&#34;http://boxen.github.com&#34;&gt;boxen&lt;/a&gt; which could give me an easy way to rebuild and &lt;em&gt;maintain&lt;/em&gt; the software on my Mac and hatched a plan of devops style automation!&lt;/p&gt;
 
-&lt;h1&gt;My automation trifecta&lt;/h1&gt;
+&lt;h1 id=&#34;toc_1&#34;&gt;My automation trifecta&lt;/h1&gt;
 
-&lt;!--more--&gt;
-
-&lt;h2&gt;Boxen&lt;/h2&gt;
+&lt;h2 id=&#34;toc_2&#34;&gt;Boxen&lt;/h2&gt;
 
 &lt;p&gt;Boxen is built on top of &lt;a href=&#34;https://puppetlabs.com/&#34;&gt;puppet&lt;/a&gt; and it allows you to describe in code your Mac configuration and what software to install on it. To get started just copy githubs&amp;rsquo; starter &lt;a href=&#34;https://github.com/boxen/our-boxen&#34;&gt;boxen repo&lt;/a&gt; and then add your requirements.
 I had to do two things to get my software stack automated:&lt;/p&gt;
@@ -538,13 +609,13 @@ No wasting time hunting down .dmgs and navigating through their respective websi
 If you want to know more about boxen then check out this &lt;a href=&#34;https://speakerdeck.com/wfarr/boxen&#34;&gt;presentation&lt;/a&gt;.
 All my configuration is now on github &lt;a href=&#34;https://github.com/rozza/my-boxen/&#34;&gt;my-boxen&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2&gt;dotfiles&lt;/h2&gt;
+&lt;h2 id=&#34;toc_3&#34;&gt;dotfiles&lt;/h2&gt;
 
 &lt;p&gt;Boxen is great as it automates the software installed on my mac but what about my general configuration? I could use Boxen and puppet to define and create &lt;em&gt;all&lt;/em&gt; my configuration files - but that seems unnecessarily complex and to me there is a separation of concerns. So when I asked on twitter what other folk do &lt;a href=&#34;http://intranation.com&#34;&gt;Brad Wright&lt;/a&gt; pointed me to his dotfiles.&lt;/p&gt;
 
 &lt;p&gt;After a quick investigation I duly &lt;span style=&#34;text-decoration:line-through;&#34;&gt;raided and plundered&lt;/span&gt; took inspiration from and now I have all my personal dot file configurations for things like &lt;em&gt;github, slate and zsh&lt;/em&gt; backed up on github.  What about private configuration files? Where it makes sense any files with a &lt;code&gt;.local_&lt;/code&gt; prefix will be sourced by their respective core configuration file.  That way I can have different configrations across machines - I can have a core &lt;code&gt;.bashrc&lt;/code&gt; and a local version on each machine eg &lt;code&gt;.local_bashrc&lt;/code&gt;.  All my public &lt;a href=&#34;https://github.com/rozza/dotfiles&#34;&gt;dotfiles&lt;/a&gt; are on github so plunder away!&lt;/p&gt;
 
-&lt;h2&gt;Vagrant&lt;/h2&gt;
+&lt;h2 id=&#34;toc_4&#34;&gt;Vagrant&lt;/h2&gt;
 
 &lt;p&gt;The final piece in my automation puzzle is Vagrant.
 I&amp;rsquo;ve been a huge fan of using vm&amp;rsquo;s for development for years and more recently &lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;vagrant&lt;/a&gt; has been my tool of choice.
@@ -554,10 +625,10 @@ As its a vm all I had to do is back it up before I wiped the hard drive and I co
 
 &lt;p&gt;When working on a vm, I still like to use sublime text on my mac to code.  So the way to achieve this is to nfs the code directory from the Mac into the vm - I used to do it the other way round, but having the code local to the mac makes editing very snappy.  The last thing to do was back up my code directory - I was surprised that all my checked out code weighs in at a hefty 13 gigs!&lt;/p&gt;
 
-&lt;h1&gt;Automation heaven&lt;/h1&gt;
+&lt;h1 id=&#34;toc_5&#34;&gt;Automation heaven&lt;/h1&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-    &lt;img src=&#34;http://rosslawley.co.uk/images/make-a-boxen.png&#34; /&gt;&lt;br&gt;
+    &lt;img src=&#34;/images/make-a-boxen.png&#34; /&gt;&lt;br&gt;
     &lt;small&gt; Source: &lt;a href=&#34;https://speakerdeck.com/wfarr/boxen&#34;/&gt;https://speakerdeck.com/wfarr/boxen&lt;/a&gt;&lt;/small&gt;
 &lt;/p&gt;
 

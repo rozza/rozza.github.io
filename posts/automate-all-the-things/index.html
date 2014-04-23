@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Ross Lawley">
-    <link href="/favicon.png" rel="icon">
+    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
 
     <title>Automate all the things</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/site.css" rel="stylesheet">
+    <link href="http://rosslawley.co.uk/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://rosslawley.co.uk/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://rosslawley.co.uk/css/site.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   </head>
@@ -21,7 +21,7 @@
   <div class="container">
     <div class="navbar-header">
       
-        <h1><a class="navbar-brand" href="/">Ross Lawley</a></h1>
+        <h1><a class="navbar-brand" href="http://rosslawley.co.uk/">Ross Lawley</a></h1>
       
     </div>
       <ul class="nav navbar-nav pull-right">
@@ -55,7 +55,9 @@
   </div>
   </header>
     <div class="container">
-    <h1>Disaster Strikes</h1>
+    
+
+<h1 id="toc_0">Disaster Strikes</h1>
 
 <p>Last week my Mac book ran out of space again, this had been going on for some time and I&rsquo;d had enough.
 I was spending an ever increasing amount of much time hunting down rogue space invaders on my small 120gb hard drive.  So <strong>something</strong> had to be done.</p>
@@ -70,11 +72,9 @@ I was spending an ever increasing amount of much time hunting down rogue space i
 Normally starting from scratch would be a royal pain in the backside, taking many days to get things installed and allow me to get back to coding.
 Then I remembered hearing about <a href="http://boxen.github.com">boxen</a> which could give me an easy way to rebuild and <em>maintain</em> the software on my Mac and hatched a plan of devops style automation!</p>
 
-<h1>My automation trifecta</h1>
+<h1 id="toc_1">My automation trifecta</h1>
 
-<!--more-->
-
-<h2>Boxen</h2>
+<h2 id="toc_2">Boxen</h2>
 
 <p>Boxen is built on top of <a href="https://puppetlabs.com/">puppet</a> and it allows you to describe in code your Mac configuration and what software to install on it. To get started just copy githubs&rsquo; starter <a href="https://github.com/boxen/our-boxen">boxen repo</a> and then add your requirements.
 I had to do two things to get my software stack automated:</p>
@@ -90,13 +90,13 @@ No wasting time hunting down .dmgs and navigating through their respective websi
 If you want to know more about boxen then check out this <a href="https://speakerdeck.com/wfarr/boxen">presentation</a>.
 All my configuration is now on github <a href="https://github.com/rozza/my-boxen/">my-boxen</a></p>
 
-<h2>dotfiles</h2>
+<h2 id="toc_3">dotfiles</h2>
 
 <p>Boxen is great as it automates the software installed on my mac but what about my general configuration? I could use Boxen and puppet to define and create <em>all</em> my configuration files - but that seems unnecessarily complex and to me there is a separation of concerns. So when I asked on twitter what other folk do <a href="http://intranation.com">Brad Wright</a> pointed me to his dotfiles.</p>
 
 <p>After a quick investigation I duly <span style="text-decoration:line-through;">raided and plundered</span> took inspiration from and now I have all my personal dot file configurations for things like <em>github, slate and zsh</em> backed up on github.  What about private configuration files? Where it makes sense any files with a <code>.local_</code> prefix will be sourced by their respective core configuration file.  That way I can have different configrations across machines - I can have a core <code>.bashrc</code> and a local version on each machine eg <code>.local_bashrc</code>.  All my public <a href="https://github.com/rozza/dotfiles">dotfiles</a> are on github so plunder away!</p>
 
-<h2>Vagrant</h2>
+<h2 id="toc_4">Vagrant</h2>
 
 <p>The final piece in my automation puzzle is Vagrant.
 I&rsquo;ve been a huge fan of using vm&rsquo;s for development for years and more recently <a href="http://www.vagrantup.com/">vagrant</a> has been my tool of choice.
@@ -106,7 +106,7 @@ As its a vm all I had to do is back it up before I wiped the hard drive and I co
 
 <p>When working on a vm, I still like to use sublime text on my mac to code.  So the way to achieve this is to nfs the code directory from the Mac into the vm - I used to do it the other way round, but having the code local to the mac makes editing very snappy.  The last thing to do was back up my code directory - I was surprised that all my checked out code weighs in at a hefty 13 gigs!</p>
 
-<h1>Automation heaven</h1>
+<h1 id="toc_5">Automation heaven</h1>
 
 <p class="text-center">
     <img src="http://rosslawley.co.uk/images/make-a-boxen.png" /><br>
@@ -127,15 +127,15 @@ That included the time it took me to learn how to use boxen and setup dotfiles!<
   <footer>
   <p>
   
-    <a href="/categories/tech/"><span class="badge">tech</span></a>
+    <a href="http://rosslawley.co.uk/categories/tech/"><span class="badge">tech</span></a>
   
-    <a href="/categories/devops/"><span class="badge">devops</span></a>
+    <a href="http://rosslawley.co.uk/categories/devops/"><span class="badge">devops</span></a>
   
-    <a href="/categories/puppet/"><span class="badge">puppet</span></a>
+    <a href="http://rosslawley.co.uk/categories/puppet/"><span class="badge">puppet</span></a>
   
-    <a href="/categories/vagrant/"><span class="badge">vagrant</span></a>
+    <a href="http://rosslawley.co.uk/categories/vagrant/"><span class="badge">vagrant</span></a>
   
-    <a href="/categories/osx/"><span class="badge">osx</span></a>
+    <a href="http://rosslawley.co.uk/categories/osx/"><span class="badge">osx</span></a>
   
   </p>
   
@@ -162,7 +162,7 @@ That included the time it took me to learn how to use boxen and setup dotfiles!<
   <div class="row">
     <footer class="footer-page" role="contentinfo">
       <p>
-        Copyright &copy; 2013 - Ross Lawley - <a href="/posts">Site Archive</a>
+        Copyright &copy; 2013 - Ross Lawley - <a href="http://rosslawley.co.uk/posts">Site Archive</a>
       </p>
       <p>
         <span class="credit">Powered by <a href="http://hugo.spf13.com/">Hugo</a></span>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Ross Lawley">
+    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
+
+    <title>How to: Handle multiple Scala versions</title>
+
+    <link href="http://rosslawley.co.uk/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://rosslawley.co.uk/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://rosslawley.co.uk/css/site.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      
+        <h1><a class="navbar-brand" href="http://rosslawley.co.uk/">Ross Lawley</a></h1>
+      
+    </div>
+      <ul class="nav navbar-nav pull-right">
+        <li>
+          <a href="http://github.com/rozza" title="Github Profile" target="_blank">
+            <i class="icon-github-sign social-navbar"></i>
+          </a>
+        </li>
+        <li>
+          <a href="http://linkedin.com/in/rosslawley" title="Linkedin Profile" target="_blank">
+            <i class="icon-linkedin-sign social-navbar"></i>
+          </a>
+        </li>
+        <li>
+          <a href="http://twitter.com/RossC0" title="Twitter Profile" target="_blank">
+            <i class="icon-twitter-sign social-navbar"></i>
+          </a>
+        </li>
+      </ul>
+  </div>
+</nav>
+    <div class="container content">
+<div class="article col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+<article role="article">
+  <header>
+  <div class="jumbotron">
+    <div class="container">
+    <h1>How to: Handle multiple Scala versions</h1>
+    <h5 class="date-time"><i class="icon-calendar-empty"></i> <time datetime="2014-04-23 00:00:00 &#43;0000 UTC" pubdate="" data-updated="true">Wed 04, 2014</time></h5>
+    </div>
+  </div>
+  </header>
+    <div class="container">
+    
+
+<p>I recently upgraded <a href="http://mongodb.github.io/casbah/">Casbah</a> to support the latest Scala 2.11 release and for the first time when supporting multiple Scala versions I hit a stumbling block.  If you&rsquo;re writing a library that wants to support multiple versions of Scala in a single code base, it&rsquo;s generally easy isn&rsquo;t it? Thankfully, it is as <a href="http://www.scala-sbt.org/">sbt</a> can do the heavy lifting for you.</p>
+
+<h2 id="toc_0">Three steps to success</h2>
+
+<p>The sbt documentation covers the basics nicely in their <a href="http://www.scala-sbt.org/release/docs/Detailed-Topics/Cross-Build.html">cross build</a> documentation.  But what&rsquo;s the path to success?</p>
+
+<ol>
+<li><p>Choose the Scala&rsquo;s you are going to support.</p>
+
+<p>Set the <code>crossScalaVersions</code> setting in your build file to define the Scala versions you want to support. In Casbah we support: <code>crossScalaVersions := Seq(&quot;2.11.0&quot;, &quot;2.10.4&quot;, &quot;2.9.3&quot;)</code></p></li>
+
+<li><p>Configure libraries</p>
+
+<p>Here it can get hairy because third party libraries may not support all your favoured scala builds in their latest release.  If they do, then happy days but if not you may have to pick out each library version as needed.  Here is an example from the Casbah build:</p>
+
+<pre><code>// In the build settings append to the library dependencies
+libraryDependencies &lt;++= scalaVersion (sv =&gt; Seq(specs2(sv), scalatime(sv)))
+
+
+// Helper method to pattern match against the scala version and return the correct specs version
+def specs2(scalaVersion: String) =
+  (scalaVersion match {
+    case &quot;2.9.3&quot;   =&gt; &quot;org.specs2&quot; %% &quot;specs2&quot; % &quot;1.12.4.1&quot;
+    case _ =&gt; &quot;org.specs2&quot; %% &quot;specs2&quot; % &quot;2.3.11&quot;
+  }) % &quot;test&quot;
+</code></pre>
+
+<p>As the latest Specs build <code>2.3.11</code> doesn&rsquo;t support Scala 2.9.3 we have to use the older <code>1.12.4.1</code> version for 2.9.3.  The downside is we can&rsquo;t yet use some of the nicer newer features of the Specs library in our test suite.</p></li>
+
+<li><p>Scala version specific code.</p>
+
+<p>This is the real challenge, what do you do if you need specific code for a specific version of Scala?  Hopefully, you&rsquo;ll never need to but this isn&rsquo;t always the case as I found with Casbah.  We use <code>BeanInfo</code> annotation and it lives in <code>scala.reflection</code> in Scala 2.9.3 and in <code>scala.beans</code> in 2.11.</p>
+
+<p>So how can we get round this? Luckily, Scala 2.10 gave me a hint as <code>BeanInfo</code> had been depreciated in <code>scala.reflection</code> but they had mirrored it in a <a href="https://github.com/scala/scala/blob/v2.10.4/src/library/scala/reflect/package.scala#L55-L56">package object</a>. I could use the same trick in Casbah! However, I would need a version for Scala 2.9.3 to point to <code>scala.reflect.BeanInfo</code> and a version for 2.10 &amp; 2.11. Then update all the code to point to the scala specific package object.</p>
+
+<p>As the code would be version specific it couldn&rsquo;t live in the <code>src/main/scala</code> directory as it wouldn&rsquo;t compile. So instead I created specific Scala directories in <code>src/main</code> like so:</p>
+
+<pre><code>./scala
+./scala_2.9.3  // Scala 2.9.3 specific code
+./scala_2.10   // Scala 2.10 specific code
+./scala_2.11   // Scala 2.11 specific code
+</code></pre>
+
+<p>As Scala 2.10 &amp; 2.11 point versions will be binary compatible I only need a top level directory for them.  Then alls that&rsquo;s needed is to add these source directories to the build:</p>
+
+<pre><code>unmanagedSourceDirectories in Compile &lt;+= (sourceDirectory in Compile, scalaBinaryVersion){
+  (s, v) =&gt; s / (&quot;scala_&quot;+v)
+}
+</code></pre>
+
+<p>This adds extra source directories to the compile step and using <code>scalaBinaryVersion</code> I get the binary compatible versions (so it&rsquo;s 2.11 for all 2.11 releases but would be 2.9.3, 2.9.2, 2.9.1 for the non compatible point releases from the 2.9 series).</p>
+
+<p>The fix in Casbah was to simply add a <code>beans.scala</code> for the scala specific versions and create a <code>BeanInfo</code> type which points to the correct scala package. Problem solved.</p></li>
+</ol>
+
+<p>Sbt allow you to run any command against multiple versions of Scala. <code>./sbt +test</code> will test against all your <code>crossScalaVersions</code> of Scala and hopefully confirm the code works as expected.  If I want to test a specific version use a double plus sign and add the version string to the arguments eg: <code>./sbt ++ 2.9.3 test</code>.</p>
+
+<h2 id="toc_1">Final thoughts</h2>
+
+<p>Scala is a relatively fast moving ecosystem with new major releases every 13 months or so.  When I took over Casbah it supported 6 binary incompatible versions of Scala! From 2.8.1 to 2.9.3. Happily, Scala patch versions from 2.10.0 on have become binary compatible making supporting multiple versions of Scala easier.  However, one of the key issues for maintaining a library is to know when to end of life an old Scala version, so to keep the library fresh.</p>
+
+<p>In Casbah supporting the current and last major versions of Scala gives users support for the latest MongoDB version and allows them some flexibility when it comes to updating Scala. Generally, this has been a trouble free process and as shown above problems are solvable in just three easy steps.</p>
+
+    </div>
+  <footer>
+  <p>
+  
+    <a href="http://rosslawley.co.uk/categories/tech/"><span class="badge">tech</span></a>
+  
+    <a href="http://rosslawley.co.uk/categories/mongodb/"><span class="badge">mongodb</span></a>
+  
+    <a href="http://rosslawley.co.uk/categories/libary/"><span class="badge">libary</span></a>
+  
+    <a href="http://rosslawley.co.uk/categories/scala/"><span class="badge">scala</span></a>
+  
+  </p>
+  
+  
+    <a class="next pull-right" href="http://rosslawley.co.uk/posts/rx-java">
+      RxJava - understandably reactive
+      <span class="glyphicon glyphicon-forward"></span>
+    </a>
+  
+  </footer>
+</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rozza';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+</div>
+  </div>
+  <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+  <div class="row">
+    <footer class="footer-page" role="contentinfo">
+      <p>
+        Copyright &copy; 2014 - Ross Lawley - <a href="http://rosslawley.co.uk/posts">Site Archive</a>
+      </p>
+      <p>
+        <span class="credit">Powered by <a href="http://hugo.spf13.com/">Hugo</a></span>
+         
+      </p>
+    </footer>
+  </div>
+  </div>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-716284-3']);
+    _gaq.push(['_setDomainName', 'rosslawley.co.uk']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  </body>
+</html>
