@@ -30,6 +30,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="alternate" type="application/rss+xml" title="Ross Lawley" href="http://rosslawley.co.uk/index.xml" />
+    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
 </head>
 <body>
 
@@ -77,7 +78,7 @@
                         <p class="post-meta">
                             
                             
-                                under 
+                                under
                                 
                                 <a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-RxJava" href="http://rosslawley.co.uk/categories/rxjava">RxJava</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-reactive" href="http://rosslawley.co.uk/categories/reactive">reactive</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a>
                             
@@ -96,33 +97,11 @@ a port of .Net&rsquo;s <a href="http://msdn.microsoft.com/en-gb/data/gg577609.as
 which covered what it is and how they implemented the core and then added
 support for other JVM languages.</p>
 
-<p>Two things immediately struck me:</p>
-
-<ol>
-<li><p>Observables are not opnionated about how the backend works.  It could be
-concurrent or swapped out with a thread pool, an actor
-or an nio event &amp; event loop&hellip; Pretty cool, this means there is a single way
-of handling the code no matter if the backend is synchronus or asynchronus.</p></li>
-
-<li><p>The methods for manipulating multiple observers, chaining or nesting
-is extremely powerful, yet easy to understand.</p></li>
-</ol>
-
-<p>I&rsquo;m really looking forward to using it, to me its an easier abstraction to
-understand for handling streams of data and seemly less complex than using Plays
-excellent <code>Iteratee.Concurrent</code> library.</p>
-
-<p>Enjoy:</p>
-
-<p><div class="embed video-player">
-<iframe class="youtube-player" type="text/html"
-    width="640" height="385"
-    src="http://www.youtube.com/embed/tOMK_FYJREw"
-    allowfullscreen frameborder="0">
-</iframe>
-</div></p>
-
                     </div>
+
+                    <footer class="post-footer">
+                    <a href='http://rosslawley.co.uk/rx-java/' class="pull-right">Read more &GreaterGreater;</a>
+                  </footer>
                 </section>
                 
             </div>

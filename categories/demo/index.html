@@ -30,6 +30,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="alternate" type="application/rss+xml" title="Ross Lawley" href="http://rosslawley.co.uk/index.xml" />
+    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
 </head>
 <body>
 
@@ -77,7 +78,7 @@
                         <p class="post-meta">
                             
                             
-                                under 
+                                under
                                 
                                 <a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-aggregation" href="http://rosslawley.co.uk/categories/aggregation">aggregation</a><a class="post-category post-category-demo" href="http://rosslawley.co.uk/categories/demo">demo</a><a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-geo" href="http://rosslawley.co.uk/categories/geo">geo</a>
                             
@@ -85,9 +86,7 @@
                     </header>
 
                     <div class="post-description">
-                        
-
-<p>Earlier in the year I gave a talk at <a href="http://www.10gen.com/events/mongodb-london-2013">MongoDB London</a>
+                        <p>Earlier in the year I gave a talk at <a href="http://www.10gen.com/events/mongodb-london-2013">MongoDB London</a>
 about the different aggregation options with MongoDB.  The topic recently came up again
 in conversation at a user group, so I thought it deserved a blog post.</p>
 
@@ -101,135 +100,11 @@ in conversation at a user group, so I thought it deserved a blog post.</p>
 
 <p>Two things immediately sprang to mind: <strong>weather</strong> and <strong>beer</strong>.</p>
 
-<p>I opted to focus on something close to my heart: <strong>beer</strong> :)
-But what to aggregate about beer? Then I remembered an old pub quiz favourite&hellip;</p>
-
-<p><strong>What is the most popular pub name in the UK?</strong></p>
-
-<p>I know there is some great open data, including a wealth of information
-on pubs available from the awesome <a href="http://www.openstreetmap.org/">open street map</a>
-project.  I just need to get at it and happily the <a href="http://www.overpass-api.de">Overpass-api</a>
-provides a simple &ldquo;xapi&rdquo; interface for OSM data.
-All I needed was anything tagged with <code>amenity=pub</code> within in the
-bounds of the UK and with their xapi interface this is as simple as a wget:
-<code>http://www.overpass-api.de/api/xapi?*[amenity=pub][bbox=-10.5,49.78,1.78,59]</code></p>
-
-<p>Once I had an osm file I used the <a href="http://imposm.org/">imposm python library</a> to
-parse the xml and then convert it to following GeoJSON format:</p>
-
-<pre>
-<code class="javascript">{
-  "_id" : 451152,
-  "amenity" : "pub",
-  "name" : "The Dignity",
-  "addr:housenumber" : "363",
-  "addr:street" : "Regents Park Road",
-  "addr:city" : "London",
-  "addr:postcode" : "N3 1DH",
-  "toilets" : "yes",
-  "toilets:access" : "customers",
-  "location" : {
-      "type" : "Point",
-      "coordinates" : [-0.1945732, 51.6008172]
-  }
-}
-</code></pre>
-
-<p>Then it was a case of simply inserting it as a document into MongoDB. I
-quickly noticed that the data needed a little cleaning, as I was seeing duplicate
-pub names, for example: &ldquo;The Red Lion&rdquo; and &ldquo;Red Lion&rdquo;.  Because I wanted to make
-a wordle I normalised all the pub names.</p>
-
-<p>If you want to know more about the importing process, the full loading code is
-available on github: <a href="https://github.com/rozza/pubnames/blob/master/osm2mongo.py">osm2mongo.py</a></p>
-
-<h2 id="top-pub-names:e8cc9569ac7e5d9e066aee5378affb29">Top pub names</h2>
-
-<p>It turns out finding the most popular pub names is very simple with the
-aggregation framework.  Just group by the name and then sum up all the occurrences.
-To get the top five most popular pub names we sort by the summed value and then
-limit to 5:</p>
-
-<div class="row">
-  <div class="col-md-6 col-lg-6">
-<pre>
-<code class="javascript">db.pubs.aggregate([
-  {"$group":
-     {"_id": "$name",
-      "value": {"$sum": 1}
-     }
-  },
-  {"$sort": {"value": -1}},
-  {"$limit": 5}
-]);
-</code></pre>
-  </div>
-  <div class="col-md-6 col-lg-6">
-For the whole of the UK this returns:
-
-<ol>
-<li>The Red Lion</li>
-<li>The Royal Oak</li>
-<li>The Crown</li>
-<li>The White Hart</li>
-<li>The White Horse</li>
-</ol>
-  </div>
-</div>
-
-<p class="text-center">
-  <img src="/images/pubs_wordle.png"<br>
-</p>
-
-<h2 id="top-pub-names-near-you:e8cc9569ac7e5d9e066aee5378affb29">Top pub names near you</h2>
-
-<p>At MongoDB London I thought that was too easy, so filtered to find the top pub
-names near the conference and showing off some of the geo functionality that became
-available in MongoDB 2.4.  To limit the result set match and ensure the
-location is within a 2 mile radius by using <code>$centreSphere</code>. Just provide the
-coordinates <code>[ &lt;long&gt;, &lt;lat&gt; ]</code> and a radius of roughly 2 miles
-(3959 is approximately the radius of the earth, so divide it by 2):
-<pre>
-<code class="javascript">db.pubs.aggregate([
-    { &ldquo;$match&rdquo; : { &ldquo;location&rdquo;:
-                 { &ldquo;$within&rdquo;:
-                   { &ldquo;$text-centerSphere&rdquo;: [[-0.12, 51.516], 2 / 3959] }}}
-    },
-    { &ldquo;$group&rdquo; :
-       { &ldquo;_id&rdquo; : &ldquo;$name&rdquo;,
-         &ldquo;value&rdquo; : { &ldquo;$sum&rdquo; : 1 } }
-    },
-    { &ldquo;$sort&rdquo; : { &ldquo;value&rdquo; : -1 } },
-    { &ldquo;$limit&rdquo; : 5 }
-  ]);
-</code></pre></p>
-
-<h2 id="what-about-where-i-live:e8cc9569ac7e5d9e066aee5378affb29">What about where I live?</h2>
-
-<p>At the conference I looked the most popular pub name near the conference.  Thats
-great if you happen to live in the centre of London but what about everyone else
-in the UK? So for this blog post I decided to update the demo code and make it
-dynamic based on where you live.</p>
-
-<p>See: <a href="http://pubnames.rosslawley.co.uk">pubnames.rosslawley.co.uk</a> <br>(It may take
-some time for the heroku dyno to wake, so please be patient!)</p>
-
-<p>Apologies for those outside the UK - the demo app doesn&rsquo;t have data for the
-whole world - its surely possible to do, I just lacked the patience to download
-it all!</p>
-
-<h2 id="cheers:e8cc9569ac7e5d9e066aee5378affb29">Cheers</h2>
-
-<p class="text-center">
-  <img src="/images/almurray.jpg" title="Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946" /> <br>
-  <small> Source: <a href="http://www.flickr.com/photos/bradfordtheatres/3063899946"/>http://www.flickr.com/photos/bradfordtheatres/3063899946</a></small>
-</p>
-
-<p>All the code is available in my repo on <a href="https://github.com/rozza/pubnames">github</a>
-including the bson file of the pubs and the wordle code - so fork it and start
-playing with MongoDB&rsquo;s great geo features!</p>
-
                     </div>
+
+                    <footer class="post-footer">
+                    <a href='http://rosslawley.co.uk/the-most-popular-pub-name/' class="pull-right">Read more &GreaterGreater;</a>
+                  </footer>
                 </section>
                 
             </div>

@@ -30,6 +30,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="alternate" type="application/rss+xml" title="Ross Lawley" href="http://rosslawley.co.uk/index.xml" />
+    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
 </head>
 <body>
 
@@ -77,7 +78,7 @@
                         <p class="post-meta">
                             
                             
-                                under 
+                                under
                                 
                                 <a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-devops" href="http://rosslawley.co.uk/categories/devops">devops</a><a class="post-category post-category-puppet" href="http://rosslawley.co.uk/categories/puppet">puppet</a><a class="post-category post-category-vagrant" href="http://rosslawley.co.uk/categories/vagrant">vagrant</a><a class="post-category post-category-osx" href="http://rosslawley.co.uk/categories/osx">osx</a>
                             
@@ -85,9 +86,7 @@
                     </header>
 
                     <div class="post-description">
-                        
-
-<h1 id="disaster-strikes:d0d5301291dac9bc7676a826a8ff4f68">Disaster Strikes</h1>
+                        <h1 id="disaster-strikes:d0d5301291dac9bc7676a826a8ff4f68">Disaster Strikes</h1>
 
 <p>Last week my Mac book ran out of space again, this had been going on for some time and I&rsquo;d had enough.
 I was spending an ever increasing amount of much time hunting down rogue space invaders on my small 120gb hard drive.  So <strong>something</strong> had to be done.</p>
@@ -104,56 +103,11 @@ Then I remembered hearing about <a href="http://boxen.github.com">boxen</a> whic
 
 <h1 id="my-automation-trifecta:d0d5301291dac9bc7676a826a8ff4f68">My automation trifecta</h1>
 
-<h2 id="boxen:d0d5301291dac9bc7676a826a8ff4f68">Boxen</h2>
-
-<p>Boxen is built on top of <a href="https://puppetlabs.com/">puppet</a> and it allows you to describe in code your Mac configuration and what software to install on it. To get started just copy githubs&rsquo; starter <a href="https://github.com/boxen/our-boxen">boxen repo</a> and then add your requirements.
-I had to do two things to get my software stack automated:</p>
-
-<ol>
-<li>In the main puppetfile link to the github sources and versions</li>
-<li>In my personal puppet manifest (modules/people/manifests/rozza.pp) include the classes for the software I want installed.</li>
-<li>Profit?!</li>
-</ol>
-
-<p>Check it into github and run boxen. Volia a few minutes later my initial stack comprising; <em>Adium, Chrome, Dropbox, Intellij, Iterm2, Skype, Slate, Spotify, Sublime Text 2, Vagrant, Virtualbox, wget and Zsh</em> were all installed and ready to use.
-No wasting time hunting down .dmgs and navigating through their respective websites to download them.
-If you want to know more about boxen then check out this <a href="https://speakerdeck.com/wfarr/boxen">presentation</a>.
-All my configuration is now on github <a href="https://github.com/rozza/my-boxen/">my-boxen</a></p>
-
-<h2 id="dotfiles:d0d5301291dac9bc7676a826a8ff4f68">dotfiles</h2>
-
-<p>Boxen is great as it automates the software installed on my mac but what about my general configuration? I could use Boxen and puppet to define and create <em>all</em> my configuration files - but that seems unnecessarily complex and to me there is a separation of concerns. So when I asked on twitter what other folk do <a href="http://intranation.com">Brad Wright</a> pointed me to his dotfiles.</p>
-
-<p>After a quick investigation I duly <span style="text-decoration:line-through;">raided and plundered</span> took inspiration from and now I have all my personal dot file configurations for things like <em>github, slate and zsh</em> backed up on github.  What about private configuration files? Where it makes sense any files with a <code>.local_</code> prefix will be sourced by their respective core configuration file.  That way I can have different configrations across machines - I can have a core <code>.bashrc</code> and a local version on each machine eg <code>.local_bashrc</code>.  All my public <a href="https://github.com/rozza/dotfiles">dotfiles</a> are on github so plunder away!</p>
-
-<h2 id="vagrant:d0d5301291dac9bc7676a826a8ff4f68">Vagrant</h2>
-
-<p>The final piece in my automation puzzle is Vagrant.
-I&rsquo;ve been a huge fan of using vm&rsquo;s for development for years and more recently <a href="http://www.vagrantup.com/">vagrant</a> has been my tool of choice.
-Installing things with apt-get on a linux vm just saves me time and pre-<a href="http://10gen.com">10gen</a> my vms used to mirror my production environment.
-As its a vm all I had to do is back it up before I wiped the hard drive and I could use that to get up and running
-(I know its vagrant and had I been more diligent all I would have needed was the vagrant file and base box).</p>
-
-<p>When working on a vm, I still like to use sublime text on my mac to code.  So the way to achieve this is to nfs the code directory from the Mac into the vm - I used to do it the other way round, but having the code local to the mac makes editing very snappy.  The last thing to do was back up my code directory - I was surprised that all my checked out code weighs in at a hefty 13 gigs!</p>
-
-<h1 id="automation-heaven:d0d5301291dac9bc7676a826a8ff4f68">Automation heaven</h1>
-
-<p class="text-center">
-    <img src="/images/make-a-boxen.png" /><br>
-    <small> Source: <a href="https://speakerdeck.com/wfarr/boxen"/>https://speakerdeck.com/wfarr/boxen</a></small>
-</p>
-
-<p>By using a combination of boxen, vagrant and dotfiles I massively reduced the time needed to rebuild my mac and get productive.
-By backing up 13gb of source code, it meant I managed to reformat, install Mountain Lion and configure my Mac and get coding again in under 3 hours!
-That included the time it took me to learn how to use boxen and setup dotfiles!</p>
-
-<p>Of course I will tweak those repositories overtime but all my core configuration for my Mac is now in a git repo on github <a href="https://github.com/rozza/my-boxen/">my-boxen</a> for the software and <a href="https://github.com/rozza/dotfiles">dotfiles</a> for configuration.</p>
-
-<p>I&rsquo;m loving this adventure and if want to backup your software configuration or you&rsquo;re getting a new Mac, then jump on board and automate all the things&trade;.</p>
-
-<p><strong>PS</strong>. Feel free to clone / copy my repo&rsquo;s all I ask is if you add something cool you either comment below or <a href="http://twitter.com/RossC0">tweet me</a> so I can use it to should I need to!</p>
-
                     </div>
+
+                    <footer class="post-footer">
+                    <a href='http://rosslawley.co.uk/automate-all-the-things/' class="pull-right">Read more &GreaterGreater;</a>
+                  </footer>
                 </section>
                 
             </div>

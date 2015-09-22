@@ -30,6 +30,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="alternate" type="application/rss+xml" title="Ross Lawley" href="http://rosslawley.co.uk/index.xml" />
+    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
 </head>
 <body>
 
@@ -77,7 +78,7 @@
                         <p class="post-meta">
                             
                             
-                                under 
+                                under
                                 
                                 <a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-library" href="http://rosslawley.co.uk/categories/library">library</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a>
                             
@@ -85,72 +86,17 @@
                     </header>
 
                     <div class="post-description">
-                        
-
-<p>I recently upgraded <a href="http://mongodb.github.io/casbah/">Casbah</a> to support the latest Scala 2.11 release and for the first time when supporting multiple Scala versions I hit a stumbling block.  If you&rsquo;re writing a library that wants to support multiple versions of Scala in a single code base, it&rsquo;s generally easy isn&rsquo;t it? Thankfully, it is as <a href="http://www.scala-sbt.org/">sbt</a> can do the heavy lifting for you.</p>
+                        <p>I recently upgraded <a href="http://mongodb.github.io/casbah/">Casbah</a> to support the latest Scala 2.11 release and for the first time when supporting multiple Scala versions I hit a stumbling block.  If you&rsquo;re writing a library that wants to support multiple versions of Scala in a single code base, it&rsquo;s generally easy isn&rsquo;t it? Thankfully, it is as <a href="http://www.scala-sbt.org/">sbt</a> can do the heavy lifting for you.</p>
 
 <h2 id="three-steps-to-success:7a5c4c34d420fcc6185eaa05487dbc11">Three steps to success</h2>
 
 <p>The sbt documentation covers the basics nicely in their <a href="http://www.scala-sbt.org/release/docs/Detailed-Topics/Cross-Build.html">cross build</a> documentation.  But what&rsquo;s the path to success?</p>
 
-<ol>
-<li><p>Choose the Scala&rsquo;s you are going to support.</p>
-
-<p>Set the <code>crossScalaVersions</code> setting in your build file to define the Scala versions you want to support. In Casbah we support: <code>crossScalaVersions := Seq(&quot;2.11.0&quot;, &quot;2.10.4&quot;, &quot;2.9.3&quot;)</code></p></li>
-
-<li><p>Configure libraries</p>
-
-<p>Here it can get hairy because third party libraries may not support all your favoured scala builds in their latest release.  If they do, then happy days but if not you may have to pick out each library version as needed.  Here is an example from the Casbah build:</p>
-
-<pre><code>// In the build settings append to the library dependencies
-libraryDependencies &lt;++= scalaVersion (sv =&gt; Seq(specs2(sv), scalatime(sv)))
-
-
-// Helper method to pattern match against the scala version and return the correct specs version
-def specs2(scalaVersion: String) =
-  (scalaVersion match {
-    case &quot;2.9.3&quot;   =&gt; &quot;org.specs2&quot; %% &quot;specs2&quot; % &quot;1.12.4.1&quot;
-    case _ =&gt; &quot;org.specs2&quot; %% &quot;specs2&quot; % &quot;2.3.11&quot;
-  }) % &quot;test&quot;
-</code></pre>
-
-<p>As the latest Specs build <code>2.3.11</code> doesn&rsquo;t support Scala 2.9.3 we have to use the older <code>1.12.4.1</code> version for 2.9.3.  The downside is we can&rsquo;t yet use some of the nicer newer features of the Specs library in our test suite.</p></li>
-
-<li><p>Scala version specific code.</p>
-
-<p>This is the real challenge, what do you do if you need specific code for a specific version of Scala?  Hopefully, you&rsquo;ll never need to but this isn&rsquo;t always the case as I found with Casbah.  We use <code>BeanInfo</code> annotation and it lives in <code>scala.reflection</code> in Scala 2.9.3 and in <code>scala.beans</code> in 2.11.</p>
-
-<p>So how can we get round this? Luckily, Scala 2.10 gave me a hint as <code>BeanInfo</code> had been depreciated in <code>scala.reflection</code> but they had mirrored it in a <a href="https://github.com/scala/scala/blob/v2.10.4/src/library/scala/reflect/package.scala#L55-L56">package object</a>. I could use the same trick in Casbah! However, I would need a version for Scala 2.9.3 to point to <code>scala.reflect.BeanInfo</code> and a version for 2.10 &amp; 2.11. Then update all the code to point to the scala specific package object.</p>
-
-<p>As the code would be version specific it couldn&rsquo;t live in the <code>src/main/scala</code> directory as it wouldn&rsquo;t compile. So instead I created specific Scala directories in <code>src/main</code> like so:</p>
-
-<pre><code>./scala
-./scala_2.9.3  // Scala 2.9.3 specific code
-./scala_2.10   // Scala 2.10 specific code
-./scala_2.11   // Scala 2.11 specific code
-</code></pre>
-
-<p>As Scala 2.10 &amp; 2.11 point versions will be binary compatible I only need a top level directory for them.  Then alls that&rsquo;s needed is to add these source directories to the build:</p>
-
-<pre><code>unmanagedSourceDirectories in Compile &lt;+= (sourceDirectory in Compile, scalaBinaryVersion){
-  (s, v) =&gt; s / (&quot;scala_&quot;+v)
-}
-</code></pre>
-
-<p>This adds extra source directories to the compile step and using <code>scalaBinaryVersion</code> I get the binary compatible versions (so it&rsquo;s 2.11 for all 2.11 releases but would be 2.9.3, 2.9.2, 2.9.1 for the non compatible point releases from the 2.9 series).</p>
-
-<p>The fix in Casbah was to simply add a <code>beans.scala</code> for the scala specific versions and create a <code>BeanInfo</code> type which points to the correct scala package. Problem solved.</p></li>
-</ol>
-
-<p>Sbt allow you to run any command against multiple versions of Scala. <code>./sbt +test</code> will test against all your <code>crossScalaVersions</code> of Scala and hopefully confirm the code works as expected.  If I want to test a specific version use a double plus sign and add the version string to the arguments eg: <code>./sbt ++ 2.9.3 test</code>.</p>
-
-<h2 id="final-thoughts:7a5c4c34d420fcc6185eaa05487dbc11">Final thoughts</h2>
-
-<p>Scala is a relatively fast moving ecosystem with new major releases every 13 months or so.  When I took over Casbah it supported 6 binary incompatible versions of Scala! From 2.8.1 to 2.9.3. Happily, Scala patch versions from 2.10.0 on have become binary compatible making supporting multiple versions of Scala easier.  However, one of the key issues for maintaining a library is to know when to end of life an old Scala version, so to keep the library fresh.</p>
-
-<p>In Casbah supporting the current and last major versions of Scala gives users support for the latest MongoDB version and allows them some flexibility when it comes to updating Scala. Generally, this has been a trouble free process and as shown above problems are solvable in just three easy steps.</p>
-
                     </div>
+
+                    <footer class="post-footer">
+                    <a href='http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/' class="pull-right">Read more &GreaterGreater;</a>
+                  </footer>
                 </section>
                 
             </div>
