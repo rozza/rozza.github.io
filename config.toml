@@ -1,0 +1,12 @@
+baseurl = "http://rosslawley.co.uk"
+languageCode = "en-gb"
+title = "Ross Lawley"
+theme = "purehugo"
+Paginate = 10
+disqusShortname = "rozza"
+
+[params]
+  twitterName = "RossC0"
+  githubName = "rozza"
+  description = "Some techincal musings"
+  google_analytics = "UA-716284-3"
