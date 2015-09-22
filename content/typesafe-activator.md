@@ -8,6 +8,7 @@ categories:
 - mongodb
 - reactive
 - scala
+- jvm
 aliases:
     - /posts/typesafe_activator/
 ---

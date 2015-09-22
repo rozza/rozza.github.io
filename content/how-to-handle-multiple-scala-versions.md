@@ -7,6 +7,7 @@ categories:
 - mongodb
 - library
 - scala
+- jvm
 aliases:
     - /posts/how-to-handle-multiple-scala-versions/
 ---
