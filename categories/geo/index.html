@@ -1,112 +1,262 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Ross Lawley">
-    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
+    <title>Geo &middot; Ross Lawley</title>
 
-    <title>Geo</title>
+    <meta name="description" content="Some techincal musings">
 
-    <link href="http://rosslawley.co.uk/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://rosslawley.co.uk/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://rosslawley.co.uk/css/site.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
-  </head>
+    <meta name="generator" content="Hugo 0.14" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Geo &middot; Ross Lawley">
+    <meta name="twitter:description" content="Some techincal musings">
 
-  <body>
-    <nav class="navbar navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      
-        <h1><a class="navbar-brand" href="http://rosslawley.co.uk/">Ross Lawley</a></h1>
-      
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Geo &middot; Ross Lawley">
+    <meta property="og:description" content="Some techincal musings">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="http://rosslawley.co.uk/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Ross Lawley" href="http://rosslawley.co.uk/index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://rosslawley.co.uk">Ross Lawley</a></h1>
+            <h2 class="brand-tagline"> Some techincal musings </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/RossC0"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/rozza "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://rosslawley.co.uk/index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
     </div>
-      <ul class="nav navbar-nav pull-right">
-        <li>
-          <a href="http://github.com/rozza" title="Github Profile" target="_blank">
-            <i class="icon-github-sign social-navbar"></i>
-          </a>
-        </li>
-        <li>
-          <a href="http://linkedin.com/in/rosslawley" title="Linkedin Profile" target="_blank">
-            <i class="icon-linkedin-sign social-navbar"></i>
-          </a>
-        </li>
-        <li>
-          <a href="http://twitter.com/RossC0" title="Twitter Profile" target="_blank">
-            <i class="icon-twitter-sign social-navbar"></i>
-          </a>
-        </li>
-      </ul>
-  </div>
-</nav>
-    <div class="container content">
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                
+                <h1 class="content-subhead">23 Jul 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/the-most-popular-pub-name/" class="post-title">Using MongoDB to find the most popular pub names!</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-aggregation" href="http://rosslawley.co.uk/categories/aggregation">aggregation</a><a class="post-category post-category-demo" href="http://rosslawley.co.uk/categories/demo">demo</a><a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-geo" href="http://rosslawley.co.uk/categories/geo">geo</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>Earlier in the year I gave a talk at <a href="http://www.10gen.com/events/mongodb-london-2013">MongoDB London</a>
+about the different aggregation options with MongoDB.  The topic recently came up again
+in conversation at a user group, so I thought it deserved a blog post.</p>
+
+<h2 id="gathering-ideas-for-the-talk:e8cc9569ac7e5d9e066aee5378affb29">Gathering ideas for the talk</h2>
+
+<p>I wanted to give a more interesting aggregation talk than the standard
+&ldquo;counting words in text&rdquo;, and as the <a href="http://docs.mongodb.org/manual/core/aggregation/">aggregation framework</a> gained shiny <a href="http://docs.mongodb.org/manual/core/2dsphere/">2dsphere geo</a> support in
+<a href="http://docs.mongodb.org/manual/release-notes/2.4/#new-geospatial-indexes-with-geojson-and-improved-spherical-geometry">2.4</a>, I figured I&rsquo;d use that. I just needed a topic&hellip;</p>
+
+<h3 id="what-are-us-brits-focused-on:e8cc9569ac7e5d9e066aee5378affb29">What are us Brits focused on?</h3>
+
+<p>Two things immediately sprang to mind: <strong>weather</strong> and <strong>beer</strong>.</p>
+
+<p>I opted to focus on something close to my heart: <strong>beer</strong> :)
+But what to aggregate about beer? Then I remembered an old pub quiz favourite&hellip;</p>
+
+<p><strong>What is the most popular pub name in the UK?</strong></p>
+
+<p>I know there is some great open data, including a wealth of information
+on pubs available from the awesome <a href="http://www.openstreetmap.org/">open street map</a>
+project.  I just need to get at it and happily the <a href="http://www.overpass-api.de">Overpass-api</a>
+provides a simple &ldquo;xapi&rdquo; interface for OSM data.
+All I needed was anything tagged with <code>amenity=pub</code> within in the
+bounds of the UK and with their xapi interface this is as simple as a wget:
+<code>http://www.overpass-api.de/api/xapi?*[amenity=pub][bbox=-10.5,49.78,1.78,59]</code></p>
+
+<p>Once I had an osm file I used the <a href="http://imposm.org/">imposm python library</a> to
+parse the xml and then convert it to following GeoJSON format:</p>
+
+<pre>
+<code class="javascript">{
+  "_id" : 451152,
+  "amenity" : "pub",
+  "name" : "The Dignity",
+  "addr:housenumber" : "363",
+  "addr:street" : "Regents Park Road",
+  "addr:city" : "London",
+  "addr:postcode" : "N3 1DH",
+  "toilets" : "yes",
+  "toilets:access" : "customers",
+  "location" : {
+      "type" : "Point",
+      "coordinates" : [-0.1945732, 51.6008172]
+  }
+}
+</code></pre>
+
+<p>Then it was a case of simply inserting it as a document into MongoDB. I
+quickly noticed that the data needed a little cleaning, as I was seeing duplicate
+pub names, for example: &ldquo;The Red Lion&rdquo; and &ldquo;Red Lion&rdquo;.  Because I wanted to make
+a wordle I normalised all the pub names.</p>
+
+<p>If you want to know more about the importing process, the full loading code is
+available on github: <a href="https://github.com/rozza/pubnames/blob/master/osm2mongo.py">osm2mongo.py</a></p>
+
+<h2 id="top-pub-names:e8cc9569ac7e5d9e066aee5378affb29">Top pub names</h2>
+
+<p>It turns out finding the most popular pub names is very simple with the
+aggregation framework.  Just group by the name and then sum up all the occurrences.
+To get the top five most popular pub names we sort by the summed value and then
+limit to 5:</p>
+
 <div class="row">
-  <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Category: Geo</h1>
-      </div>
-    </div>
+  <div class="col-md-6 col-lg-6">
+<pre>
+<code class="javascript">db.pubs.aggregate([
+  {"$group":
+     {"_id": "$name",
+      "value": {"$sum": 1}
+     }
+  },
+  {"$sort": {"value": -1}},
+  {"$limit": 5}
+]);
+</code></pre>
+  </div>
+  <div class="col-md-6 col-lg-6">
+For the whole of the UK this returns:
+
+<ol>
+<li>The Red Lion</li>
+<li>The Royal Oak</li>
+<li>The Crown</li>
+<li>The White Hart</li>
+<li>The White Horse</li>
+</ol>
   </div>
 </div>
-<section class="row">
-  <ul>
-    
-      <li class="category">
-<div class="post col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-  <article>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      <h2><a href='http://rosslawley.co.uk/posts/the-most-popular-pub-name'>Using MongoDB to find the most popular pub names!</a></h2>
+
+<p class="text-center">
+  <img src="/images/pubs_wordle.png"<br>
+</p>
+
+<h2 id="top-pub-names-near-you:e8cc9569ac7e5d9e066aee5378affb29">Top pub names near you</h2>
+
+<p>At MongoDB London I thought that was too easy, so filtered to find the top pub
+names near the conference and showing off some of the geo functionality that became
+available in MongoDB 2.4.  To limit the result set match and ensure the
+location is within a 2 mile radius by using <code>$centreSphere</code>. Just provide the
+coordinates <code>[ &lt;long&gt;, &lt;lat&gt; ]</code> and a radius of roughly 2 miles
+(3959 is approximately the radius of the earth, so divide it by 2):
+<pre>
+<code class="javascript">db.pubs.aggregate([
+    { &ldquo;$match&rdquo; : { &ldquo;location&rdquo;:
+                 { &ldquo;$within&rdquo;:
+                   { &ldquo;$text-centerSphere&rdquo;: [[-0.12, 51.516], 2 / 3959] }}}
+    },
+    { &ldquo;$group&rdquo; :
+       { &ldquo;_id&rdquo; : &ldquo;$name&rdquo;,
+         &ldquo;value&rdquo; : { &ldquo;$sum&rdquo; : 1 } }
+    },
+    { &ldquo;$sort&rdquo; : { &ldquo;value&rdquo; : -1 } },
+    { &ldquo;$limit&rdquo; : 5 }
+  ]);
+</code></pre></p>
+
+<h2 id="what-about-where-i-live:e8cc9569ac7e5d9e066aee5378affb29">What about where I live?</h2>
+
+<p>At the conference I looked the most popular pub name near the conference.  Thats
+great if you happen to live in the centre of London but what about everyone else
+in the UK? So for this blog post I decided to update the demo code and make it
+dynamic based on where you live.</p>
+
+<p>See: <a href="http://pubnames.rosslawley.co.uk">pubnames.rosslawley.co.uk</a> <br>(It may take
+some time for the heroku dyno to wake, so please be patient!)</p>
+
+<p>Apologies for those outside the UK - the demo app doesn&rsquo;t have data for the
+whole world - its surely possible to do, I just lacked the patience to download
+it all!</p>
+
+<h2 id="cheers:e8cc9569ac7e5d9e066aee5378affb29">Cheers</h2>
+
+<p class="text-center">
+  <img src="/images/almurray.jpg" title="Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946" /> <br>
+  <small> Source: <a href="http://www.flickr.com/photos/bradfordtheatres/3063899946"/>http://www.flickr.com/photos/bradfordtheatres/3063899946</a></small>
+</p>
+
+<p>All the code is available in my repo on <a href="https://github.com/rozza/pubnames">github</a>
+including the bson file of the pubs and the wordle code - so fork it and start
+playing with MongoDB&rsquo;s great geo features!</p>
+
+                    </div>
+                </section>
+                
+            </div>
+            
+
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a></li>
+        </ul>
     </div>
-    <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
-      <h5 class="date-time">
-  <i class="icon-calendar-empty"></i>
-  <time datetime="2013-07-23 00:00:00 &#43;0000 UTC" data-updated="true">
-    July
-    23, 2013
-  </time>
-</h5>
-    </div>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      Posted in:
-      <a href="http://rosslawley.co.uk/categories/mongodb/">mongodb</a>, <a href="http://rosslawley.co.uk/categories/aggregation/">aggregation</a>, <a href="http://rosslawley.co.uk/categories/demo/">demo</a>, <a href="http://rosslawley.co.uk/categories/tech/">tech</a>, <a href="http://rosslawley.co.uk/categories/geo/">geo</a>
-    </div>
-  </article>
 </div>
-</li>
+<script src="http://rosslawley.co.uk/js/all.min.js"></script>
+        </div>
+    </div>
+</div>
 
-    
-  </ul>
-</section>
-  </div>
-  <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-  <div class="row">
-    <footer class="footer-page" role="contentinfo">
-      <p>
-        Copyright &copy; 2013 - Ross Lawley - <a href="http://rosslawley.co.uk/posts">Site Archive</a>
-      </p>
-      <p>
-        <span class="credit">Powered by <a href="http://hugo.spf13.com/">Hugo</a></span>
-         
-      </p>
-    </footer>
-  </div>
-  </div>
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-716284-3']);
-    _gaq.push(['_setDomainName', 'rosslawley.co.uk']);
-    _gaq.push(['_trackPageview']);
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-  </body>
+ga('create', 'UA-716284-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
 </html>

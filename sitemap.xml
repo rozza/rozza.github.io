@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://rosslawley.co.uk/</loc>
+    <lastmod>2014-04-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/</loc>
+    <lastmod>2014-04-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://rosslawley.co.uk/rx-java/</loc>
+    <lastmod>2013-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://rosslawley.co.uk/typesafe-activator/</loc>
+    <lastmod>2013-09-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://rosslawley.co.uk/switching-to-sublimetext-3/</loc>
+    <lastmod>2013-07-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://rosslawley.co.uk/the-most-popular-pub-name/</loc>
+    <lastmod>2013-07-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://rosslawley.co.uk/mongoengine-0-dot-8-dot-0/</loc>
+    <lastmod>2013-05-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://rosslawley.co.uk/mongoengine-0-dot-8-rc1-released/</loc>
+    <lastmod>2013-05-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://rosslawley.co.uk/automate-all-the-things/</loc>
+    <lastmod>2013-03-20T00:00:00+00:00</lastmod>
+  </url>
+  
+</urlset>

@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Scala on  </title>
-    <link>http://rosslawley.co.uk/categories/scala/index.xml</link>
+    <title>Scala on Ross Lawley</title>
+    <link>http://rosslawley.co.uk/categories/scala/</link>
+    <description>Recent content in Scala on Ross Lawley</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <author>Ross Lawley</author>
-    <rights>Copyright (c) 2013, Ross Lawley; all rights reserved.</rights>
-    <updated>2014-04-23 00:00:00 &#43;0000 UTC</updated>
+    <lastBuildDate>Wed, 23 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://rosslawley.co.uk/categories/scala/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>How to: Handle multiple Scala versions</title>
-      <link>http://rosslawley.co.uk/posts/how-to-handle-multiple-scala-versions</link>
-      <pubDate>Wed, 23 Apr 2014 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/how-to-handle-multiple-scala-versions</guid>
+      <link>http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/</link>
+      <pubDate>Wed, 23 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/</guid>
       <description>
 
 &lt;p&gt;I recently upgraded &lt;a href=&#34;http://mongodb.github.io/casbah/&#34;&gt;Casbah&lt;/a&gt; to support the latest Scala 2.11 release and for the first time when supporting multiple Scala versions I hit a stumbling block.  If you&amp;rsquo;re writing a library that wants to support multiple versions of Scala in a single code base, it&amp;rsquo;s generally easy isn&amp;rsquo;t it? Thankfully, it is as &lt;a href=&#34;http://www.scala-sbt.org/&#34;&gt;sbt&lt;/a&gt; can do the heavy lifting for you.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Three steps to success&lt;/h2&gt;
+&lt;h2 id=&#34;three-steps-to-success:7a5c4c34d420fcc6185eaa05487dbc11&#34;&gt;Three steps to success&lt;/h2&gt;
 
 &lt;p&gt;The sbt documentation covers the basics nicely in their &lt;a href=&#34;http://www.scala-sbt.org/release/docs/Detailed-Topics/Cross-Build.html&#34;&gt;cross build&lt;/a&gt; documentation.  But what&amp;rsquo;s the path to success?&lt;/p&gt;
 
@@ -73,7 +74,7 @@ def specs2(scalaVersion: String) =
 
 &lt;p&gt;Sbt allow you to run any command against multiple versions of Scala. &lt;code&gt;./sbt +test&lt;/code&gt; will test against all your &lt;code&gt;crossScalaVersions&lt;/code&gt; of Scala and hopefully confirm the code works as expected.  If I want to test a specific version use a double plus sign and add the version string to the arguments eg: &lt;code&gt;./sbt ++ 2.9.3 test&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;Final thoughts&lt;/h2&gt;
+&lt;h2 id=&#34;final-thoughts:7a5c4c34d420fcc6185eaa05487dbc11&#34;&gt;Final thoughts&lt;/h2&gt;
 
 &lt;p&gt;Scala is a relatively fast moving ecosystem with new major releases every 13 months or so.  When I took over Casbah it supported 6 binary incompatible versions of Scala! From 2.8.1 to 2.9.3. Happily, Scala patch versions from 2.10.0 on have become binary compatible making supporting multiple versions of Scala easier.  However, one of the key issues for maintaining a library is to know when to end of life an old Scala version, so to keep the library fresh.&lt;/p&gt;
 
@@ -83,10 +84,10 @@ def specs2(scalaVersion: String) =
     
     <item>
       <title>RxJava - understandably reactive</title>
-      <link>http://rosslawley.co.uk/posts/rx-java</link>
-      <pubDate>Wed, 06 Nov 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/rx-java</guid>
+      <link>http://rosslawley.co.uk/rx-java/</link>
+      <pubDate>Wed, 06 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/rx-java/</guid>
       <description>&lt;p&gt;Reactive programing is hot stuff at the moment and the
 &lt;a href=&#34;https://www.coursera.org/course/reactive&#34;&gt;Coursera Principles of Reactive Programming&lt;/a&gt;
 course has &lt;strong&gt;just&lt;/strong&gt; started (its not too late to enroll).&lt;/p&gt;
@@ -116,29 +117,29 @@ excellent &lt;code&gt;Iteratee.Concurrent&lt;/code&gt; library.&lt;/p&gt;
 
 &lt;p&gt;Enjoy:&lt;/p&gt;
 
-&lt;div class=&#34;embed video-player&#34;&gt;
+&lt;p&gt;&lt;div class=&#34;embed video-player&#34;&gt;
 &lt;iframe class=&#34;youtube-player&#34; type=&#34;text/html&#34;
     width=&#34;640&#34; height=&#34;385&#34;
     src=&#34;http://www.youtube.com/embed/tOMK_FYJREw&#34;
     allowfullscreen frameborder=&#34;0&#34;&gt;
 &lt;/iframe&gt;
-&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Typesafe&#39;s Activator</title>
-      <link>http://rosslawley.co.uk/posts/typesafe_activator</link>
-      <pubDate>Tue, 24 Sep 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/typesafe_activator</guid>
+      <link>http://rosslawley.co.uk/typesafe-activator/</link>
+      <pubDate>Tue, 24 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/typesafe-activator/</guid>
       <description>
 
 &lt;p&gt;Yesterday the &lt;a href=&#34;http://typesafe.com/blog/announcing-activator-10-create-reactive-apps-in-minutes&#34;&gt;Typesafe Activator&lt;/a&gt;
 hit 1.0. If you haven&amp;rsquo;t heard about it and use scala or the jvm then take five
 minutes and check it out - its worth it.&lt;/p&gt;
 
-&lt;h1 id=&#34;toc_0&#34;&gt;What is it?&lt;/h1&gt;
+&lt;h1 id=&#34;what-is-it:8f899c775a0faeb02adf96bdfce96cff&#34;&gt;What is it?&lt;/h1&gt;
 
 &lt;p&gt;My recommendation alone not enough and you what to know more about it before
 installing it?  No problems, let me convince you.&lt;/p&gt;
@@ -159,7 +160,7 @@ modern scalable reactive web sites.&lt;/p&gt;
 template&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-&lt;img src=&#34;/images/activator-loading.png&#34;&gt;
+&lt;img src=&#34;http://rosslawley.co.uk/images/activator-loading.png&#34;&gt;
 &lt;/p&gt;
 
 &lt;p&gt;In the background it downloads all the resources you need to create the project
@@ -167,10 +168,10 @@ from the template.  Starting a new project is extremely simple and once the
 project is loaded you get to use the Web UI in anger.&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-&lt;img src=&#34;/images/activator-orientation.png&#34;&gt;
+&lt;img src=&#34;http://rosslawley.co.uk/images/activator-orientation.png&#34;&gt;
 &lt;/p&gt;
 
-&lt;h1 id=&#34;toc_1&#34;&gt;The tutorial&lt;/h1&gt;
+&lt;h1 id=&#34;the-tutorial:8f899c775a0faeb02adf96bdfce96cff&#34;&gt;The tutorial&lt;/h1&gt;
 
 &lt;p&gt;Once loaded, you get the tutorial for this template:&lt;/p&gt;
 

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Python on  </title>
-    <link>http://rosslawley.co.uk/categories/python/index.xml</link>
+    <title>Python on Ross Lawley</title>
+    <link>http://rosslawley.co.uk/categories/python/</link>
+    <description>Recent content in Python on Ross Lawley</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <author>Ross Lawley</author>
-    <rights>Copyright (c) 2013, Ross Lawley; all rights reserved.</rights>
-    <updated>2013-05-20 00:00:00 &#43;0000 UTC</updated>
+    <lastBuildDate>Mon, 20 May 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://rosslawley.co.uk/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>mongoengine 0.8.0</title>
-      <link>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-dot-0</link>
-      <pubDate>Mon, 20 May 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-dot-0</guid>
+      <link>http://rosslawley.co.uk/mongoengine-0-dot-8-dot-0/</link>
+      <pubDate>Mon, 20 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/mongoengine-0-dot-8-dot-0/</guid>
       <description>
 
 &lt;p&gt;I&amp;rsquo;m really pleased to annouce the release of
@@ -21,7 +22,7 @@
 Its been a &lt;em&gt;long process&lt;/em&gt; due to work and life commitments but the latest version
 of MongoEngine is here.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Whats changed?&lt;/h2&gt;
+&lt;h2 id=&#34;whats-changed:21b8a771bb0f6c9b7111f39346dd1702&#34;&gt;Whats changed?&lt;/h2&gt;
 
 &lt;p&gt;There have been loads of fixes, improvements and changes in 0.8.
 The headliners are:&lt;/p&gt;
@@ -46,7 +47,7 @@ for all changes or check &lt;a href=&#34;https://github.com/MongoEngine/mongoeng
 &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;amp;page=1&amp;amp;state=closed&#34;&gt;96 tickets&lt;/a&gt;
 that have been fixed as part of this release.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;Whats next?&lt;/h2&gt;
+&lt;h2 id=&#34;whats-next:21b8a771bb0f6c9b7111f39346dd1702&#34;&gt;Whats next?&lt;/h2&gt;
 
 &lt;p&gt;There are a number of ideas on &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=6&#34;&gt;github&lt;/a&gt; for 0.9.  I&amp;rsquo;m looking for people to help with the administration and coding
 of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p&gt;
@@ -55,10 +56,10 @@ of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p
     
     <item>
       <title>MongoEngine 0.8 RC1 Released</title>
-      <link>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-rc1-released</link>
-      <pubDate>Wed, 01 May 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-rc1-released</guid>
+      <link>http://rosslawley.co.uk/mongoengine-0-dot-8-rc1-released/</link>
+      <pubDate>Wed, 01 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/mongoengine-0-dot-8-rc1-released/</guid>
       <description>
 
 &lt;p&gt;&lt;strong&gt;Notice:&lt;/strong&gt; 0.8.0RC3 has been released fixing a couple of small bugs and extra improvements.&lt;/p&gt;
@@ -69,7 +70,7 @@ of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p
 Its been a &lt;em&gt;long process&lt;/em&gt; due to work and life commitments but the latest version
 of MongoEngine is ready for testing and feedback.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Why a release candidate?&lt;/h2&gt;
+&lt;h2 id=&#34;why-a-release-candidate:381e651998269fc0201485acd98bed22&#34;&gt;Why a release candidate?&lt;/h2&gt;
 
 &lt;p&gt;There have been massive changes in the internals, requiring thought and
 &lt;strong&gt;testing&lt;/strong&gt; before upgrading and releasing to the wild - so please
@@ -84,7 +85,7 @@ please email the &lt;a href=&#34;https://groups.google.com/group/mongoengine-use
 or if you&amp;rsquo;d prefer to message me directly you can via
 &lt;a href=&#34;https://github.com/rozza&#34;&gt;https://github.com/rozza&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;Whats changed?&lt;/h2&gt;
+&lt;h2 id=&#34;whats-changed:381e651998269fc0201485acd98bed22&#34;&gt;Whats changed?&lt;/h2&gt;
 
 &lt;p&gt;There have been loads of fixes, improvements and changes in 0.8.
 The headliners are:&lt;/p&gt;
@@ -107,7 +108,7 @@ for all changes or check &lt;a href=&#34;https://github.com/MongoEngine/mongoeng
 &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;amp;page=1&amp;amp;state=closed&#34;&gt;84 tickets&lt;/a&gt;
 that have been fixed as part of this release.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_2&#34;&gt;Try it now!&lt;/h2&gt;
+&lt;h2 id=&#34;try-it-now:381e651998269fc0201485acd98bed22&#34;&gt;Try it now!&lt;/h2&gt;
 
 &lt;p&gt;Please test it, try it out and report any issues back!
 All being well 0.8.0RC1 will be released as 0.8.0 in a week.&lt;/p&gt;

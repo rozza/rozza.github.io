@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Mongodb on  </title>
-    <link>http://rosslawley.co.uk/categories/mongodb/index.xml</link>
+    <title>Mongodb on Ross Lawley</title>
+    <link>http://rosslawley.co.uk/categories/mongodb/</link>
+    <description>Recent content in Mongodb on Ross Lawley</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <author>Ross Lawley</author>
-    <rights>Copyright (c) 2013, Ross Lawley; all rights reserved.</rights>
-    <updated>2014-04-23 00:00:00 &#43;0000 UTC</updated>
+    <lastBuildDate>Wed, 23 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://rosslawley.co.uk/categories/mongodb/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>How to: Handle multiple Scala versions</title>
-      <link>http://rosslawley.co.uk/posts/how-to-handle-multiple-scala-versions</link>
-      <pubDate>Wed, 23 Apr 2014 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/how-to-handle-multiple-scala-versions</guid>
+      <link>http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/</link>
+      <pubDate>Wed, 23 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/</guid>
       <description>
 
 &lt;p&gt;I recently upgraded &lt;a href=&#34;http://mongodb.github.io/casbah/&#34;&gt;Casbah&lt;/a&gt; to support the latest Scala 2.11 release and for the first time when supporting multiple Scala versions I hit a stumbling block.  If you&amp;rsquo;re writing a library that wants to support multiple versions of Scala in a single code base, it&amp;rsquo;s generally easy isn&amp;rsquo;t it? Thankfully, it is as &lt;a href=&#34;http://www.scala-sbt.org/&#34;&gt;sbt&lt;/a&gt; can do the heavy lifting for you.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Three steps to success&lt;/h2&gt;
+&lt;h2 id=&#34;three-steps-to-success:7a5c4c34d420fcc6185eaa05487dbc11&#34;&gt;Three steps to success&lt;/h2&gt;
 
 &lt;p&gt;The sbt documentation covers the basics nicely in their &lt;a href=&#34;http://www.scala-sbt.org/release/docs/Detailed-Topics/Cross-Build.html&#34;&gt;cross build&lt;/a&gt; documentation.  But what&amp;rsquo;s the path to success?&lt;/p&gt;
 
@@ -73,7 +74,7 @@ def specs2(scalaVersion: String) =
 
 &lt;p&gt;Sbt allow you to run any command against multiple versions of Scala. &lt;code&gt;./sbt +test&lt;/code&gt; will test against all your &lt;code&gt;crossScalaVersions&lt;/code&gt; of Scala and hopefully confirm the code works as expected.  If I want to test a specific version use a double plus sign and add the version string to the arguments eg: &lt;code&gt;./sbt ++ 2.9.3 test&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;Final thoughts&lt;/h2&gt;
+&lt;h2 id=&#34;final-thoughts:7a5c4c34d420fcc6185eaa05487dbc11&#34;&gt;Final thoughts&lt;/h2&gt;
 
 &lt;p&gt;Scala is a relatively fast moving ecosystem with new major releases every 13 months or so.  When I took over Casbah it supported 6 binary incompatible versions of Scala! From 2.8.1 to 2.9.3. Happily, Scala patch versions from 2.10.0 on have become binary compatible making supporting multiple versions of Scala easier.  However, one of the key issues for maintaining a library is to know when to end of life an old Scala version, so to keep the library fresh.&lt;/p&gt;
 
@@ -83,10 +84,10 @@ def specs2(scalaVersion: String) =
     
     <item>
       <title>RxJava - understandably reactive</title>
-      <link>http://rosslawley.co.uk/posts/rx-java</link>
-      <pubDate>Wed, 06 Nov 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/rx-java</guid>
+      <link>http://rosslawley.co.uk/rx-java/</link>
+      <pubDate>Wed, 06 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/rx-java/</guid>
       <description>&lt;p&gt;Reactive programing is hot stuff at the moment and the
 &lt;a href=&#34;https://www.coursera.org/course/reactive&#34;&gt;Coursera Principles of Reactive Programming&lt;/a&gt;
 course has &lt;strong&gt;just&lt;/strong&gt; started (its not too late to enroll).&lt;/p&gt;
@@ -116,29 +117,29 @@ excellent &lt;code&gt;Iteratee.Concurrent&lt;/code&gt; library.&lt;/p&gt;
 
 &lt;p&gt;Enjoy:&lt;/p&gt;
 
-&lt;div class=&#34;embed video-player&#34;&gt;
+&lt;p&gt;&lt;div class=&#34;embed video-player&#34;&gt;
 &lt;iframe class=&#34;youtube-player&#34; type=&#34;text/html&#34;
     width=&#34;640&#34; height=&#34;385&#34;
     src=&#34;http://www.youtube.com/embed/tOMK_FYJREw&#34;
     allowfullscreen frameborder=&#34;0&#34;&gt;
 &lt;/iframe&gt;
-&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Typesafe&#39;s Activator</title>
-      <link>http://rosslawley.co.uk/posts/typesafe_activator</link>
-      <pubDate>Tue, 24 Sep 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/typesafe_activator</guid>
+      <link>http://rosslawley.co.uk/typesafe-activator/</link>
+      <pubDate>Tue, 24 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/typesafe-activator/</guid>
       <description>
 
 &lt;p&gt;Yesterday the &lt;a href=&#34;http://typesafe.com/blog/announcing-activator-10-create-reactive-apps-in-minutes&#34;&gt;Typesafe Activator&lt;/a&gt;
 hit 1.0. If you haven&amp;rsquo;t heard about it and use scala or the jvm then take five
 minutes and check it out - its worth it.&lt;/p&gt;
 
-&lt;h1 id=&#34;toc_0&#34;&gt;What is it?&lt;/h1&gt;
+&lt;h1 id=&#34;what-is-it:8f899c775a0faeb02adf96bdfce96cff&#34;&gt;What is it?&lt;/h1&gt;
 
 &lt;p&gt;My recommendation alone not enough and you what to know more about it before
 installing it?  No problems, let me convince you.&lt;/p&gt;
@@ -159,7 +160,7 @@ modern scalable reactive web sites.&lt;/p&gt;
 template&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-&lt;img src=&#34;/images/activator-loading.png&#34;&gt;
+&lt;img src=&#34;http://rosslawley.co.uk/images/activator-loading.png&#34;&gt;
 &lt;/p&gt;
 
 &lt;p&gt;In the background it downloads all the resources you need to create the project
@@ -167,10 +168,10 @@ from the template.  Starting a new project is extremely simple and once the
 project is loaded you get to use the Web UI in anger.&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-&lt;img src=&#34;/images/activator-orientation.png&#34;&gt;
+&lt;img src=&#34;http://rosslawley.co.uk/images/activator-orientation.png&#34;&gt;
 &lt;/p&gt;
 
-&lt;h1 id=&#34;toc_1&#34;&gt;The tutorial&lt;/h1&gt;
+&lt;h1 id=&#34;the-tutorial:8f899c775a0faeb02adf96bdfce96cff&#34;&gt;The tutorial&lt;/h1&gt;
 
 &lt;p&gt;Once loaded, you get the tutorial for this template:&lt;/p&gt;
 
@@ -205,23 +206,23 @@ Typesafe stack then download activator now and you&amp;rsquo;ll be up and runnin
     
     <item>
       <title>Using MongoDB to find the most popular pub names!</title>
-      <link>http://rosslawley.co.uk/posts/the-most-popular-pub-name</link>
-      <pubDate>Tue, 23 Jul 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/the-most-popular-pub-name</guid>
+      <link>http://rosslawley.co.uk/the-most-popular-pub-name/</link>
+      <pubDate>Tue, 23 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/the-most-popular-pub-name/</guid>
       <description>
 
 &lt;p&gt;Earlier in the year I gave a talk at &lt;a href=&#34;http://www.10gen.com/events/mongodb-london-2013&#34;&gt;MongoDB London&lt;/a&gt;
 about the different aggregation options with MongoDB.  The topic recently came up again
 in conversation at a user group, so I thought it deserved a blog post.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Gathering ideas for the talk&lt;/h2&gt;
+&lt;h2 id=&#34;gathering-ideas-for-the-talk:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;Gathering ideas for the talk&lt;/h2&gt;
 
 &lt;p&gt;I wanted to give a more interesting aggregation talk than the standard
 &amp;ldquo;counting words in text&amp;rdquo;, and as the &lt;a href=&#34;http://docs.mongodb.org/manual/core/aggregation/&#34;&gt;aggregation framework&lt;/a&gt; gained shiny &lt;a href=&#34;http://docs.mongodb.org/manual/core/2dsphere/&#34;&gt;2dsphere geo&lt;/a&gt; support in
 &lt;a href=&#34;http://docs.mongodb.org/manual/release-notes/2.4/#new-geospatial-indexes-with-geojson-and-improved-spherical-geometry&#34;&gt;2.4&lt;/a&gt;, I figured I&amp;rsquo;d use that. I just needed a topic&amp;hellip;&lt;/p&gt;
 
-&lt;h3 id=&#34;toc_1&#34;&gt;What are us Brits focused on?&lt;/h3&gt;
+&lt;h3 id=&#34;what-are-us-brits-focused-on:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;What are us Brits focused on?&lt;/h3&gt;
 
 &lt;p&gt;Two things immediately sprang to mind: &lt;strong&gt;weather&lt;/strong&gt; and &lt;strong&gt;beer&lt;/strong&gt;.&lt;/p&gt;
 
@@ -267,7 +268,7 @@ a wordle I normalised all the pub names.&lt;/p&gt;
 &lt;p&gt;If you want to know more about the importing process, the full loading code is
 available on github: &lt;a href=&#34;https://github.com/rozza/pubnames/blob/master/osm2mongo.py&#34;&gt;osm2mongo.py&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_2&#34;&gt;Top pub names&lt;/h2&gt;
+&lt;h2 id=&#34;top-pub-names:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;Top pub names&lt;/h2&gt;
 
 &lt;p&gt;It turns out finding the most popular pub names is very simple with the
 aggregation framework.  Just group by the name and then sum up all the occurrences.
@@ -302,10 +303,10 @@ For the whole of the UK this returns:
 &lt;/div&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-  &lt;img src=&#34;/images/pubs_wordle.png&#34;&lt;br&gt;
+  &lt;img src=&#34;http://rosslawley.co.uk/images/pubs_wordle.png&#34;&lt;br&gt;
 &lt;/p&gt;
 
-&lt;h2 id=&#34;toc_3&#34;&gt;Top pub names near you&lt;/h2&gt;
+&lt;h2 id=&#34;top-pub-names-near-you:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;Top pub names near you&lt;/h2&gt;
 
 &lt;p&gt;At MongoDB London I thought that was too easy, so filtered to find the top pub
 names near the conference and showing off some of the geo functionality that became
@@ -328,7 +329,7 @@ coordinates &lt;code&gt;[ &amp;lt;long&amp;gt;, &amp;lt;lat&amp;gt; ]&lt;/code&g
   ]);
 &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_4&#34;&gt;What about where I live?&lt;/h2&gt;
+&lt;h2 id=&#34;what-about-where-i-live:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;What about where I live?&lt;/h2&gt;
 
 &lt;p&gt;At the conference I looked the most popular pub name near the conference.  Thats
 great if you happen to live in the centre of London but what about everyone else
@@ -342,10 +343,10 @@ some time for the heroku dyno to wake, so please be patient!)&lt;/p&gt;
 whole world - its surely possible to do, I just lacked the patience to download
 it all!&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_5&#34;&gt;Cheers&lt;/h2&gt;
+&lt;h2 id=&#34;cheers:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;Cheers&lt;/h2&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-  &lt;img src=&#34;/images/almurray.jpg&#34; title=&#34;Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946&#34; /&gt; &lt;br&gt;
+  &lt;img src=&#34;http://rosslawley.co.uk/images/almurray.jpg&#34; title=&#34;Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946&#34; /&gt; &lt;br&gt;
   &lt;small&gt; Source: &lt;a href=&#34;http://www.flickr.com/photos/bradfordtheatres/3063899946&#34;/&gt;http://www.flickr.com/photos/bradfordtheatres/3063899946&lt;/a&gt;&lt;/small&gt;
 &lt;/p&gt;
 
@@ -357,10 +358,10 @@ playing with MongoDB&amp;rsquo;s great geo features!&lt;/p&gt;
     
     <item>
       <title>mongoengine 0.8.0</title>
-      <link>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-dot-0</link>
-      <pubDate>Mon, 20 May 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-dot-0</guid>
+      <link>http://rosslawley.co.uk/mongoengine-0-dot-8-dot-0/</link>
+      <pubDate>Mon, 20 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/mongoengine-0-dot-8-dot-0/</guid>
       <description>
 
 &lt;p&gt;I&amp;rsquo;m really pleased to annouce the release of
@@ -368,7 +369,7 @@ playing with MongoDB&amp;rsquo;s great geo features!&lt;/p&gt;
 Its been a &lt;em&gt;long process&lt;/em&gt; due to work and life commitments but the latest version
 of MongoEngine is here.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Whats changed?&lt;/h2&gt;
+&lt;h2 id=&#34;whats-changed:21b8a771bb0f6c9b7111f39346dd1702&#34;&gt;Whats changed?&lt;/h2&gt;
 
 &lt;p&gt;There have been loads of fixes, improvements and changes in 0.8.
 The headliners are:&lt;/p&gt;
@@ -393,7 +394,7 @@ for all changes or check &lt;a href=&#34;https://github.com/MongoEngine/mongoeng
 &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;amp;page=1&amp;amp;state=closed&#34;&gt;96 tickets&lt;/a&gt;
 that have been fixed as part of this release.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;Whats next?&lt;/h2&gt;
+&lt;h2 id=&#34;whats-next:21b8a771bb0f6c9b7111f39346dd1702&#34;&gt;Whats next?&lt;/h2&gt;
 
 &lt;p&gt;There are a number of ideas on &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=6&#34;&gt;github&lt;/a&gt; for 0.9.  I&amp;rsquo;m looking for people to help with the administration and coding
 of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p&gt;
@@ -402,10 +403,10 @@ of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p
     
     <item>
       <title>MongoEngine 0.8 RC1 Released</title>
-      <link>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-rc1-released</link>
-      <pubDate>Wed, 01 May 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-rc1-released</guid>
+      <link>http://rosslawley.co.uk/mongoengine-0-dot-8-rc1-released/</link>
+      <pubDate>Wed, 01 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/mongoengine-0-dot-8-rc1-released/</guid>
       <description>
 
 &lt;p&gt;&lt;strong&gt;Notice:&lt;/strong&gt; 0.8.0RC3 has been released fixing a couple of small bugs and extra improvements.&lt;/p&gt;
@@ -416,7 +417,7 @@ of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p
 Its been a &lt;em&gt;long process&lt;/em&gt; due to work and life commitments but the latest version
 of MongoEngine is ready for testing and feedback.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Why a release candidate?&lt;/h2&gt;
+&lt;h2 id=&#34;why-a-release-candidate:381e651998269fc0201485acd98bed22&#34;&gt;Why a release candidate?&lt;/h2&gt;
 
 &lt;p&gt;There have been massive changes in the internals, requiring thought and
 &lt;strong&gt;testing&lt;/strong&gt; before upgrading and releasing to the wild - so please
@@ -431,7 +432,7 @@ please email the &lt;a href=&#34;https://groups.google.com/group/mongoengine-use
 or if you&amp;rsquo;d prefer to message me directly you can via
 &lt;a href=&#34;https://github.com/rozza&#34;&gt;https://github.com/rozza&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;Whats changed?&lt;/h2&gt;
+&lt;h2 id=&#34;whats-changed:381e651998269fc0201485acd98bed22&#34;&gt;Whats changed?&lt;/h2&gt;
 
 &lt;p&gt;There have been loads of fixes, improvements and changes in 0.8.
 The headliners are:&lt;/p&gt;
@@ -454,7 +455,7 @@ for all changes or check &lt;a href=&#34;https://github.com/MongoEngine/mongoeng
 &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;amp;page=1&amp;amp;state=closed&#34;&gt;84 tickets&lt;/a&gt;
 that have been fixed as part of this release.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_2&#34;&gt;Try it now!&lt;/h2&gt;
+&lt;h2 id=&#34;try-it-now:381e651998269fc0201485acd98bed22&#34;&gt;Try it now!&lt;/h2&gt;
 
 &lt;p&gt;Please test it, try it out and report any issues back!
 All being well 0.8.0RC1 will be released as 0.8.0 in a week.&lt;/p&gt;

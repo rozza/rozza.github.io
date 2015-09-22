@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mongoengine 0.8.0 &middot; Ross Lawley</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.14" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="mongoengine 0.8.0 &middot; Ross Lawley">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="mongoengine 0.8.0 &middot; Ross Lawley">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="http://rosslawley.co.uk/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Ross Lawley" href="http://rosslawley.co.uk/index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://rosslawley.co.uk">Ross Lawley</a></h1>
+            <h2 class="brand-tagline"> Some techincal musings </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/RossC0"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/rozza "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://rosslawley.co.uk/index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">20 May 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/mongoengine-0-dot-8-dot-0/" class="post-title">mongoengine 0.8.0</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-mongoengine" href="http://rosslawley.co.uk/categories/mongoengine">mongoengine</a><a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-nosql" href="http://rosslawley.co.uk/categories/nosql">nosql</a><a class="post-category post-category-python" href="http://rosslawley.co.uk/categories/python">python</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-share">
+                        <div class="post-share-links">
+                            <h4 style="">Share</h4>
+                            <a href="#" data-type="facebook" data-url="http://rosslawley.co.uk/mongoengine-0-dot-8-dot-0/" data-title="mongoengine 0.8.0" data-description="" data-media="" class="prettySocial fa fa-facebook"></a>
+                            <a href="#" data-type="googleplus" data-url="http://rosslawley.co.uk/mongoengine-0-dot-8-dot-0/" data-description="" class="prettySocial fa fa-google-plus"></a>
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="post-description">
+                        
+
+<p>I&rsquo;m really pleased to annouce the release of
+<a href="https://pypi.python.org/pypi/mongoengine/0.8.0">MongoEngine 0.8.0</a>.
+Its been a <em>long process</em> due to work and life commitments but the latest version
+of MongoEngine is here.</p>
+
+<h2 id="whats-changed:21b8a771bb0f6c9b7111f39346dd1702">Whats changed?</h2>
+
+<p>There have been loads of fixes, improvements and changes in 0.8.
+The headliners are:</p>
+
+<ul>
+<li>Minimum requirements are python 2.6+ and pymongo 2.5+</li>
+<li>Inheritance now off by default</li>
+<li>Inherited documents store <code>_cls</code> not <code>_types</code> (preventing auto creation of
+multikey indexes)</li>
+<li>Querysets are immutable and now return clones</li>
+<li>New Geo Fields supporting mongodb 2.4 new &ldquo;2dSphere&rdquo; indexes</li>
+<li>New context managers for switching collections or databases on the fly as
+well as turning off dereferencing</li>
+<li>Django support improved (now supports Django 1.5.1, groups and permissions)</li>
+<li>Performance improvements, back to the same performance as 0.4</li>
+</ul>
+
+<p>And much, much more!</p>
+
+<p>See the full <a href="http://docs.mongoengine.org/en/latest/changelog.html#changes-in-0-8-0">changelog</a>
+for all changes or check <a href="https://github.com/MongoEngine/mongoengine/">github</a> to see the
+<a href="https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;page=1&amp;state=closed">96 tickets</a>
+that have been fixed as part of this release.</p>
+
+<h2 id="whats-next:21b8a771bb0f6c9b7111f39346dd1702">Whats next?</h2>
+
+<p>There are a number of ideas on <a href="https://github.com/MongoEngine/mongoengine/issues?milestone=6">github</a> for 0.9.  I&rsquo;m looking for people to help with the administration and coding
+of MongoEngine, so please get involved and help drive MongoEngine forward!</p>
+
+                    </div>
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rozza';
+    var disqus_identifier = 'http:\/\/rosslawley.co.uk\/mongoengine-0-dot-8-dot-0\/';
+    var disqus_title = 'mongoengine 0.8.0';
+    var disqus_url = 'http:\/\/rosslawley.co.uk\/mongoengine-0-dot-8-dot-0\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="http://rosslawley.co.uk/js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-716284-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

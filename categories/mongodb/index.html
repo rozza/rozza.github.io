@@ -1,232 +1,625 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Ross Lawley">
-    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
+    <title>Mongodb &middot; Ross Lawley</title>
 
-    <title>Mongodb</title>
+    <meta name="description" content="Some techincal musings">
 
-    <link href="http://rosslawley.co.uk/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://rosslawley.co.uk/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://rosslawley.co.uk/css/site.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
-  </head>
+    <meta name="generator" content="Hugo 0.14" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Mongodb &middot; Ross Lawley">
+    <meta name="twitter:description" content="Some techincal musings">
 
-  <body>
-    <nav class="navbar navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      
-        <h1><a class="navbar-brand" href="http://rosslawley.co.uk/">Ross Lawley</a></h1>
-      
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Mongodb &middot; Ross Lawley">
+    <meta property="og:description" content="Some techincal musings">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="http://rosslawley.co.uk/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Ross Lawley" href="http://rosslawley.co.uk/index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://rosslawley.co.uk">Ross Lawley</a></h1>
+            <h2 class="brand-tagline"> Some techincal musings </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/RossC0"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/rozza "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://rosslawley.co.uk/index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
     </div>
-      <ul class="nav navbar-nav pull-right">
-        <li>
-          <a href="http://github.com/rozza" title="Github Profile" target="_blank">
-            <i class="icon-github-sign social-navbar"></i>
-          </a>
-        </li>
-        <li>
-          <a href="http://linkedin.com/in/rosslawley" title="Linkedin Profile" target="_blank">
-            <i class="icon-linkedin-sign social-navbar"></i>
-          </a>
-        </li>
-        <li>
-          <a href="http://twitter.com/RossC0" title="Twitter Profile" target="_blank">
-            <i class="icon-twitter-sign social-navbar"></i>
-          </a>
-        </li>
-      </ul>
-  </div>
-</nav>
-    <div class="container content">
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                
+                <h1 class="content-subhead">23 Apr 2014, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/" class="post-title">How to: Handle multiple Scala versions</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-library" href="http://rosslawley.co.uk/categories/library">library</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>I recently upgraded <a href="http://mongodb.github.io/casbah/">Casbah</a> to support the latest Scala 2.11 release and for the first time when supporting multiple Scala versions I hit a stumbling block.  If you&rsquo;re writing a library that wants to support multiple versions of Scala in a single code base, it&rsquo;s generally easy isn&rsquo;t it? Thankfully, it is as <a href="http://www.scala-sbt.org/">sbt</a> can do the heavy lifting for you.</p>
+
+<h2 id="three-steps-to-success:7a5c4c34d420fcc6185eaa05487dbc11">Three steps to success</h2>
+
+<p>The sbt documentation covers the basics nicely in their <a href="http://www.scala-sbt.org/release/docs/Detailed-Topics/Cross-Build.html">cross build</a> documentation.  But what&rsquo;s the path to success?</p>
+
+<ol>
+<li><p>Choose the Scala&rsquo;s you are going to support.</p>
+
+<p>Set the <code>crossScalaVersions</code> setting in your build file to define the Scala versions you want to support. In Casbah we support: <code>crossScalaVersions := Seq(&quot;2.11.0&quot;, &quot;2.10.4&quot;, &quot;2.9.3&quot;)</code></p></li>
+
+<li><p>Configure libraries</p>
+
+<p>Here it can get hairy because third party libraries may not support all your favoured scala builds in their latest release.  If they do, then happy days but if not you may have to pick out each library version as needed.  Here is an example from the Casbah build:</p>
+
+<pre><code>// In the build settings append to the library dependencies
+libraryDependencies &lt;++= scalaVersion (sv =&gt; Seq(specs2(sv), scalatime(sv)))
+
+
+// Helper method to pattern match against the scala version and return the correct specs version
+def specs2(scalaVersion: String) =
+  (scalaVersion match {
+    case &quot;2.9.3&quot;   =&gt; &quot;org.specs2&quot; %% &quot;specs2&quot; % &quot;1.12.4.1&quot;
+    case _ =&gt; &quot;org.specs2&quot; %% &quot;specs2&quot; % &quot;2.3.11&quot;
+  }) % &quot;test&quot;
+</code></pre>
+
+<p>As the latest Specs build <code>2.3.11</code> doesn&rsquo;t support Scala 2.9.3 we have to use the older <code>1.12.4.1</code> version for 2.9.3.  The downside is we can&rsquo;t yet use some of the nicer newer features of the Specs library in our test suite.</p></li>
+
+<li><p>Scala version specific code.</p>
+
+<p>This is the real challenge, what do you do if you need specific code for a specific version of Scala?  Hopefully, you&rsquo;ll never need to but this isn&rsquo;t always the case as I found with Casbah.  We use <code>BeanInfo</code> annotation and it lives in <code>scala.reflection</code> in Scala 2.9.3 and in <code>scala.beans</code> in 2.11.</p>
+
+<p>So how can we get round this? Luckily, Scala 2.10 gave me a hint as <code>BeanInfo</code> had been depreciated in <code>scala.reflection</code> but they had mirrored it in a <a href="https://github.com/scala/scala/blob/v2.10.4/src/library/scala/reflect/package.scala#L55-L56">package object</a>. I could use the same trick in Casbah! However, I would need a version for Scala 2.9.3 to point to <code>scala.reflect.BeanInfo</code> and a version for 2.10 &amp; 2.11. Then update all the code to point to the scala specific package object.</p>
+
+<p>As the code would be version specific it couldn&rsquo;t live in the <code>src/main/scala</code> directory as it wouldn&rsquo;t compile. So instead I created specific Scala directories in <code>src/main</code> like so:</p>
+
+<pre><code>./scala
+./scala_2.9.3  // Scala 2.9.3 specific code
+./scala_2.10   // Scala 2.10 specific code
+./scala_2.11   // Scala 2.11 specific code
+</code></pre>
+
+<p>As Scala 2.10 &amp; 2.11 point versions will be binary compatible I only need a top level directory for them.  Then alls that&rsquo;s needed is to add these source directories to the build:</p>
+
+<pre><code>unmanagedSourceDirectories in Compile &lt;+= (sourceDirectory in Compile, scalaBinaryVersion){
+  (s, v) =&gt; s / (&quot;scala_&quot;+v)
+}
+</code></pre>
+
+<p>This adds extra source directories to the compile step and using <code>scalaBinaryVersion</code> I get the binary compatible versions (so it&rsquo;s 2.11 for all 2.11 releases but would be 2.9.3, 2.9.2, 2.9.1 for the non compatible point releases from the 2.9 series).</p>
+
+<p>The fix in Casbah was to simply add a <code>beans.scala</code> for the scala specific versions and create a <code>BeanInfo</code> type which points to the correct scala package. Problem solved.</p></li>
+</ol>
+
+<p>Sbt allow you to run any command against multiple versions of Scala. <code>./sbt +test</code> will test against all your <code>crossScalaVersions</code> of Scala and hopefully confirm the code works as expected.  If I want to test a specific version use a double plus sign and add the version string to the arguments eg: <code>./sbt ++ 2.9.3 test</code>.</p>
+
+<h2 id="final-thoughts:7a5c4c34d420fcc6185eaa05487dbc11">Final thoughts</h2>
+
+<p>Scala is a relatively fast moving ecosystem with new major releases every 13 months or so.  When I took over Casbah it supported 6 binary incompatible versions of Scala! From 2.8.1 to 2.9.3. Happily, Scala patch versions from 2.10.0 on have become binary compatible making supporting multiple versions of Scala easier.  However, one of the key issues for maintaining a library is to know when to end of life an old Scala version, so to keep the library fresh.</p>
+
+<p>In Casbah supporting the current and last major versions of Scala gives users support for the latest MongoDB version and allows them some flexibility when it comes to updating Scala. Generally, this has been a trouble free process and as shown above problems are solvable in just three easy steps.</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">06 Nov 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/rx-java/" class="post-title">RxJava - understandably reactive</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-RxJava" href="http://rosslawley.co.uk/categories/rxjava">RxJava</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-reactive" href="http://rosslawley.co.uk/categories/reactive">reactive</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>Reactive programing is hot stuff at the moment and the
+<a href="https://www.coursera.org/course/reactive">Coursera Principles of Reactive Programming</a>
+course has <strong>just</strong> started (its not too late to enroll).</p>
+
+<p>Recently, I&rsquo;ve been hearing good things about <a href="https://github.com/Netflix/RxJava">RxJava</a> (
+a port of .Net&rsquo;s <a href="http://msdn.microsoft.com/en-gb/data/gg577609.aspx">Reactive extensions</a>
+) so I wanted to learn some more. Then I stumbled upon a video from a recent
+<a href="http://www.meetup.com/SF-Scala/">SF Scala</a> meetup
+which covered what it is and how they implemented the core and then added
+support for other JVM languages.</p>
+
+<p>Two things immediately struck me:</p>
+
+<ol>
+<li><p>Observables are not opnionated about how the backend works.  It could be
+concurrent or swapped out with a thread pool, an actor
+or an nio event &amp; event loop&hellip; Pretty cool, this means there is a single way
+of handling the code no matter if the backend is synchronus or asynchronus.</p></li>
+
+<li><p>The methods for manipulating multiple observers, chaining or nesting
+is extremely powerful, yet easy to understand.</p></li>
+</ol>
+
+<p>I&rsquo;m really looking forward to using it, to me its an easier abstraction to
+understand for handling streams of data and seemly less complex than using Plays
+excellent <code>Iteratee.Concurrent</code> library.</p>
+
+<p>Enjoy:</p>
+
+<p><div class="embed video-player">
+<iframe class="youtube-player" type="text/html"
+    width="640" height="385"
+    src="http://www.youtube.com/embed/tOMK_FYJREw"
+    allowfullscreen frameborder="0">
+</iframe>
+</div></p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">24 Sep 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/typesafe-activator/" class="post-title">Typesafe&#39;s Activator</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-play" href="http://rosslawley.co.uk/categories/play">play</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-reactive" href="http://rosslawley.co.uk/categories/reactive">reactive</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>Yesterday the <a href="http://typesafe.com/blog/announcing-activator-10-create-reactive-apps-in-minutes">Typesafe Activator</a>
+hit 1.0. If you haven&rsquo;t heard about it and use scala or the jvm then take five
+minutes and check it out - its worth it.</p>
+
+<h1 id="what-is-it:8f899c775a0faeb02adf96bdfce96cff">What is it?</h1>
+
+<p>My recommendation alone not enough and you what to know more about it before
+installing it?  No problems, let me convince you.</p>
+
+<blockquote>
+<p>Typesafe Activator is a local web &amp; command-line tool that helps developers
+get started with the Typesafe Platform.</p>
+</blockquote>
+
+<p>Whats that give you?  Basically, a real nice UI in the browser for creating web
+applications from templates.  The <a href="http://typesafe.com/activator/templates">templates</a>
+cover &ldquo;hello world&rdquo; in scala to using <a href="http://akka.io">Akka</a>, <a href="http://playframework.com">
+Play</a> and <a href="http://www.scala-lang.org/">Scala</a> to create
+modern scalable reactive web sites.</p>
+
+<p>Its quick and easy to get going - I chose the
+<a href="http://typesafe.com/activator/template/play-mongo-knockout">Play Reactive Mongo and knockout.js</a>
+template</p>
+
+<p class="text-center">
+<img src="/images/activator-loading.png">
+</p>
+
+<p>In the background it downloads all the resources you need to create the project
+from the template.  Starting a new project is extremely simple and once the
+project is loaded you get to use the Web UI in anger.</p>
+
+<p class="text-center">
+<img src="/images/activator-orientation.png">
+</p>
+
+<h1 id="the-tutorial:8f899c775a0faeb02adf96bdfce96cff">The tutorial</h1>
+
+<p>Once loaded, you get the tutorial for this template:</p>
+
+<blockquote>
+<p>The world is going reactive</p>
+
+<p>Not long ago, response times in the seconds were considered appropriate. Browser
+refreshes were the norm in web applications. Systems would go down for hours of
+maintenance, or even be rebooted nightly, and this was ok because people only
+expected the systems to be up during business hours..</p>
+</blockquote>
+
+<p><em>Exciting stuff!</em>  So not only can you code, compile and test your application
+all in the browser - there&rsquo;s a tutorial to guide you through the various new
+concepts as well.</p>
+
+<p>The reactive mongo tutorial, gets you up and running using creating a reactive
+Play web application with a rich front end and scalable backend.  It uses
+<a href="http://reactivemongo.org">Reactive Mongo</a> an asynchronous non blocking scala
+mongodb driver for the database.  The play framework for the webserver,
+<a href="http://coffeescript.org">coffeescript</a> and <a href="http://knockoutjs.com">knockout.js</a>
+for the frontend.</p>
+
+<p>The tutorial walks you through how the various parts of the app work together and
+links through to the code.  Next it sets tasks to update parts of the app, extending
+it and adding functionality.</p>
+
+<p>This quickly, gets you up to speed, so if you are interested in any of the
+Typesafe stack then download activator now and you&rsquo;ll be up and running in minutes!</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">23 Jul 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/the-most-popular-pub-name/" class="post-title">Using MongoDB to find the most popular pub names!</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-aggregation" href="http://rosslawley.co.uk/categories/aggregation">aggregation</a><a class="post-category post-category-demo" href="http://rosslawley.co.uk/categories/demo">demo</a><a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-geo" href="http://rosslawley.co.uk/categories/geo">geo</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>Earlier in the year I gave a talk at <a href="http://www.10gen.com/events/mongodb-london-2013">MongoDB London</a>
+about the different aggregation options with MongoDB.  The topic recently came up again
+in conversation at a user group, so I thought it deserved a blog post.</p>
+
+<h2 id="gathering-ideas-for-the-talk:e8cc9569ac7e5d9e066aee5378affb29">Gathering ideas for the talk</h2>
+
+<p>I wanted to give a more interesting aggregation talk than the standard
+&ldquo;counting words in text&rdquo;, and as the <a href="http://docs.mongodb.org/manual/core/aggregation/">aggregation framework</a> gained shiny <a href="http://docs.mongodb.org/manual/core/2dsphere/">2dsphere geo</a> support in
+<a href="http://docs.mongodb.org/manual/release-notes/2.4/#new-geospatial-indexes-with-geojson-and-improved-spherical-geometry">2.4</a>, I figured I&rsquo;d use that. I just needed a topic&hellip;</p>
+
+<h3 id="what-are-us-brits-focused-on:e8cc9569ac7e5d9e066aee5378affb29">What are us Brits focused on?</h3>
+
+<p>Two things immediately sprang to mind: <strong>weather</strong> and <strong>beer</strong>.</p>
+
+<p>I opted to focus on something close to my heart: <strong>beer</strong> :)
+But what to aggregate about beer? Then I remembered an old pub quiz favourite&hellip;</p>
+
+<p><strong>What is the most popular pub name in the UK?</strong></p>
+
+<p>I know there is some great open data, including a wealth of information
+on pubs available from the awesome <a href="http://www.openstreetmap.org/">open street map</a>
+project.  I just need to get at it and happily the <a href="http://www.overpass-api.de">Overpass-api</a>
+provides a simple &ldquo;xapi&rdquo; interface for OSM data.
+All I needed was anything tagged with <code>amenity=pub</code> within in the
+bounds of the UK and with their xapi interface this is as simple as a wget:
+<code>http://www.overpass-api.de/api/xapi?*[amenity=pub][bbox=-10.5,49.78,1.78,59]</code></p>
+
+<p>Once I had an osm file I used the <a href="http://imposm.org/">imposm python library</a> to
+parse the xml and then convert it to following GeoJSON format:</p>
+
+<pre>
+<code class="javascript">{
+  "_id" : 451152,
+  "amenity" : "pub",
+  "name" : "The Dignity",
+  "addr:housenumber" : "363",
+  "addr:street" : "Regents Park Road",
+  "addr:city" : "London",
+  "addr:postcode" : "N3 1DH",
+  "toilets" : "yes",
+  "toilets:access" : "customers",
+  "location" : {
+      "type" : "Point",
+      "coordinates" : [-0.1945732, 51.6008172]
+  }
+}
+</code></pre>
+
+<p>Then it was a case of simply inserting it as a document into MongoDB. I
+quickly noticed that the data needed a little cleaning, as I was seeing duplicate
+pub names, for example: &ldquo;The Red Lion&rdquo; and &ldquo;Red Lion&rdquo;.  Because I wanted to make
+a wordle I normalised all the pub names.</p>
+
+<p>If you want to know more about the importing process, the full loading code is
+available on github: <a href="https://github.com/rozza/pubnames/blob/master/osm2mongo.py">osm2mongo.py</a></p>
+
+<h2 id="top-pub-names:e8cc9569ac7e5d9e066aee5378affb29">Top pub names</h2>
+
+<p>It turns out finding the most popular pub names is very simple with the
+aggregation framework.  Just group by the name and then sum up all the occurrences.
+To get the top five most popular pub names we sort by the summed value and then
+limit to 5:</p>
+
 <div class="row">
-  <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Category: Mongodb</h1>
-      </div>
-    </div>
+  <div class="col-md-6 col-lg-6">
+<pre>
+<code class="javascript">db.pubs.aggregate([
+  {"$group":
+     {"_id": "$name",
+      "value": {"$sum": 1}
+     }
+  },
+  {"$sort": {"value": -1}},
+  {"$limit": 5}
+]);
+</code></pre>
+  </div>
+  <div class="col-md-6 col-lg-6">
+For the whole of the UK this returns:
+
+<ol>
+<li>The Red Lion</li>
+<li>The Royal Oak</li>
+<li>The Crown</li>
+<li>The White Hart</li>
+<li>The White Horse</li>
+</ol>
   </div>
 </div>
-<section class="row">
-  <ul>
-    
-      <li class="category">
-<div class="post col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-  <article>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      <h2><a href='http://rosslawley.co.uk/posts/how-to-handle-multiple-scala-versions'>How to: Handle multiple Scala versions</a></h2>
+
+<p class="text-center">
+  <img src="/images/pubs_wordle.png"<br>
+</p>
+
+<h2 id="top-pub-names-near-you:e8cc9569ac7e5d9e066aee5378affb29">Top pub names near you</h2>
+
+<p>At MongoDB London I thought that was too easy, so filtered to find the top pub
+names near the conference and showing off some of the geo functionality that became
+available in MongoDB 2.4.  To limit the result set match and ensure the
+location is within a 2 mile radius by using <code>$centreSphere</code>. Just provide the
+coordinates <code>[ &lt;long&gt;, &lt;lat&gt; ]</code> and a radius of roughly 2 miles
+(3959 is approximately the radius of the earth, so divide it by 2):
+<pre>
+<code class="javascript">db.pubs.aggregate([
+    { &ldquo;$match&rdquo; : { &ldquo;location&rdquo;:
+                 { &ldquo;$within&rdquo;:
+                   { &ldquo;$text-centerSphere&rdquo;: [[-0.12, 51.516], 2 / 3959] }}}
+    },
+    { &ldquo;$group&rdquo; :
+       { &ldquo;_id&rdquo; : &ldquo;$name&rdquo;,
+         &ldquo;value&rdquo; : { &ldquo;$sum&rdquo; : 1 } }
+    },
+    { &ldquo;$sort&rdquo; : { &ldquo;value&rdquo; : -1 } },
+    { &ldquo;$limit&rdquo; : 5 }
+  ]);
+</code></pre></p>
+
+<h2 id="what-about-where-i-live:e8cc9569ac7e5d9e066aee5378affb29">What about where I live?</h2>
+
+<p>At the conference I looked the most popular pub name near the conference.  Thats
+great if you happen to live in the centre of London but what about everyone else
+in the UK? So for this blog post I decided to update the demo code and make it
+dynamic based on where you live.</p>
+
+<p>See: <a href="http://pubnames.rosslawley.co.uk">pubnames.rosslawley.co.uk</a> <br>(It may take
+some time for the heroku dyno to wake, so please be patient!)</p>
+
+<p>Apologies for those outside the UK - the demo app doesn&rsquo;t have data for the
+whole world - its surely possible to do, I just lacked the patience to download
+it all!</p>
+
+<h2 id="cheers:e8cc9569ac7e5d9e066aee5378affb29">Cheers</h2>
+
+<p class="text-center">
+  <img src="/images/almurray.jpg" title="Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946" /> <br>
+  <small> Source: <a href="http://www.flickr.com/photos/bradfordtheatres/3063899946"/>http://www.flickr.com/photos/bradfordtheatres/3063899946</a></small>
+</p>
+
+<p>All the code is available in my repo on <a href="https://github.com/rozza/pubnames">github</a>
+including the bson file of the pubs and the wordle code - so fork it and start
+playing with MongoDB&rsquo;s great geo features!</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">20 May 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/mongoengine-0-dot-8-dot-0/" class="post-title">mongoengine 0.8.0</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-mongoengine" href="http://rosslawley.co.uk/categories/mongoengine">mongoengine</a><a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-nosql" href="http://rosslawley.co.uk/categories/nosql">nosql</a><a class="post-category post-category-python" href="http://rosslawley.co.uk/categories/python">python</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>I&rsquo;m really pleased to annouce the release of
+<a href="https://pypi.python.org/pypi/mongoengine/0.8.0">MongoEngine 0.8.0</a>.
+Its been a <em>long process</em> due to work and life commitments but the latest version
+of MongoEngine is here.</p>
+
+<h2 id="whats-changed:21b8a771bb0f6c9b7111f39346dd1702">Whats changed?</h2>
+
+<p>There have been loads of fixes, improvements and changes in 0.8.
+The headliners are:</p>
+
+<ul>
+<li>Minimum requirements are python 2.6+ and pymongo 2.5+</li>
+<li>Inheritance now off by default</li>
+<li>Inherited documents store <code>_cls</code> not <code>_types</code> (preventing auto creation of
+multikey indexes)</li>
+<li>Querysets are immutable and now return clones</li>
+<li>New Geo Fields supporting mongodb 2.4 new &ldquo;2dSphere&rdquo; indexes</li>
+<li>New context managers for switching collections or databases on the fly as
+well as turning off dereferencing</li>
+<li>Django support improved (now supports Django 1.5.1, groups and permissions)</li>
+<li>Performance improvements, back to the same performance as 0.4</li>
+</ul>
+
+<p>And much, much more!</p>
+
+<p>See the full <a href="http://docs.mongoengine.org/en/latest/changelog.html#changes-in-0-8-0">changelog</a>
+for all changes or check <a href="https://github.com/MongoEngine/mongoengine/">github</a> to see the
+<a href="https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;page=1&amp;state=closed">96 tickets</a>
+that have been fixed as part of this release.</p>
+
+<h2 id="whats-next:21b8a771bb0f6c9b7111f39346dd1702">Whats next?</h2>
+
+<p>There are a number of ideas on <a href="https://github.com/MongoEngine/mongoengine/issues?milestone=6">github</a> for 0.9.  I&rsquo;m looking for people to help with the administration and coding
+of MongoEngine, so please get involved and help drive MongoEngine forward!</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">01 May 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/mongoengine-0-dot-8-rc1-released/" class="post-title">MongoEngine 0.8 RC1 Released</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-mongoengine" href="http://rosslawley.co.uk/categories/mongoengine">mongoengine</a><a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-nosql" href="http://rosslawley.co.uk/categories/nosql">nosql</a><a class="post-category post-category-python" href="http://rosslawley.co.uk/categories/python">python</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p><strong>Notice:</strong> 0.8.0RC3 has been released fixing a couple of small bugs and extra improvements.</p>
+
+<p><strong>Notice:</strong> 0.8.0RC2 has been released fixing an obscure queryset cursor cloning issue.</p>
+
+<p>I&rsquo;m really pleased to annouce the release candidate for <a href="https://pypi.python.org/pypi/mongoengine/0.8.0RC1">MongoEngine 0.8</a>!
+Its been a <em>long process</em> due to work and life commitments but the latest version
+of MongoEngine is ready for testing and feedback.</p>
+
+<h2 id="why-a-release-candidate:381e651998269fc0201485acd98bed22">Why a release candidate?</h2>
+
+<p>There have been massive changes in the internals, requiring thought and
+<strong>testing</strong> before upgrading and releasing to the wild - so please
+read the <a href="http://docs.mongoengine.org/en/latest/upgrade.html#to-0-8">upgrade</a>
+docs carefully!</p>
+
+<p>The changes are worth it and make using <a href="http://mongoengine.org">MongoEngine</a>
+even better.</p>
+
+<p>Please test 0.8.0RC1 on your test systems and staging systems and any feedback
+please email the <a href="https://groups.google.com/group/mongoengine-users">user group</a>
+or if you&rsquo;d prefer to message me directly you can via
+<a href="https://github.com/rozza">https://github.com/rozza</a></p>
+
+<h2 id="whats-changed:381e651998269fc0201485acd98bed22">Whats changed?</h2>
+
+<p>There have been loads of fixes, improvements and changes in 0.8.
+The headliners are:</p>
+
+<ul>
+<li>Minimum requirements are python 2.6+ and pymongo 2.5+</li>
+<li>Inheritance now off by default</li>
+<li>Inherited documents store <code>_cls</code> not <code>_types</code> (preventing auto creation of
+multikey indexes)</li>
+<li>Querysets are immutable and now return clones</li>
+<li>New Geo Fields supporting mongodb 2.4 new &ldquo;2dSphere&rdquo; indexes</li>
+<li>New context managers for switching collections or databases on the fly as
+well as turning off dereferencing</li>
+<li>Django support improved (now supports Django 1.5.1, groups and permissions)</li>
+<li>Performance improvements, back to the same performance as 0.4</li>
+</ul>
+
+<p>And much, much more! See the full <a href="http://docs.mongoengine.org/en/latest/changelog.html#changes-in-0-8-0">changelog</a>
+for all changes or check <a href="https://github.com/MongoEngine/mongoengine/">github</a> to see the
+<a href="https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;page=1&amp;state=closed">84 tickets</a>
+that have been fixed as part of this release.</p>
+
+<h2 id="try-it-now:381e651998269fc0201485acd98bed22">Try it now!</h2>
+
+<p>Please test it, try it out and report any issues back!
+All being well 0.8.0RC1 will be released as 0.8.0 in a week.</p>
+
+<p><small>* Want to get involved in MongoEngine? We&rsquo;re looking for help so please ping me!</small></p>
+
+                    </div>
+                </section>
+                
+            </div>
+            
+
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a></li>
+        </ul>
     </div>
-    <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
-      <h5 class="date-time">
-  <i class="icon-calendar-empty"></i>
-  <time datetime="2014-04-23 00:00:00 &#43;0000 UTC" data-updated="true">
-    April
-    23, 2014
-  </time>
-</h5>
-    </div>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      Posted in:
-      <a href="http://rosslawley.co.uk/categories/tech/">tech</a>, <a href="http://rosslawley.co.uk/categories/mongodb/">mongodb</a>, <a href="http://rosslawley.co.uk/categories/library/">library</a>, <a href="http://rosslawley.co.uk/categories/scala/">scala</a>
-    </div>
-  </article>
 </div>
-</li>
-
-    
-      <li class="category">
-<div class="post col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-  <article>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      <h2><a href='http://rosslawley.co.uk/posts/rx-java'>RxJava - understandably reactive</a></h2>
+<script src="http://rosslawley.co.uk/js/all.min.js"></script>
+        </div>
     </div>
-    <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
-      <h5 class="date-time">
-  <i class="icon-calendar-empty"></i>
-  <time datetime="2013-11-06 00:00:00 &#43;0000 UTC" data-updated="true">
-    November
-    6, 2013
-  </time>
-</h5>
-    </div>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      Posted in:
-      <a href="http://rosslawley.co.uk/categories/tech/">tech</a>, <a href="http://rosslawley.co.uk/categories/RxJava/">RxJava</a>, <a href="http://rosslawley.co.uk/categories/mongodb/">mongodb</a>, <a href="http://rosslawley.co.uk/categories/reactive/">reactive</a>, <a href="http://rosslawley.co.uk/categories/scala/">scala</a>
-    </div>
-  </article>
 </div>
-</li>
 
-    
-      <li class="category">
-<div class="post col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-  <article>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      <h2><a href='http://rosslawley.co.uk/posts/typesafe_activator'>Typesafe&#39;s Activator</a></h2>
-    </div>
-    <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
-      <h5 class="date-time">
-  <i class="icon-calendar-empty"></i>
-  <time datetime="2013-09-24 00:00:00 &#43;0000 UTC" data-updated="true">
-    September
-    24, 2013
-  </time>
-</h5>
-    </div>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      Posted in:
-      <a href="http://rosslawley.co.uk/categories/tech/">tech</a>, <a href="http://rosslawley.co.uk/categories/play/">play</a>, <a href="http://rosslawley.co.uk/categories/mongodb/">mongodb</a>, <a href="http://rosslawley.co.uk/categories/reactive/">reactive</a>, <a href="http://rosslawley.co.uk/categories/scala/">scala</a>
-    </div>
-  </article>
-</div>
-</li>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    
-      <li class="category">
-<div class="post col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-  <article>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      <h2><a href='http://rosslawley.co.uk/posts/the-most-popular-pub-name'>Using MongoDB to find the most popular pub names!</a></h2>
-    </div>
-    <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
-      <h5 class="date-time">
-  <i class="icon-calendar-empty"></i>
-  <time datetime="2013-07-23 00:00:00 &#43;0000 UTC" data-updated="true">
-    July
-    23, 2013
-  </time>
-</h5>
-    </div>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      Posted in:
-      <a href="http://rosslawley.co.uk/categories/mongodb/">mongodb</a>, <a href="http://rosslawley.co.uk/categories/aggregation/">aggregation</a>, <a href="http://rosslawley.co.uk/categories/demo/">demo</a>, <a href="http://rosslawley.co.uk/categories/tech/">tech</a>, <a href="http://rosslawley.co.uk/categories/geo/">geo</a>
-    </div>
-  </article>
-</div>
-</li>
+ga('create', 'UA-716284-3', 'auto');
+ga('send', 'pageview');
 
-    
-      <li class="category">
-<div class="post col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-  <article>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      <h2><a href='http://rosslawley.co.uk/posts/mongoengine-0-dot-8-dot-0'>mongoengine 0.8.0</a></h2>
-    </div>
-    <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
-      <h5 class="date-time">
-  <i class="icon-calendar-empty"></i>
-  <time datetime="2013-05-20 00:00:00 &#43;0000 UTC" data-updated="true">
-    May
-    20, 2013
-  </time>
-</h5>
-    </div>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      Posted in:
-      <a href="http://rosslawley.co.uk/categories/mongodb/">mongodb</a>, <a href="http://rosslawley.co.uk/categories/mongoengine/">mongoengine</a>, <a href="http://rosslawley.co.uk/categories/tech/">tech</a>, <a href="http://rosslawley.co.uk/categories/nosql/">nosql</a>, <a href="http://rosslawley.co.uk/categories/python/">python</a>
-    </div>
-  </article>
-</div>
-</li>
+</script>
 
-    
-      <li class="category">
-<div class="post col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-  <article>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      <h2><a href='http://rosslawley.co.uk/posts/mongoengine-0-dot-8-rc1-released'>MongoEngine 0.8 RC1 Released</a></h2>
-    </div>
-    <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
-      <h5 class="date-time">
-  <i class="icon-calendar-empty"></i>
-  <time datetime="2013-05-01 00:00:00 &#43;0000 UTC" data-updated="true">
-    May
-    1, 2013
-  </time>
-</h5>
-    </div>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      Posted in:
-      <a href="http://rosslawley.co.uk/categories/mongodb/">mongodb</a>, <a href="http://rosslawley.co.uk/categories/mongoengine/">mongoengine</a>, <a href="http://rosslawley.co.uk/categories/tech/">tech</a>, <a href="http://rosslawley.co.uk/categories/nosql/">nosql</a>, <a href="http://rosslawley.co.uk/categories/python/">python</a>
-    </div>
-  </article>
-</div>
-</li>
-
-    
-  </ul>
-</section>
-  </div>
-  <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-  <div class="row">
-    <footer class="footer-page" role="contentinfo">
-      <p>
-        Copyright &copy; 2014 - Ross Lawley - <a href="http://rosslawley.co.uk/posts">Site Archive</a>
-      </p>
-      <p>
-        <span class="credit">Powered by <a href="http://hugo.spf13.com/">Hugo</a></span>
-         
-      </p>
-    </footer>
-  </div>
-  </div>
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-716284-3']);
-    _gaq.push(['_setDomainName', 'rosslawley.co.uk']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-  </body>
+</body>
 </html>

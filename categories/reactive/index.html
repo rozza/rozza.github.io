@@ -1,136 +1,244 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Ross Lawley">
-    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
+    <title>Reactive &middot; Ross Lawley</title>
 
-    <title>Reactive</title>
+    <meta name="description" content="Some techincal musings">
 
-    <link href="http://rosslawley.co.uk/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://rosslawley.co.uk/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://rosslawley.co.uk/css/site.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
-  </head>
-
-  <body>
-    <nav class="navbar navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      
-        <h1><a class="navbar-brand" href="http://rosslawley.co.uk/">Ross Lawley</a></h1>
-      
-    </div>
-      <ul class="nav navbar-nav pull-right">
-        <li>
-          <a href="http://github.com/rozza" title="Github Profile" target="_blank">
-            <i class="icon-github-sign social-navbar"></i>
-          </a>
-        </li>
-        <li>
-          <a href="http://linkedin.com/in/rosslawley" title="Linkedin Profile" target="_blank">
-            <i class="icon-linkedin-sign social-navbar"></i>
-          </a>
-        </li>
-        <li>
-          <a href="http://twitter.com/RossC0" title="Twitter Profile" target="_blank">
-            <i class="icon-twitter-sign social-navbar"></i>
-          </a>
-        </li>
-      </ul>
-  </div>
-</nav>
-    <div class="container content">
-<div class="row">
-  <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Category: Reactive</h1>
-      </div>
-    </div>
-  </div>
-</div>
-<section class="row">
-  <ul>
+    <meta name="generator" content="Hugo 0.14" />
+    <meta name="twitter:card" content="summary">
     
-      <li class="category">
-<div class="post col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-  <article>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      <h2><a href='http://rosslawley.co.uk/posts/rx-java'>RxJava - understandably reactive</a></h2>
+    <meta name="twitter:title" content="Reactive &middot; Ross Lawley">
+    <meta name="twitter:description" content="Some techincal musings">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Reactive &middot; Ross Lawley">
+    <meta property="og:description" content="Some techincal musings">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="http://rosslawley.co.uk/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Ross Lawley" href="http://rosslawley.co.uk/index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://rosslawley.co.uk">Ross Lawley</a></h1>
+            <h2 class="brand-tagline"> Some techincal musings </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/RossC0"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/rozza "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://rosslawley.co.uk/index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
-      <h5 class="date-time">
-  <i class="icon-calendar-empty"></i>
-  <time datetime="2013-11-06 00:00:00 &#43;0000 UTC" data-updated="true">
-    November
-    6, 2013
-  </time>
-</h5>
-    </div>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      Posted in:
-      <a href="http://rosslawley.co.uk/categories/tech/">tech</a>, <a href="http://rosslawley.co.uk/categories/RxJava/">RxJava</a>, <a href="http://rosslawley.co.uk/categories/mongodb/">mongodb</a>, <a href="http://rosslawley.co.uk/categories/reactive/">reactive</a>, <a href="http://rosslawley.co.uk/categories/scala/">scala</a>
-    </div>
-  </article>
 </div>
-</li>
 
-    
-      <li class="category">
-<div class="post col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-  <article>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      <h2><a href='http://rosslawley.co.uk/posts/typesafe_activator'>Typesafe&#39;s Activator</a></h2>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                
+                <h1 class="content-subhead">06 Nov 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/rx-java/" class="post-title">RxJava - understandably reactive</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-RxJava" href="http://rosslawley.co.uk/categories/rxjava">RxJava</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-reactive" href="http://rosslawley.co.uk/categories/reactive">reactive</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>Reactive programing is hot stuff at the moment and the
+<a href="https://www.coursera.org/course/reactive">Coursera Principles of Reactive Programming</a>
+course has <strong>just</strong> started (its not too late to enroll).</p>
+
+<p>Recently, I&rsquo;ve been hearing good things about <a href="https://github.com/Netflix/RxJava">RxJava</a> (
+a port of .Net&rsquo;s <a href="http://msdn.microsoft.com/en-gb/data/gg577609.aspx">Reactive extensions</a>
+) so I wanted to learn some more. Then I stumbled upon a video from a recent
+<a href="http://www.meetup.com/SF-Scala/">SF Scala</a> meetup
+which covered what it is and how they implemented the core and then added
+support for other JVM languages.</p>
+
+<p>Two things immediately struck me:</p>
+
+<ol>
+<li><p>Observables are not opnionated about how the backend works.  It could be
+concurrent or swapped out with a thread pool, an actor
+or an nio event &amp; event loop&hellip; Pretty cool, this means there is a single way
+of handling the code no matter if the backend is synchronus or asynchronus.</p></li>
+
+<li><p>The methods for manipulating multiple observers, chaining or nesting
+is extremely powerful, yet easy to understand.</p></li>
+</ol>
+
+<p>I&rsquo;m really looking forward to using it, to me its an easier abstraction to
+understand for handling streams of data and seemly less complex than using Plays
+excellent <code>Iteratee.Concurrent</code> library.</p>
+
+<p>Enjoy:</p>
+
+<p><div class="embed video-player">
+<iframe class="youtube-player" type="text/html"
+    width="640" height="385"
+    src="http://www.youtube.com/embed/tOMK_FYJREw"
+    allowfullscreen frameborder="0">
+</iframe>
+</div></p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">24 Sep 2013, 00:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/typesafe-activator/" class="post-title">Typesafe&#39;s Activator</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-play" href="http://rosslawley.co.uk/categories/play">play</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-reactive" href="http://rosslawley.co.uk/categories/reactive">reactive</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>Yesterday the <a href="http://typesafe.com/blog/announcing-activator-10-create-reactive-apps-in-minutes">Typesafe Activator</a>
+hit 1.0. If you haven&rsquo;t heard about it and use scala or the jvm then take five
+minutes and check it out - its worth it.</p>
+
+<h1 id="what-is-it:8f899c775a0faeb02adf96bdfce96cff">What is it?</h1>
+
+<p>My recommendation alone not enough and you what to know more about it before
+installing it?  No problems, let me convince you.</p>
+
+<blockquote>
+<p>Typesafe Activator is a local web &amp; command-line tool that helps developers
+get started with the Typesafe Platform.</p>
+</blockquote>
+
+<p>Whats that give you?  Basically, a real nice UI in the browser for creating web
+applications from templates.  The <a href="http://typesafe.com/activator/templates">templates</a>
+cover &ldquo;hello world&rdquo; in scala to using <a href="http://akka.io">Akka</a>, <a href="http://playframework.com">
+Play</a> and <a href="http://www.scala-lang.org/">Scala</a> to create
+modern scalable reactive web sites.</p>
+
+<p>Its quick and easy to get going - I chose the
+<a href="http://typesafe.com/activator/template/play-mongo-knockout">Play Reactive Mongo and knockout.js</a>
+template</p>
+
+<p class="text-center">
+<img src="/images/activator-loading.png">
+</p>
+
+<p>In the background it downloads all the resources you need to create the project
+from the template.  Starting a new project is extremely simple and once the
+project is loaded you get to use the Web UI in anger.</p>
+
+<p class="text-center">
+<img src="/images/activator-orientation.png">
+</p>
+
+<h1 id="the-tutorial:8f899c775a0faeb02adf96bdfce96cff">The tutorial</h1>
+
+<p>Once loaded, you get the tutorial for this template:</p>
+
+<blockquote>
+<p>The world is going reactive</p>
+
+<p>Not long ago, response times in the seconds were considered appropriate. Browser
+refreshes were the norm in web applications. Systems would go down for hours of
+maintenance, or even be rebooted nightly, and this was ok because people only
+expected the systems to be up during business hours..</p>
+</blockquote>
+
+<p><em>Exciting stuff!</em>  So not only can you code, compile and test your application
+all in the browser - there&rsquo;s a tutorial to guide you through the various new
+concepts as well.</p>
+
+<p>The reactive mongo tutorial, gets you up and running using creating a reactive
+Play web application with a rich front end and scalable backend.  It uses
+<a href="http://reactivemongo.org">Reactive Mongo</a> an asynchronous non blocking scala
+mongodb driver for the database.  The play framework for the webserver,
+<a href="http://coffeescript.org">coffeescript</a> and <a href="http://knockoutjs.com">knockout.js</a>
+for the frontend.</p>
+
+<p>The tutorial walks you through how the various parts of the app work together and
+links through to the code.  Next it sets tasks to update parts of the app, extending
+it and adding functionality.</p>
+
+<p>This quickly, gets you up to speed, so if you are interested in any of the
+Typesafe stack then download activator now and you&rsquo;ll be up and running in minutes!</p>
+
+                    </div>
+                </section>
+                
+            </div>
+            
+
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a></li>
+        </ul>
     </div>
-    <div class="col-md-2 col-lg-2 col-md-pull-10 col-lg-pull-10">
-      <h5 class="date-time">
-  <i class="icon-calendar-empty"></i>
-  <time datetime="2013-09-24 00:00:00 &#43;0000 UTC" data-updated="true">
-    September
-    24, 2013
-  </time>
-</h5>
-    </div>
-    <div class="col-md-10 col-lg-10 col-md-push-2 col-lg-push-2">
-      Posted in:
-      <a href="http://rosslawley.co.uk/categories/tech/">tech</a>, <a href="http://rosslawley.co.uk/categories/play/">play</a>, <a href="http://rosslawley.co.uk/categories/mongodb/">mongodb</a>, <a href="http://rosslawley.co.uk/categories/reactive/">reactive</a>, <a href="http://rosslawley.co.uk/categories/scala/">scala</a>
-    </div>
-  </article>
 </div>
-</li>
+<script src="http://rosslawley.co.uk/js/all.min.js"></script>
+        </div>
+    </div>
+</div>
 
-    
-  </ul>
-</section>
-  </div>
-  <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-  <div class="row">
-    <footer class="footer-page" role="contentinfo">
-      <p>
-        Copyright &copy; 2013 - Ross Lawley - <a href="http://rosslawley.co.uk/posts">Site Archive</a>
-      </p>
-      <p>
-        <span class="credit">Powered by <a href="http://hugo.spf13.com/">Hugo</a></span>
-         
-      </p>
-    </footer>
-  </div>
-  </div>
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-716284-3']);
-    _gaq.push(['_setDomainName', 'rosslawley.co.uk']);
-    _gaq.push(['_trackPageview']);
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-  </body>
+ga('create', 'UA-716284-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
 </html>

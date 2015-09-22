@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Library on  </title>
-    <link>http://rosslawley.co.uk/categories/library/index.xml</link>
+    <title>Library on Ross Lawley</title>
+    <link>http://rosslawley.co.uk/categories/library/</link>
+    <description>Recent content in Library on Ross Lawley</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <author>Ross Lawley</author>
-    <rights>Copyright (c) 2013, Ross Lawley; all rights reserved.</rights>
-    <updated>2014-04-23 00:00:00 &#43;0000 UTC</updated>
+    <lastBuildDate>Wed, 23 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://rosslawley.co.uk/categories/library/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>How to: Handle multiple Scala versions</title>
-      <link>http://rosslawley.co.uk/posts/how-to-handle-multiple-scala-versions</link>
-      <pubDate>Wed, 23 Apr 2014 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/how-to-handle-multiple-scala-versions</guid>
+      <link>http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/</link>
+      <pubDate>Wed, 23 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/</guid>
       <description>
 
 &lt;p&gt;I recently upgraded &lt;a href=&#34;http://mongodb.github.io/casbah/&#34;&gt;Casbah&lt;/a&gt; to support the latest Scala 2.11 release and for the first time when supporting multiple Scala versions I hit a stumbling block.  If you&amp;rsquo;re writing a library that wants to support multiple versions of Scala in a single code base, it&amp;rsquo;s generally easy isn&amp;rsquo;t it? Thankfully, it is as &lt;a href=&#34;http://www.scala-sbt.org/&#34;&gt;sbt&lt;/a&gt; can do the heavy lifting for you.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Three steps to success&lt;/h2&gt;
+&lt;h2 id=&#34;three-steps-to-success:7a5c4c34d420fcc6185eaa05487dbc11&#34;&gt;Three steps to success&lt;/h2&gt;
 
 &lt;p&gt;The sbt documentation covers the basics nicely in their &lt;a href=&#34;http://www.scala-sbt.org/release/docs/Detailed-Topics/Cross-Build.html&#34;&gt;cross build&lt;/a&gt; documentation.  But what&amp;rsquo;s the path to success?&lt;/p&gt;
 
@@ -73,7 +74,7 @@ def specs2(scalaVersion: String) =
 
 &lt;p&gt;Sbt allow you to run any command against multiple versions of Scala. &lt;code&gt;./sbt +test&lt;/code&gt; will test against all your &lt;code&gt;crossScalaVersions&lt;/code&gt; of Scala and hopefully confirm the code works as expected.  If I want to test a specific version use a double plus sign and add the version string to the arguments eg: &lt;code&gt;./sbt ++ 2.9.3 test&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;Final thoughts&lt;/h2&gt;
+&lt;h2 id=&#34;final-thoughts:7a5c4c34d420fcc6185eaa05487dbc11&#34;&gt;Final thoughts&lt;/h2&gt;
 
 &lt;p&gt;Scala is a relatively fast moving ecosystem with new major releases every 13 months or so.  When I took over Casbah it supported 6 binary incompatible versions of Scala! From 2.8.1 to 2.9.3. Happily, Scala patch versions from 2.10.0 on have become binary compatible making supporting multiple versions of Scala easier.  However, one of the key issues for maintaining a library is to know when to end of life an old Scala version, so to keep the library fresh.&lt;/p&gt;
 

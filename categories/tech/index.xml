@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Tech on  </title>
-    <link>http://rosslawley.co.uk/categories/tech/index.xml</link>
+    <title>Tech on Ross Lawley</title>
+    <link>http://rosslawley.co.uk/categories/tech/</link>
+    <description>Recent content in Tech on Ross Lawley</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <author>Ross Lawley</author>
-    <rights>Copyright (c) 2013, Ross Lawley; all rights reserved.</rights>
-    <updated>2014-04-23 00:00:00 &#43;0000 UTC</updated>
+    <lastBuildDate>Wed, 23 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://rosslawley.co.uk/categories/tech/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>How to: Handle multiple Scala versions</title>
-      <link>http://rosslawley.co.uk/posts/how-to-handle-multiple-scala-versions</link>
-      <pubDate>Wed, 23 Apr 2014 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/how-to-handle-multiple-scala-versions</guid>
+      <link>http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/</link>
+      <pubDate>Wed, 23 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/</guid>
       <description>
 
 &lt;p&gt;I recently upgraded &lt;a href=&#34;http://mongodb.github.io/casbah/&#34;&gt;Casbah&lt;/a&gt; to support the latest Scala 2.11 release and for the first time when supporting multiple Scala versions I hit a stumbling block.  If you&amp;rsquo;re writing a library that wants to support multiple versions of Scala in a single code base, it&amp;rsquo;s generally easy isn&amp;rsquo;t it? Thankfully, it is as &lt;a href=&#34;http://www.scala-sbt.org/&#34;&gt;sbt&lt;/a&gt; can do the heavy lifting for you.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Three steps to success&lt;/h2&gt;
+&lt;h2 id=&#34;three-steps-to-success:7a5c4c34d420fcc6185eaa05487dbc11&#34;&gt;Three steps to success&lt;/h2&gt;
 
 &lt;p&gt;The sbt documentation covers the basics nicely in their &lt;a href=&#34;http://www.scala-sbt.org/release/docs/Detailed-Topics/Cross-Build.html&#34;&gt;cross build&lt;/a&gt; documentation.  But what&amp;rsquo;s the path to success?&lt;/p&gt;
 
@@ -73,7 +74,7 @@ def specs2(scalaVersion: String) =
 
 &lt;p&gt;Sbt allow you to run any command against multiple versions of Scala. &lt;code&gt;./sbt +test&lt;/code&gt; will test against all your &lt;code&gt;crossScalaVersions&lt;/code&gt; of Scala and hopefully confirm the code works as expected.  If I want to test a specific version use a double plus sign and add the version string to the arguments eg: &lt;code&gt;./sbt ++ 2.9.3 test&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;Final thoughts&lt;/h2&gt;
+&lt;h2 id=&#34;final-thoughts:7a5c4c34d420fcc6185eaa05487dbc11&#34;&gt;Final thoughts&lt;/h2&gt;
 
 &lt;p&gt;Scala is a relatively fast moving ecosystem with new major releases every 13 months or so.  When I took over Casbah it supported 6 binary incompatible versions of Scala! From 2.8.1 to 2.9.3. Happily, Scala patch versions from 2.10.0 on have become binary compatible making supporting multiple versions of Scala easier.  However, one of the key issues for maintaining a library is to know when to end of life an old Scala version, so to keep the library fresh.&lt;/p&gt;
 
@@ -83,10 +84,10 @@ def specs2(scalaVersion: String) =
     
     <item>
       <title>RxJava - understandably reactive</title>
-      <link>http://rosslawley.co.uk/posts/rx-java</link>
-      <pubDate>Wed, 06 Nov 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/rx-java</guid>
+      <link>http://rosslawley.co.uk/rx-java/</link>
+      <pubDate>Wed, 06 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/rx-java/</guid>
       <description>&lt;p&gt;Reactive programing is hot stuff at the moment and the
 &lt;a href=&#34;https://www.coursera.org/course/reactive&#34;&gt;Coursera Principles of Reactive Programming&lt;/a&gt;
 course has &lt;strong&gt;just&lt;/strong&gt; started (its not too late to enroll).&lt;/p&gt;
@@ -116,29 +117,29 @@ excellent &lt;code&gt;Iteratee.Concurrent&lt;/code&gt; library.&lt;/p&gt;
 
 &lt;p&gt;Enjoy:&lt;/p&gt;
 
-&lt;div class=&#34;embed video-player&#34;&gt;
+&lt;p&gt;&lt;div class=&#34;embed video-player&#34;&gt;
 &lt;iframe class=&#34;youtube-player&#34; type=&#34;text/html&#34;
     width=&#34;640&#34; height=&#34;385&#34;
     src=&#34;http://www.youtube.com/embed/tOMK_FYJREw&#34;
     allowfullscreen frameborder=&#34;0&#34;&gt;
 &lt;/iframe&gt;
-&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Typesafe&#39;s Activator</title>
-      <link>http://rosslawley.co.uk/posts/typesafe_activator</link>
-      <pubDate>Tue, 24 Sep 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/typesafe_activator</guid>
+      <link>http://rosslawley.co.uk/typesafe-activator/</link>
+      <pubDate>Tue, 24 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/typesafe-activator/</guid>
       <description>
 
 &lt;p&gt;Yesterday the &lt;a href=&#34;http://typesafe.com/blog/announcing-activator-10-create-reactive-apps-in-minutes&#34;&gt;Typesafe Activator&lt;/a&gt;
 hit 1.0. If you haven&amp;rsquo;t heard about it and use scala or the jvm then take five
 minutes and check it out - its worth it.&lt;/p&gt;
 
-&lt;h1 id=&#34;toc_0&#34;&gt;What is it?&lt;/h1&gt;
+&lt;h1 id=&#34;what-is-it:8f899c775a0faeb02adf96bdfce96cff&#34;&gt;What is it?&lt;/h1&gt;
 
 &lt;p&gt;My recommendation alone not enough and you what to know more about it before
 installing it?  No problems, let me convince you.&lt;/p&gt;
@@ -159,7 +160,7 @@ modern scalable reactive web sites.&lt;/p&gt;
 template&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-&lt;img src=&#34;/images/activator-loading.png&#34;&gt;
+&lt;img src=&#34;http://rosslawley.co.uk/images/activator-loading.png&#34;&gt;
 &lt;/p&gt;
 
 &lt;p&gt;In the background it downloads all the resources you need to create the project
@@ -167,10 +168,10 @@ from the template.  Starting a new project is extremely simple and once the
 project is loaded you get to use the Web UI in anger.&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-&lt;img src=&#34;/images/activator-orientation.png&#34;&gt;
+&lt;img src=&#34;http://rosslawley.co.uk/images/activator-orientation.png&#34;&gt;
 &lt;/p&gt;
 
-&lt;h1 id=&#34;toc_1&#34;&gt;The tutorial&lt;/h1&gt;
+&lt;h1 id=&#34;the-tutorial:8f899c775a0faeb02adf96bdfce96cff&#34;&gt;The tutorial&lt;/h1&gt;
 
 &lt;p&gt;Once loaded, you get the tutorial for this template:&lt;/p&gt;
 
@@ -205,10 +206,10 @@ Typesafe stack then download activator now and you&amp;rsquo;ll be up and runnin
     
     <item>
       <title>Switching to Sublime Text 3</title>
-      <link>http://rosslawley.co.uk/posts/switching-to-sublimetext-3</link>
-      <pubDate>Wed, 31 Jul 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/switching-to-sublimetext-3</guid>
+      <link>http://rosslawley.co.uk/switching-to-sublimetext-3/</link>
+      <pubDate>Wed, 31 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/switching-to-sublimetext-3/</guid>
       <description>
 
 &lt;p&gt;For a long while I&amp;rsquo;ve been a huge fan of &lt;a href=&#34;http://www.sublimetext.com/&#34;&gt;Sublime Text 2&lt;/a&gt;,
@@ -222,13 +223,13 @@ plugin ecosystem has matured.  After experiencing some slow downs in
 Sublime Text 2 (ST2) I thought it was time to upgrade to an even more
 sublime experience.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;5 step migration to Sublime Text 3&lt;/h2&gt;
+&lt;h2 id=&#34;5-step-migration-to-sublime-text-3:1a9591199d94248b300fa0f7455d5c0a&#34;&gt;5 step migration to Sublime Text 3&lt;/h2&gt;
 
 &lt;p&gt;First off there is &lt;strong&gt;no risk&lt;/strong&gt; in trying to upgrade, it has a different app
 name to ST2 and its configurations are in a different directory. In short you
 can have both installed and living happily.&lt;/p&gt;
 
-&lt;h3 id=&#34;toc_1&#34;&gt;1. Can I upgrade?&lt;/h3&gt;
+&lt;h3 id=&#34;1-can-i-upgrade:1a9591199d94248b300fa0f7455d5c0a&#34;&gt;1. Can I upgrade?&lt;/h3&gt;
 
 &lt;p&gt;Goto the awesome &lt;a href=&#34;http://www.caniswitchtosublimetext3.com/&#34;&gt;Can I Switch To Sublime Text 3?&lt;/a&gt;
 website and check your packages.  Its probably not a goer if your most used
@@ -237,14 +238,14 @@ have already been updated and do now work with ST3.  My results were as
 follows:&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-&lt;img src=&#34;/images/ready_for_sublime.png&#34;&gt;
+&lt;img src=&#34;http://rosslawley.co.uk/images/ready_for_sublime.png&#34;&gt;
 &lt;/p&gt;
 
 &lt;p&gt;I had one fail but when looking at the package reposititory it suggested an
 ST3 alternative for a python code intel tool that would work (SublimeJEDI) -
 so I was good to go.&lt;/p&gt;
 
-&lt;h3 id=&#34;toc_2&#34;&gt;2. Install package control and packages&lt;/h3&gt;
+&lt;h3 id=&#34;2-install-package-control-and-packages:1a9591199d94248b300fa0f7455d5c0a&#34;&gt;2. Install package control and packages&lt;/h3&gt;
 
 &lt;p&gt;Its easy to install package control, just checkout the
 &lt;a href=&#34;http://wbond.net/sublime_packages/package_control/installation#ST3&#34;&gt;instructions&lt;/a&gt;.
@@ -257,7 +258,7 @@ manually install - this usually is simple and only involves cloning the
 plugin repository into your packages directory and then checking out an
 ST3 compatible branch.  Its no real hardship - so go for it.&lt;/p&gt;
 
-&lt;h3 id=&#34;toc_3&#34;&gt;3. Migrate settings&lt;/h3&gt;
+&lt;h3 id=&#34;3-migrate-settings:1a9591199d94248b300fa0f7455d5c0a&#34;&gt;3. Migrate settings&lt;/h3&gt;
 
 &lt;p&gt;Once all the packages are installed, its time to get ST3 as comfy as you had
 ST2.  To do this copy and paste your user settings from:
@@ -269,14 +270,14 @@ directory of ST2 into the User directory of ST3 eg:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cp ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User/Python.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Python.sublime-settings
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;toc_4&#34;&gt;4. Update the subl helper:&lt;/h3&gt;
+&lt;h3 id=&#34;4-update-the-subl-helper:1a9591199d94248b300fa0f7455d5c0a&#34;&gt;4. Update the subl helper:&lt;/h3&gt;
 
 &lt;p&gt;Remove / rename any symlinked helpers then:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;sudo ln -s &amp;quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&amp;quot; /usr/bin/subl
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;toc_5&#34;&gt;5. Profit!&lt;/h3&gt;
+&lt;h3 id=&#34;5-profit:1a9591199d94248b300fa0f7455d5c0a&#34;&gt;5. Profit!&lt;/h3&gt;
 
 &lt;p&gt;Easy eh?  You now have ST3 configured as you are used to and if anything
 is buggy (&lt;em&gt;it is still in a beta&lt;/em&gt;) you can easily switch back to ST2.&lt;/p&gt;
@@ -310,23 +311,23 @@ you can make the switch today.&lt;/p&gt;
     
     <item>
       <title>Using MongoDB to find the most popular pub names!</title>
-      <link>http://rosslawley.co.uk/posts/the-most-popular-pub-name</link>
-      <pubDate>Tue, 23 Jul 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/the-most-popular-pub-name</guid>
+      <link>http://rosslawley.co.uk/the-most-popular-pub-name/</link>
+      <pubDate>Tue, 23 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/the-most-popular-pub-name/</guid>
       <description>
 
 &lt;p&gt;Earlier in the year I gave a talk at &lt;a href=&#34;http://www.10gen.com/events/mongodb-london-2013&#34;&gt;MongoDB London&lt;/a&gt;
 about the different aggregation options with MongoDB.  The topic recently came up again
 in conversation at a user group, so I thought it deserved a blog post.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Gathering ideas for the talk&lt;/h2&gt;
+&lt;h2 id=&#34;gathering-ideas-for-the-talk:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;Gathering ideas for the talk&lt;/h2&gt;
 
 &lt;p&gt;I wanted to give a more interesting aggregation talk than the standard
 &amp;ldquo;counting words in text&amp;rdquo;, and as the &lt;a href=&#34;http://docs.mongodb.org/manual/core/aggregation/&#34;&gt;aggregation framework&lt;/a&gt; gained shiny &lt;a href=&#34;http://docs.mongodb.org/manual/core/2dsphere/&#34;&gt;2dsphere geo&lt;/a&gt; support in
 &lt;a href=&#34;http://docs.mongodb.org/manual/release-notes/2.4/#new-geospatial-indexes-with-geojson-and-improved-spherical-geometry&#34;&gt;2.4&lt;/a&gt;, I figured I&amp;rsquo;d use that. I just needed a topic&amp;hellip;&lt;/p&gt;
 
-&lt;h3 id=&#34;toc_1&#34;&gt;What are us Brits focused on?&lt;/h3&gt;
+&lt;h3 id=&#34;what-are-us-brits-focused-on:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;What are us Brits focused on?&lt;/h3&gt;
 
 &lt;p&gt;Two things immediately sprang to mind: &lt;strong&gt;weather&lt;/strong&gt; and &lt;strong&gt;beer&lt;/strong&gt;.&lt;/p&gt;
 
@@ -372,7 +373,7 @@ a wordle I normalised all the pub names.&lt;/p&gt;
 &lt;p&gt;If you want to know more about the importing process, the full loading code is
 available on github: &lt;a href=&#34;https://github.com/rozza/pubnames/blob/master/osm2mongo.py&#34;&gt;osm2mongo.py&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_2&#34;&gt;Top pub names&lt;/h2&gt;
+&lt;h2 id=&#34;top-pub-names:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;Top pub names&lt;/h2&gt;
 
 &lt;p&gt;It turns out finding the most popular pub names is very simple with the
 aggregation framework.  Just group by the name and then sum up all the occurrences.
@@ -407,10 +408,10 @@ For the whole of the UK this returns:
 &lt;/div&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-  &lt;img src=&#34;/images/pubs_wordle.png&#34;&lt;br&gt;
+  &lt;img src=&#34;http://rosslawley.co.uk/images/pubs_wordle.png&#34;&lt;br&gt;
 &lt;/p&gt;
 
-&lt;h2 id=&#34;toc_3&#34;&gt;Top pub names near you&lt;/h2&gt;
+&lt;h2 id=&#34;top-pub-names-near-you:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;Top pub names near you&lt;/h2&gt;
 
 &lt;p&gt;At MongoDB London I thought that was too easy, so filtered to find the top pub
 names near the conference and showing off some of the geo functionality that became
@@ -433,7 +434,7 @@ coordinates &lt;code&gt;[ &amp;lt;long&amp;gt;, &amp;lt;lat&amp;gt; ]&lt;/code&g
   ]);
 &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_4&#34;&gt;What about where I live?&lt;/h2&gt;
+&lt;h2 id=&#34;what-about-where-i-live:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;What about where I live?&lt;/h2&gt;
 
 &lt;p&gt;At the conference I looked the most popular pub name near the conference.  Thats
 great if you happen to live in the centre of London but what about everyone else
@@ -447,10 +448,10 @@ some time for the heroku dyno to wake, so please be patient!)&lt;/p&gt;
 whole world - its surely possible to do, I just lacked the patience to download
 it all!&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_5&#34;&gt;Cheers&lt;/h2&gt;
+&lt;h2 id=&#34;cheers:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;Cheers&lt;/h2&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-  &lt;img src=&#34;/images/almurray.jpg&#34; title=&#34;Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946&#34; /&gt; &lt;br&gt;
+  &lt;img src=&#34;http://rosslawley.co.uk/images/almurray.jpg&#34; title=&#34;Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946&#34; /&gt; &lt;br&gt;
   &lt;small&gt; Source: &lt;a href=&#34;http://www.flickr.com/photos/bradfordtheatres/3063899946&#34;/&gt;http://www.flickr.com/photos/bradfordtheatres/3063899946&lt;/a&gt;&lt;/small&gt;
 &lt;/p&gt;
 
@@ -462,10 +463,10 @@ playing with MongoDB&amp;rsquo;s great geo features!&lt;/p&gt;
     
     <item>
       <title>mongoengine 0.8.0</title>
-      <link>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-dot-0</link>
-      <pubDate>Mon, 20 May 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-dot-0</guid>
+      <link>http://rosslawley.co.uk/mongoengine-0-dot-8-dot-0/</link>
+      <pubDate>Mon, 20 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/mongoengine-0-dot-8-dot-0/</guid>
       <description>
 
 &lt;p&gt;I&amp;rsquo;m really pleased to annouce the release of
@@ -473,7 +474,7 @@ playing with MongoDB&amp;rsquo;s great geo features!&lt;/p&gt;
 Its been a &lt;em&gt;long process&lt;/em&gt; due to work and life commitments but the latest version
 of MongoEngine is here.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Whats changed?&lt;/h2&gt;
+&lt;h2 id=&#34;whats-changed:21b8a771bb0f6c9b7111f39346dd1702&#34;&gt;Whats changed?&lt;/h2&gt;
 
 &lt;p&gt;There have been loads of fixes, improvements and changes in 0.8.
 The headliners are:&lt;/p&gt;
@@ -498,7 +499,7 @@ for all changes or check &lt;a href=&#34;https://github.com/MongoEngine/mongoeng
 &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;amp;page=1&amp;amp;state=closed&#34;&gt;96 tickets&lt;/a&gt;
 that have been fixed as part of this release.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;Whats next?&lt;/h2&gt;
+&lt;h2 id=&#34;whats-next:21b8a771bb0f6c9b7111f39346dd1702&#34;&gt;Whats next?&lt;/h2&gt;
 
 &lt;p&gt;There are a number of ideas on &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=6&#34;&gt;github&lt;/a&gt; for 0.9.  I&amp;rsquo;m looking for people to help with the administration and coding
 of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p&gt;
@@ -507,10 +508,10 @@ of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p
     
     <item>
       <title>MongoEngine 0.8 RC1 Released</title>
-      <link>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-rc1-released</link>
-      <pubDate>Wed, 01 May 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/mongoengine-0-dot-8-rc1-released</guid>
+      <link>http://rosslawley.co.uk/mongoengine-0-dot-8-rc1-released/</link>
+      <pubDate>Wed, 01 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/mongoengine-0-dot-8-rc1-released/</guid>
       <description>
 
 &lt;p&gt;&lt;strong&gt;Notice:&lt;/strong&gt; 0.8.0RC3 has been released fixing a couple of small bugs and extra improvements.&lt;/p&gt;
@@ -521,7 +522,7 @@ of MongoEngine, so please get involved and help drive MongoEngine forward!&lt;/p
 Its been a &lt;em&gt;long process&lt;/em&gt; due to work and life commitments but the latest version
 of MongoEngine is ready for testing and feedback.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Why a release candidate?&lt;/h2&gt;
+&lt;h2 id=&#34;why-a-release-candidate:381e651998269fc0201485acd98bed22&#34;&gt;Why a release candidate?&lt;/h2&gt;
 
 &lt;p&gt;There have been massive changes in the internals, requiring thought and
 &lt;strong&gt;testing&lt;/strong&gt; before upgrading and releasing to the wild - so please
@@ -536,7 +537,7 @@ please email the &lt;a href=&#34;https://groups.google.com/group/mongoengine-use
 or if you&amp;rsquo;d prefer to message me directly you can via
 &lt;a href=&#34;https://github.com/rozza&#34;&gt;https://github.com/rozza&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;Whats changed?&lt;/h2&gt;
+&lt;h2 id=&#34;whats-changed:381e651998269fc0201485acd98bed22&#34;&gt;Whats changed?&lt;/h2&gt;
 
 &lt;p&gt;There have been loads of fixes, improvements and changes in 0.8.
 The headliners are:&lt;/p&gt;
@@ -559,7 +560,7 @@ for all changes or check &lt;a href=&#34;https://github.com/MongoEngine/mongoeng
 &lt;a href=&#34;https://github.com/MongoEngine/mongoengine/issues?milestone=2&amp;amp;page=1&amp;amp;state=closed&#34;&gt;84 tickets&lt;/a&gt;
 that have been fixed as part of this release.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_2&#34;&gt;Try it now!&lt;/h2&gt;
+&lt;h2 id=&#34;try-it-now:381e651998269fc0201485acd98bed22&#34;&gt;Try it now!&lt;/h2&gt;
 
 &lt;p&gt;Please test it, try it out and report any issues back!
 All being well 0.8.0RC1 will be released as 0.8.0 in a week.&lt;/p&gt;
@@ -570,20 +571,20 @@ All being well 0.8.0RC1 will be released as 0.8.0 in a week.&lt;/p&gt;
     
     <item>
       <title>Automate all the things</title>
-      <link>http://rosslawley.co.uk/posts/automate-all-the-things</link>
-      <pubDate>Wed, 20 Mar 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/automate-all-the-things</guid>
+      <link>http://rosslawley.co.uk/automate-all-the-things/</link>
+      <pubDate>Wed, 20 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/automate-all-the-things/</guid>
       <description>
 
-&lt;h1 id=&#34;toc_0&#34;&gt;Disaster Strikes&lt;/h1&gt;
+&lt;h1 id=&#34;disaster-strikes:d0d5301291dac9bc7676a826a8ff4f68&#34;&gt;Disaster Strikes&lt;/h1&gt;
 
 &lt;p&gt;Last week my Mac book ran out of space again, this had been going on for some time and I&amp;rsquo;d had enough.
 I was spending an ever increasing amount of much time hunting down rogue space invaders on my small 120gb hard drive.  So &lt;strong&gt;something&lt;/strong&gt; had to be done.&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
     &lt;strong&gt;In times like this there is only one solution!&lt;/strong&gt;&lt;br&gt;
-    &lt;img src=&#34;/images/mrragequit.jpg&#34; title=&#34;Original image: http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&#34; /&gt; &lt;br&gt;
+    &lt;img src=&#34;http://rosslawley.co.uk/images/mrragequit.jpg&#34; title=&#34;Original image: http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&#34; /&gt; &lt;br&gt;
     &lt;small&gt; Source: &lt;a href=&#34;http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&#34;/&gt;http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&lt;/a&gt;&lt;/small&gt;
 &lt;/p&gt;
 
@@ -591,9 +592,9 @@ I was spending an ever increasing amount of much time hunting down rogue space i
 Normally starting from scratch would be a royal pain in the backside, taking many days to get things installed and allow me to get back to coding.
 Then I remembered hearing about &lt;a href=&#34;http://boxen.github.com&#34;&gt;boxen&lt;/a&gt; which could give me an easy way to rebuild and &lt;em&gt;maintain&lt;/em&gt; the software on my Mac and hatched a plan of devops style automation!&lt;/p&gt;
 
-&lt;h1 id=&#34;toc_1&#34;&gt;My automation trifecta&lt;/h1&gt;
+&lt;h1 id=&#34;my-automation-trifecta:d0d5301291dac9bc7676a826a8ff4f68&#34;&gt;My automation trifecta&lt;/h1&gt;
 
-&lt;h2 id=&#34;toc_2&#34;&gt;Boxen&lt;/h2&gt;
+&lt;h2 id=&#34;boxen:d0d5301291dac9bc7676a826a8ff4f68&#34;&gt;Boxen&lt;/h2&gt;
 
 &lt;p&gt;Boxen is built on top of &lt;a href=&#34;https://puppetlabs.com/&#34;&gt;puppet&lt;/a&gt; and it allows you to describe in code your Mac configuration and what software to install on it. To get started just copy githubs&amp;rsquo; starter &lt;a href=&#34;https://github.com/boxen/our-boxen&#34;&gt;boxen repo&lt;/a&gt; and then add your requirements.
 I had to do two things to get my software stack automated:&lt;/p&gt;
@@ -609,13 +610,13 @@ No wasting time hunting down .dmgs and navigating through their respective websi
 If you want to know more about boxen then check out this &lt;a href=&#34;https://speakerdeck.com/wfarr/boxen&#34;&gt;presentation&lt;/a&gt;.
 All my configuration is now on github &lt;a href=&#34;https://github.com/rozza/my-boxen/&#34;&gt;my-boxen&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_3&#34;&gt;dotfiles&lt;/h2&gt;
+&lt;h2 id=&#34;dotfiles:d0d5301291dac9bc7676a826a8ff4f68&#34;&gt;dotfiles&lt;/h2&gt;
 
 &lt;p&gt;Boxen is great as it automates the software installed on my mac but what about my general configuration? I could use Boxen and puppet to define and create &lt;em&gt;all&lt;/em&gt; my configuration files - but that seems unnecessarily complex and to me there is a separation of concerns. So when I asked on twitter what other folk do &lt;a href=&#34;http://intranation.com&#34;&gt;Brad Wright&lt;/a&gt; pointed me to his dotfiles.&lt;/p&gt;
 
 &lt;p&gt;After a quick investigation I duly &lt;span style=&#34;text-decoration:line-through;&#34;&gt;raided and plundered&lt;/span&gt; took inspiration from and now I have all my personal dot file configurations for things like &lt;em&gt;github, slate and zsh&lt;/em&gt; backed up on github.  What about private configuration files? Where it makes sense any files with a &lt;code&gt;.local_&lt;/code&gt; prefix will be sourced by their respective core configuration file.  That way I can have different configrations across machines - I can have a core &lt;code&gt;.bashrc&lt;/code&gt; and a local version on each machine eg &lt;code&gt;.local_bashrc&lt;/code&gt;.  All my public &lt;a href=&#34;https://github.com/rozza/dotfiles&#34;&gt;dotfiles&lt;/a&gt; are on github so plunder away!&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_4&#34;&gt;Vagrant&lt;/h2&gt;
+&lt;h2 id=&#34;vagrant:d0d5301291dac9bc7676a826a8ff4f68&#34;&gt;Vagrant&lt;/h2&gt;
 
 &lt;p&gt;The final piece in my automation puzzle is Vagrant.
 I&amp;rsquo;ve been a huge fan of using vm&amp;rsquo;s for development for years and more recently &lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;vagrant&lt;/a&gt; has been my tool of choice.
@@ -625,10 +626,10 @@ As its a vm all I had to do is back it up before I wiped the hard drive and I co
 
 &lt;p&gt;When working on a vm, I still like to use sublime text on my mac to code.  So the way to achieve this is to nfs the code directory from the Mac into the vm - I used to do it the other way round, but having the code local to the mac makes editing very snappy.  The last thing to do was back up my code directory - I was surprised that all my checked out code weighs in at a hefty 13 gigs!&lt;/p&gt;
 
-&lt;h1 id=&#34;toc_5&#34;&gt;Automation heaven&lt;/h1&gt;
+&lt;h1 id=&#34;automation-heaven:d0d5301291dac9bc7676a826a8ff4f68&#34;&gt;Automation heaven&lt;/h1&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-    &lt;img src=&#34;/images/make-a-boxen.png&#34; /&gt;&lt;br&gt;
+    &lt;img src=&#34;http://rosslawley.co.uk/images/make-a-boxen.png&#34; /&gt;&lt;br&gt;
     &lt;small&gt; Source: &lt;a href=&#34;https://speakerdeck.com/wfarr/boxen&#34;/&gt;https://speakerdeck.com/wfarr/boxen&lt;/a&gt;&lt;/small&gt;
 &lt;/p&gt;
 

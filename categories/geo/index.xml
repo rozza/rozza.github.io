@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Geo on  </title>
-    <link>http://rosslawley.co.uk/categories/geo/index.xml</link>
+    <title>Geo on Ross Lawley</title>
+    <link>http://rosslawley.co.uk/categories/geo/</link>
+    <description>Recent content in Geo on Ross Lawley</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <author>Ross Lawley</author>
-    <rights>Copyright (c) 2013, Ross Lawley; all rights reserved.</rights>
-    <updated>2013-07-23 00:00:00 &#43;0000 UTC</updated>
+    <lastBuildDate>Tue, 23 Jul 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://rosslawley.co.uk/categories/geo/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Using MongoDB to find the most popular pub names!</title>
-      <link>http://rosslawley.co.uk/posts/the-most-popular-pub-name</link>
-      <pubDate>Tue, 23 Jul 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/the-most-popular-pub-name</guid>
+      <link>http://rosslawley.co.uk/the-most-popular-pub-name/</link>
+      <pubDate>Tue, 23 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/the-most-popular-pub-name/</guid>
       <description>
 
 &lt;p&gt;Earlier in the year I gave a talk at &lt;a href=&#34;http://www.10gen.com/events/mongodb-london-2013&#34;&gt;MongoDB London&lt;/a&gt;
 about the different aggregation options with MongoDB.  The topic recently came up again
 in conversation at a user group, so I thought it deserved a blog post.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;Gathering ideas for the talk&lt;/h2&gt;
+&lt;h2 id=&#34;gathering-ideas-for-the-talk:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;Gathering ideas for the talk&lt;/h2&gt;
 
 &lt;p&gt;I wanted to give a more interesting aggregation talk than the standard
 &amp;ldquo;counting words in text&amp;rdquo;, and as the &lt;a href=&#34;http://docs.mongodb.org/manual/core/aggregation/&#34;&gt;aggregation framework&lt;/a&gt; gained shiny &lt;a href=&#34;http://docs.mongodb.org/manual/core/2dsphere/&#34;&gt;2dsphere geo&lt;/a&gt; support in
 &lt;a href=&#34;http://docs.mongodb.org/manual/release-notes/2.4/#new-geospatial-indexes-with-geojson-and-improved-spherical-geometry&#34;&gt;2.4&lt;/a&gt;, I figured I&amp;rsquo;d use that. I just needed a topic&amp;hellip;&lt;/p&gt;
 
-&lt;h3 id=&#34;toc_1&#34;&gt;What are us Brits focused on?&lt;/h3&gt;
+&lt;h3 id=&#34;what-are-us-brits-focused-on:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;What are us Brits focused on?&lt;/h3&gt;
 
 &lt;p&gt;Two things immediately sprang to mind: &lt;strong&gt;weather&lt;/strong&gt; and &lt;strong&gt;beer&lt;/strong&gt;.&lt;/p&gt;
 
@@ -72,7 +73,7 @@ a wordle I normalised all the pub names.&lt;/p&gt;
 &lt;p&gt;If you want to know more about the importing process, the full loading code is
 available on github: &lt;a href=&#34;https://github.com/rozza/pubnames/blob/master/osm2mongo.py&#34;&gt;osm2mongo.py&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_2&#34;&gt;Top pub names&lt;/h2&gt;
+&lt;h2 id=&#34;top-pub-names:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;Top pub names&lt;/h2&gt;
 
 &lt;p&gt;It turns out finding the most popular pub names is very simple with the
 aggregation framework.  Just group by the name and then sum up all the occurrences.
@@ -107,10 +108,10 @@ For the whole of the UK this returns:
 &lt;/div&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-  &lt;img src=&#34;/images/pubs_wordle.png&#34;&lt;br&gt;
+  &lt;img src=&#34;http://rosslawley.co.uk/images/pubs_wordle.png&#34;&lt;br&gt;
 &lt;/p&gt;
 
-&lt;h2 id=&#34;toc_3&#34;&gt;Top pub names near you&lt;/h2&gt;
+&lt;h2 id=&#34;top-pub-names-near-you:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;Top pub names near you&lt;/h2&gt;
 
 &lt;p&gt;At MongoDB London I thought that was too easy, so filtered to find the top pub
 names near the conference and showing off some of the geo functionality that became
@@ -133,7 +134,7 @@ coordinates &lt;code&gt;[ &amp;lt;long&amp;gt;, &amp;lt;lat&amp;gt; ]&lt;/code&g
   ]);
 &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_4&#34;&gt;What about where I live?&lt;/h2&gt;
+&lt;h2 id=&#34;what-about-where-i-live:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;What about where I live?&lt;/h2&gt;
 
 &lt;p&gt;At the conference I looked the most popular pub name near the conference.  Thats
 great if you happen to live in the centre of London but what about everyone else
@@ -147,10 +148,10 @@ some time for the heroku dyno to wake, so please be patient!)&lt;/p&gt;
 whole world - its surely possible to do, I just lacked the patience to download
 it all!&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_5&#34;&gt;Cheers&lt;/h2&gt;
+&lt;h2 id=&#34;cheers:e8cc9569ac7e5d9e066aee5378affb29&#34;&gt;Cheers&lt;/h2&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-  &lt;img src=&#34;/images/almurray.jpg&#34; title=&#34;Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946&#34; /&gt; &lt;br&gt;
+  &lt;img src=&#34;http://rosslawley.co.uk/images/almurray.jpg&#34; title=&#34;Original image: http://www.flickr.com/photos/bradfordtheatres/3063899946&#34; /&gt; &lt;br&gt;
   &lt;small&gt; Source: &lt;a href=&#34;http://www.flickr.com/photos/bradfordtheatres/3063899946&#34;/&gt;http://www.flickr.com/photos/bradfordtheatres/3063899946&lt;/a&gt;&lt;/small&gt;
 &lt;/p&gt;
 

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Sublime on  </title>
-    <link>http://rosslawley.co.uk/categories/sublime/index.xml</link>
+    <title>Sublime on Ross Lawley</title>
+    <link>http://rosslawley.co.uk/categories/sublime/</link>
+    <description>Recent content in Sublime on Ross Lawley</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <author>Ross Lawley</author>
-    <rights>Copyright (c) 2013, Ross Lawley; all rights reserved.</rights>
-    <updated>2013-07-31 00:00:00 &#43;0000 UTC</updated>
+    <lastBuildDate>Wed, 31 Jul 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://rosslawley.co.uk/categories/sublime/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Switching to Sublime Text 3</title>
-      <link>http://rosslawley.co.uk/posts/switching-to-sublimetext-3</link>
-      <pubDate>Wed, 31 Jul 2013 00:00:00 UTC</pubDate>
-      <author>Ross Lawley</author>
-      <guid>http://rosslawley.co.uk/posts/switching-to-sublimetext-3</guid>
+      <link>http://rosslawley.co.uk/switching-to-sublimetext-3/</link>
+      <pubDate>Wed, 31 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/switching-to-sublimetext-3/</guid>
       <description>
 
 &lt;p&gt;For a long while I&amp;rsquo;ve been a huge fan of &lt;a href=&#34;http://www.sublimetext.com/&#34;&gt;Sublime Text 2&lt;/a&gt;,
@@ -27,13 +28,13 @@ plugin ecosystem has matured.  After experiencing some slow downs in
 Sublime Text 2 (ST2) I thought it was time to upgrade to an even more
 sublime experience.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;5 step migration to Sublime Text 3&lt;/h2&gt;
+&lt;h2 id=&#34;5-step-migration-to-sublime-text-3:1a9591199d94248b300fa0f7455d5c0a&#34;&gt;5 step migration to Sublime Text 3&lt;/h2&gt;
 
 &lt;p&gt;First off there is &lt;strong&gt;no risk&lt;/strong&gt; in trying to upgrade, it has a different app
 name to ST2 and its configurations are in a different directory. In short you
 can have both installed and living happily.&lt;/p&gt;
 
-&lt;h3 id=&#34;toc_1&#34;&gt;1. Can I upgrade?&lt;/h3&gt;
+&lt;h3 id=&#34;1-can-i-upgrade:1a9591199d94248b300fa0f7455d5c0a&#34;&gt;1. Can I upgrade?&lt;/h3&gt;
 
 &lt;p&gt;Goto the awesome &lt;a href=&#34;http://www.caniswitchtosublimetext3.com/&#34;&gt;Can I Switch To Sublime Text 3?&lt;/a&gt;
 website and check your packages.  Its probably not a goer if your most used
@@ -42,14 +43,14 @@ have already been updated and do now work with ST3.  My results were as
 follows:&lt;/p&gt;
 
 &lt;p class=&#34;text-center&#34;&gt;
-&lt;img src=&#34;/images/ready_for_sublime.png&#34;&gt;
+&lt;img src=&#34;http://rosslawley.co.uk/images/ready_for_sublime.png&#34;&gt;
 &lt;/p&gt;
 
 &lt;p&gt;I had one fail but when looking at the package reposititory it suggested an
 ST3 alternative for a python code intel tool that would work (SublimeJEDI) -
 so I was good to go.&lt;/p&gt;
 
-&lt;h3 id=&#34;toc_2&#34;&gt;2. Install package control and packages&lt;/h3&gt;
+&lt;h3 id=&#34;2-install-package-control-and-packages:1a9591199d94248b300fa0f7455d5c0a&#34;&gt;2. Install package control and packages&lt;/h3&gt;
 
 &lt;p&gt;Its easy to install package control, just checkout the
 &lt;a href=&#34;http://wbond.net/sublime_packages/package_control/installation#ST3&#34;&gt;instructions&lt;/a&gt;.
@@ -62,7 +63,7 @@ manually install - this usually is simple and only involves cloning the
 plugin repository into your packages directory and then checking out an
 ST3 compatible branch.  Its no real hardship - so go for it.&lt;/p&gt;
 
-&lt;h3 id=&#34;toc_3&#34;&gt;3. Migrate settings&lt;/h3&gt;
+&lt;h3 id=&#34;3-migrate-settings:1a9591199d94248b300fa0f7455d5c0a&#34;&gt;3. Migrate settings&lt;/h3&gt;
 
 &lt;p&gt;Once all the packages are installed, its time to get ST3 as comfy as you had
 ST2.  To do this copy and paste your user settings from:
@@ -74,14 +75,14 @@ directory of ST2 into the User directory of ST3 eg:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cp ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User/Python.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Python.sublime-settings
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;toc_4&#34;&gt;4. Update the subl helper:&lt;/h3&gt;
+&lt;h3 id=&#34;4-update-the-subl-helper:1a9591199d94248b300fa0f7455d5c0a&#34;&gt;4. Update the subl helper:&lt;/h3&gt;
 
 &lt;p&gt;Remove / rename any symlinked helpers then:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;sudo ln -s &amp;quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&amp;quot; /usr/bin/subl
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;toc_5&#34;&gt;5. Profit!&lt;/h3&gt;
+&lt;h3 id=&#34;5-profit:1a9591199d94248b300fa0f7455d5c0a&#34;&gt;5. Profit!&lt;/h3&gt;
 
 &lt;p&gt;Easy eh?  You now have ST3 configured as you are used to and if anything
 is buggy (&lt;em&gt;it is still in a beta&lt;/em&gt;) you can easily switch back to ST2.&lt;/p&gt;
