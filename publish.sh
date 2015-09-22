@@ -8,7 +8,7 @@ if git diff-index --quiet HEAD --; then
     rm -rf public
     rm -rf .public
 
-    hugo
+    hugo-14
     mv public .public
 
     git co master
