@@ -6,8 +6,74 @@
     <description>Recent content on Ross Lawley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Wed, 23 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 23 Sep 2015 13:00:00 +0100</lastBuildDate>
     <atom:link href="http://rosslawley.co.uk/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Introducing a new MongoDB Scala Driver</title>
+      <link>http://rosslawley.co.uk/introducing-mongodb-scala-driver/</link>
+      <pubDate>Wed, 23 Sep 2015 13:00:00 +0100</pubDate>
+      
+      <guid>http://rosslawley.co.uk/introducing-mongodb-scala-driver/</guid>
+      <description>
+
+&lt;p&gt;I&amp;rsquo;m really pleased to announce the first release candidate of a new MongoDB Scala Driver!&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&#34;float:right;&#34; src=&#34;http://mongodb.github.io/mongo-scala-driver/s/img/mongoScalaLogo.png&#34;&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;insider-information:30e1b2e2e4927e03c8ac09809618f25b&#34;&gt;Insider information&lt;/h2&gt;
+
+&lt;p&gt;At &lt;a href=&#34;http://mongodb.org/&#34;&gt;MongoDB&lt;/a&gt; we&amp;rsquo;ve been really busy, back in April we &lt;a href=&#34;https://www.mongodb.com/blog/post/introducing-30-java-driver&#34;&gt;introduced&lt;/a&gt; the 3.0 Java driver. It was a massive undertaking that included numerous improvements and updates. What got me most excited with the 3.0 release was the introduction of a new fully asynchronous, non-blocking driver. Using this asynchronous driver as a base we also released an &lt;a href=&#34;mongodb.github.io/mongo-java-driver-rx&#34;&gt;RxJava&lt;/a&gt; driver and a &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver-reactivestreams&#34;&gt;Reactive Streams&lt;/a&gt; driver.&lt;/p&gt;
+
+&lt;p&gt;Today we are announcing a new MongoDB Scala Driver, which also builds upon the asynchronous driver, whilst still providing a first class Scala experience.&lt;/p&gt;
+
+&lt;h2 id=&#34;scala-specifics:30e1b2e2e4927e03c8ac09809618f25b&#34;&gt;Scala specifics&lt;/h2&gt;
+
+&lt;p&gt;This new Scala driver required much more than a simple wrapping of the Java driver. Here are some of the highlights:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A modern idiomatic Scala driver with asynchronous and non-blocking IO.&lt;/li&gt;
+&lt;li&gt;A new &lt;a href=&#34;http://mongodb.github.io/mongo-scala-driver/1.0/reference/observables/&#34;&gt;&lt;code&gt;Observable&lt;/code&gt;&lt;/a&gt; type that is both composable and flexible enough to handle streams of data from MongoDB.&lt;/li&gt;
+&lt;li&gt;New immutable and mutable type safe &lt;a href=&#34;http://mongodb.github.io/mongo-scala-driver/1.0/bson/documents/&#34;&gt;&lt;code&gt;Document&lt;/code&gt;&lt;/a&gt; classes with all the convenience of a &lt;code&gt;Map&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;A clean modern API following the latest MongoDB driver &lt;a href=&#34;https://github.com/mongodb/specifications&#34;&gt;specifications&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;A new namespace for Scala &lt;code&gt;org.mongodb.scala&lt;/code&gt;. No more confusion about what classes required for the Scala driver.&lt;/li&gt;
+&lt;li&gt;Comprehensive &lt;a href=&#34;http://mongodb.github.io/mongo-scala-driver/&#34;&gt;documentation&lt;/a&gt; site to help get you started.&lt;/li&gt;
+&lt;li&gt;Easy &lt;a href=&#34;http://mongodb.github.io/mongo-scala-driver/1.0/integrations/&#34;&gt;integration&lt;/a&gt; with other Reactive libraries such as &lt;a href=&#34;http://reactivex.io/rxscala/&#34;&gt;RxScala&lt;/a&gt; and &lt;a href=&#34;http://www.reactive-streams.org/&#34;&gt;Reactive Streams&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Below is a quick example to whet your appetite:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;// Connect to the users collection in mydb
+val mongoClient: MongoClient = MongoClient()
+val database: MongoDatabase = mongoClient.getDatabase(&amp;quot;mydb&amp;quot;)
+val collection: MongoCollection[Document] = database.getCollection(&amp;quot;users&amp;quot;)
+
+// The Document ADT enforces type safety and can implicitly box native scala types to BSON types
+val query = Document(&amp;quot;user&amp;quot; -&amp;gt; &amp;quot;Martin&amp;quot;)  // &amp;quot;Martin&amp;quot; becomes BsonString(&amp;quot;Martin&amp;quot;)
+
+// Lets run a query for all Martins and print out the json representation of each document
+collection.find(query).subscribe(
+  (user: Document) =&amp;gt; println(user.toJson()),                         // onNext
+  (error: Throwable) =&amp;gt; println(&amp;quot;Query failed: ${error.getMessage}&amp;quot;), // onError
+  () =&amp;gt; println(&amp;quot;Done&amp;quot;)                                               // onComplete
+)
+
+// Want Futures? No problems!
+val futureUsers: Future[Seq[Document]] = collection.find(query).toFuture()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Available from the following coordinates for Scala 2.11:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;&amp;quot;org.mongodb.scala&amp;quot; %% &amp;quot;mongodb-scala-driver&amp;quot; % &amp;quot;1.0.0-rc0&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;feedback-wanted:30e1b2e2e4927e03c8ac09809618f25b&#34;&gt;Feedback wanted&lt;/h2&gt;
+
+&lt;p&gt;We would love to have your feedback on the new driver, so please feel free to email me directly or post to the &lt;a href=&#34;https://groups.google.com/forum/#!forum/mongodb-user&#34;&gt;MongoDB User&lt;/a&gt; mailing list.&lt;/p&gt;
+
+&lt;p&gt;The best place to get up and running with the new driver is the &lt;a href=&#34;http://mongodb.github.io/mongo-scala-driver/1.0/getting-started/&#34;&gt;getting started&lt;/a&gt; guide.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>How to: Handle multiple Scala versions</title>

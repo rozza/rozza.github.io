@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducing a new MongoDB Scala Driver &middot; Ross Lawley</title>
+
+    <meta name="description" content="Introducing the new MongoDB Scala Driver">
+
+    <meta name="generator" content="Hugo 0.14" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Introducing a new MongoDB Scala Driver &middot; Ross Lawley">
+    <meta name="twitter:description" content="Introducing the new MongoDB Scala Driver">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Introducing a new MongoDB Scala Driver &middot; Ross Lawley">
+    <meta property="og:description" content="Introducing the new MongoDB Scala Driver">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="http://rosslawley.co.uk/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Ross Lawley" href="http://rosslawley.co.uk/index.xml" />
+    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://rosslawley.co.uk">Ross Lawley</a></h1>
+            <h2 class="brand-tagline"> Some techincal musings </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/RossC0"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/rozza "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://rosslawley.co.uk/index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">23 Sep 2015, 13:00</h1>
+                <section class="post">
+                    <header class="post-header pure-g">
+                        <div class="pure-u-4-5">
+                        <a href="http://rosslawley.co.uk/introducing-mongodb-scala-driver/" class="post-title">Introducing a new MongoDB Scala Driver</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under
+                                
+                                <a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-reactive" href="http://rosslawley.co.uk/categories/reactive">reactive</a><a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-jvm" href="http://rosslawley.co.uk/categories/jvm">jvm</a>
+                            
+                        </p>
+                        </div>
+                        <div class="post-share pure-u-1-5">
+                            <div class="post-share-links">
+                                <h4 style="">Share</h4>
+                                
+                                <a href="#" data-type="twitter" data-url="http://rosslawley.co.uk/introducing-mongodb-scala-driver/" data-description="Introducing the new MongoDB Scala Driver" data-via="RossC0" class="prettySocial fa fa-twitter"></a>
+                                
+                            </div>
+                          </div>
+                    </header>
+                    <div class="post-description">
+                        
+
+<p>I&rsquo;m really pleased to announce the first release candidate of a new MongoDB Scala Driver!</p>
+
+<p><img style="float:right;" src="http://mongodb.github.io/mongo-scala-driver/s/img/mongoScalaLogo.png"></p>
+
+<h2 id="insider-information:30e1b2e2e4927e03c8ac09809618f25b">Insider information</h2>
+
+<p>At <a href="http://mongodb.org/">MongoDB</a> we&rsquo;ve been really busy, back in April we <a href="https://www.mongodb.com/blog/post/introducing-30-java-driver">introduced</a> the 3.0 Java driver. It was a massive undertaking that included numerous improvements and updates. What got me most excited with the 3.0 release was the introduction of a new fully asynchronous, non-blocking driver. Using this asynchronous driver as a base we also released an <a href="mongodb.github.io/mongo-java-driver-rx">RxJava</a> driver and a <a href="http://mongodb.github.io/mongo-java-driver-reactivestreams">Reactive Streams</a> driver.</p>
+
+<p>Today we are announcing a new MongoDB Scala Driver, which also builds upon the asynchronous driver, whilst still providing a first class Scala experience.</p>
+
+<h2 id="scala-specifics:30e1b2e2e4927e03c8ac09809618f25b">Scala specifics</h2>
+
+<p>This new Scala driver required much more than a simple wrapping of the Java driver. Here are some of the highlights:</p>
+
+<ul>
+<li>A modern idiomatic Scala driver with asynchronous and non-blocking IO.</li>
+<li>A new <a href="http://mongodb.github.io/mongo-scala-driver/1.0/reference/observables/"><code>Observable</code></a> type that is both composable and flexible enough to handle streams of data from MongoDB.</li>
+<li>New immutable and mutable type safe <a href="http://mongodb.github.io/mongo-scala-driver/1.0/bson/documents/"><code>Document</code></a> classes with all the convenience of a <code>Map</code>.</li>
+<li>A clean modern API following the latest MongoDB driver <a href="https://github.com/mongodb/specifications">specifications</a>.</li>
+<li>A new namespace for Scala <code>org.mongodb.scala</code>. No more confusion about what classes required for the Scala driver.</li>
+<li>Comprehensive <a href="http://mongodb.github.io/mongo-scala-driver/">documentation</a> site to help get you started.</li>
+<li>Easy <a href="http://mongodb.github.io/mongo-scala-driver/1.0/integrations/">integration</a> with other Reactive libraries such as <a href="http://reactivex.io/rxscala/">RxScala</a> and <a href="http://www.reactive-streams.org/">Reactive Streams</a>.</li>
+</ul>
+
+<p>Below is a quick example to whet your appetite:</p>
+
+<pre><code class="language-scala">// Connect to the users collection in mydb
+val mongoClient: MongoClient = MongoClient()
+val database: MongoDatabase = mongoClient.getDatabase(&quot;mydb&quot;)
+val collection: MongoCollection[Document] = database.getCollection(&quot;users&quot;)
+
+// The Document ADT enforces type safety and can implicitly box native scala types to BSON types
+val query = Document(&quot;user&quot; -&gt; &quot;Martin&quot;)  // &quot;Martin&quot; becomes BsonString(&quot;Martin&quot;)
+
+// Lets run a query for all Martins and print out the json representation of each document
+collection.find(query).subscribe(
+  (user: Document) =&gt; println(user.toJson()),                         // onNext
+  (error: Throwable) =&gt; println(&quot;Query failed: ${error.getMessage}&quot;), // onError
+  () =&gt; println(&quot;Done&quot;)                                               // onComplete
+)
+
+// Want Futures? No problems!
+val futureUsers: Future[Seq[Document]] = collection.find(query).toFuture()
+</code></pre>
+
+<p>Available from the following coordinates for Scala 2.11:</p>
+
+<pre><code class="language-scala">&quot;org.mongodb.scala&quot; %% &quot;mongodb-scala-driver&quot; % &quot;1.0.0-rc0&quot;
+</code></pre>
+
+<h2 id="feedback-wanted:30e1b2e2e4927e03c8ac09809618f25b">Feedback wanted</h2>
+
+<p>We would love to have your feedback on the new driver, so please feel free to email me directly or post to the <a href="https://groups.google.com/forum/#!forum/mongodb-user">MongoDB User</a> mailing list.</p>
+
+<p>The best place to get up and running with the new driver is the <a href="http://mongodb.github.io/mongo-scala-driver/1.0/getting-started/">getting started</a> guide.</p>
+
+                    </div>
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rozza';
+    var disqus_identifier = 'http:\/\/rosslawley.co.uk\/introducing-mongodb-scala-driver\/';
+    var disqus_title = 'Introducing a new MongoDB Scala Driver';
+    var disqus_url = 'http:\/\/rosslawley.co.uk\/introducing-mongodb-scala-driver\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="http://rosslawley.co.uk/js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-716284-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
