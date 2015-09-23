@@ -62,7 +62,7 @@ collection.find(query).subscribe(
 val futureUsers: Future[Seq[Document]] = collection.find(query).toFuture()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Available from the following coordinates for Scala 2.11:&lt;/p&gt;
+&lt;p&gt;Available on sonatype for Scala 2.11:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;&amp;quot;org.mongodb.scala&amp;quot; %% &amp;quot;mongodb-scala-driver&amp;quot; % &amp;quot;1.0.0-rc0&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
