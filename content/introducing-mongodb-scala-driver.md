@@ -53,7 +53,7 @@ val futureUsers: Future[Seq[Document]] = collection.find(query).toFuture()
 Available on sonatype for Scala 2.11:
 
 ~~~scala
-"org.mongodb.scala" %% "mongodb-scala-driver" % "1.0.0-rc0"
+"org.mongodb.scala" %% "mongo-scala-driver" % "1.0.0-rc0"
 ~~~
 
 ## Feedback wanted
