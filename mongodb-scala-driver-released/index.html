@@ -3,19 +3,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introducing a new MongoDB Scala Driver &middot; Ross Lawley</title>
+    <title>MongoDB Scala Driver Released &middot; Ross Lawley</title>
 
-    <meta name="description" content="Introducing the new MongoDB Scala Driver">
+    <meta name="description" content="A new idiomatic MongoDB Driver for Scala">
 
     <meta name="generator" content="Hugo 0.14" />
     <meta name="twitter:card" content="summary">
     
-    <meta name="twitter:title" content="Introducing a new MongoDB Scala Driver &middot; Ross Lawley">
-    <meta name="twitter:description" content="Introducing the new MongoDB Scala Driver">
+    <meta name="twitter:title" content="MongoDB Scala Driver Released &middot; Ross Lawley">
+    <meta name="twitter:description" content="A new idiomatic MongoDB Driver for Scala">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Introducing a new MongoDB Scala Driver &middot; Ross Lawley">
-    <meta property="og:description" content="Introducing the new MongoDB Scala Driver">
+    <meta property="og:title" content="MongoDB Scala Driver Released &middot; Ross Lawley">
+    <meta property="og:description" content="A new idiomatic MongoDB Driver for Scala">
 
     <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
@@ -68,11 +68,11 @@
         <div>
             
             <div class="posts">
-                <h1 class="content-subhead">23 Sep 2015, 13:00</h1>
+                <h1 class="content-subhead">20 Oct 2015, 13:10</h1>
                 <section class="post">
                     <header class="post-header pure-g">
                         <div class="pure-u-4-5">
-                        <a href="http://rosslawley.co.uk/introducing-mongodb-scala-driver/" class="post-title">Introducing a new MongoDB Scala Driver</a>
+                        <a href="http://rosslawley.co.uk/mongodb-scala-driver-released/" class="post-title">MongoDB Scala Driver Released</a>
 
                         <p class="post-meta">
                             
@@ -87,7 +87,7 @@
                             <div class="post-share-links">
                                 <h4 style="">Share</h4>
                                 
-                                <a href="#" data-type="twitter" data-url="http://rosslawley.co.uk/introducing-mongodb-scala-driver/" data-description="Introducing the new MongoDB Scala Driver" data-via="RossC0" class="prettySocial fa fa-twitter"></a>
+                                <a href="#" data-type="twitter" data-url="http://rosslawley.co.uk/mongodb-scala-driver-released/" data-description="A new idiomatic MongoDB Driver for Scala" data-via="RossC0" class="prettySocial fa fa-twitter"></a>
                                 
                             </div>
                           </div>
@@ -95,28 +95,28 @@
                     <div class="post-description">
                         
 
-<h2 id="update-now-released-hugoshortcode-1:30e1b2e2e4927e03c8ac09809618f25b">Update - <a href="/mongodb-scala-driver-released/">now released!</a></h2>
+<p><img style="max-width: 100%;" src="/images/starNebula.jpg"></p>
 
-<p>I&rsquo;m really pleased to announce the first release candidate of a new MongoDB Scala Driver!</p>
+<p>The new Scala Driver for MongoDB has been released!</p>
+
+<p>Last month I <a href="/introducing-mongodb-scala-driver/">announced</a>
+ the first release candidate of a new idiomatic Scala Driver for <a href="http://mongodb.org">MongoDB</a> and I&rsquo;m excited to announce that the first official release is now available on sonatype for Scala 2.11:</p>
+
+<pre><code class="language-scala"> &quot;org.mongodb.scala&quot; %% &quot;mongo-scala-driver&quot; % &quot;1.0.0&quot;
+</code></pre>
+
+<h2 id="a-clean-simple-scala-driver:0667d62b0610317a357b6826680f4d5a">A clean, simple Scala driver.</h2>
+
+<p>At <a href="http://mongodb.org/">MongoDB</a> we&rsquo;ve been listening to your feedback about what you would like from a new Scala driver. With that in mind we&rsquo;ve written a totally new Scala driver.  Here are some of the highlights:</p>
 
 <p><img style="float:right;" src="http://mongodb.github.io/mongo-scala-driver/s/img/mongoScalaLogo.png"></p>
 
-<h2 id="insider-information:30e1b2e2e4927e03c8ac09809618f25b">Insider information</h2>
-
-<p>At <a href="http://mongodb.org/">MongoDB</a> we&rsquo;ve been really busy, back in April we <a href="https://www.mongodb.com/blog/post/introducing-30-java-driver">introduced</a> the 3.0 Java driver. It was a massive undertaking that included numerous improvements and updates. What got me most excited with the 3.0 release was the introduction of a new fully asynchronous, non-blocking driver. Using this asynchronous driver as a base we also released an <a href="mongodb.github.io/mongo-java-driver-rx">RxJava</a> driver and a <a href="http://mongodb.github.io/mongo-java-driver-reactivestreams">Reactive Streams</a> driver.</p>
-
-<p>Today we are announcing a new MongoDB Scala Driver, which also builds upon the asynchronous driver, whilst still providing a first class Scala experience.</p>
-
-<h2 id="scala-specifics:30e1b2e2e4927e03c8ac09809618f25b">Scala specifics</h2>
-
-<p>This new Scala driver required much more than a simple wrapping of the Java driver. Here are some of the highlights:</p>
-
 <ul>
 <li>A modern idiomatic Scala driver with asynchronous and non-blocking IO.</li>
+<li>A clean modern API following the latest MongoDB driver <a href="https://github.com/mongodb/specifications">specifications</a>.</li>
+<li>A new namespace for Scala <code>org.mongodb.scala</code>. No more confusion about what classes required for Scala.</li>
 <li>A new <a href="http://mongodb.github.io/mongo-scala-driver/1.0/reference/observables/"><code>Observable</code></a> type that is both composable and flexible enough to handle streams of data from MongoDB.</li>
 <li>New immutable and mutable type safe <a href="http://mongodb.github.io/mongo-scala-driver/1.0/bson/documents/"><code>Document</code></a> classes with all the convenience of a <code>Map</code>.</li>
-<li>A clean modern API following the latest MongoDB driver <a href="https://github.com/mongodb/specifications">specifications</a>.</li>
-<li>A new namespace for Scala <code>org.mongodb.scala</code>. No more confusion about what classes required for the Scala driver.</li>
 <li>Comprehensive <a href="http://mongodb.github.io/mongo-scala-driver/">documentation</a> site to help get you started.</li>
 <li>Easy <a href="http://mongodb.github.io/mongo-scala-driver/1.0/integrations/">integration</a> with other Reactive libraries such as <a href="http://reactivex.io/rxscala/">RxScala</a> and <a href="http://www.reactive-streams.org/">Reactive Streams</a>.</li>
 </ul>
@@ -129,7 +129,10 @@ val database: MongoDatabase = mongoClient.getDatabase(&quot;mydb&quot;)
 val collection: MongoCollection[Document] = database.getCollection(&quot;users&quot;)
 
 // The Document ADT enforces type safety and can implicitly box native scala types to BSON types
-val query = Document(&quot;user&quot; -&gt; &quot;Martin&quot;)  // &quot;Martin&quot; becomes BsonString(&quot;Martin&quot;)
+val martin = Document(&quot;user&quot; -&gt; &quot;Martin&quot;)  // &quot;Martin&quot; becomes BsonString(&quot;Martin&quot;)
+
+// Alternatively, create Documents from Json
+val query = Document(&quot;&quot;&quot;{user: &quot;Martin&quot;}&quot;&quot;&quot;)
 
 // Lets run a query for all Martins and print out the json representation of each document
 collection.find(query).subscribe(
@@ -140,26 +143,24 @@ collection.find(query).subscribe(
 
 // Want Futures? No problems!
 val futureUsers: Future[Seq[Document]] = collection.find(query).toFuture()
+val firstMartin: Future[Document] = collection.find(query).first().head()
 </code></pre>
 
-<p>Available on sonatype for Scala 2.11:</p>
+<p>More examples and full documentation can be found on the <a href="http://mongodb.github.io/mongo-scala-driver">documentation</a> hub, including a full <a href="http://mongodb.github.io/mongo-scala-driver/1.0/getting-started/">getting started</a> guide.</p>
 
-<pre><code class="language-scala">&quot;org.mongodb.scala&quot; %% &quot;mongo-scala-driver&quot; % &quot;1.0.0-rc0&quot;
-</code></pre>
+<h2 id="feedback-wanted:0667d62b0610317a357b6826680f4d5a">Feedback wanted</h2>
 
-<h2 id="feedback-wanted:30e1b2e2e4927e03c8ac09809618f25b">Feedback wanted</h2>
+<p>We would love to have your feedback on the new driver, so please feel free to post to the <a href="https://groups.google.com/forum/#!forum/mongodb-user">MongoDB User</a> mailing list or add feature requests to the <a href="https://jira.mongodb.org/browse/SCALA/">Jira project</a>. There are a number of items on the roadmap such as; MongoDB Server 3.2 and Case Class support but all feature requests are welcome.</p>
 
-<p>We would love to have your feedback on the new driver, so please feel free to email me directly or post to the <a href="https://groups.google.com/forum/#!forum/mongodb-user">MongoDB User</a> mailing list.</p>
-
-<p>The best place to get up and running with the new driver is the <a href="http://mongodb.github.io/mongo-scala-driver/1.0/getting-started/">getting started</a> guide.</p>
+<p>Enjoy!</p>
 
                     </div>
                     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'rozza';
-    var disqus_identifier = 'http:\/\/rosslawley.co.uk\/introducing-mongodb-scala-driver\/';
-    var disqus_title = 'Introducing a new MongoDB Scala Driver';
-    var disqus_url = 'http:\/\/rosslawley.co.uk\/introducing-mongodb-scala-driver\/';
+    var disqus_identifier = 'http:\/\/rosslawley.co.uk\/mongodb-scala-driver-released\/';
+    var disqus_title = 'MongoDB Scala Driver Released';
+    var disqus_url = 'http:\/\/rosslawley.co.uk\/mongodb-scala-driver-released\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
