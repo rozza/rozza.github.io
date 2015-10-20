@@ -6,6 +6,8 @@ date = "2015-09-23T13:00:00+01:00"
 title = "Introducing a new MongoDB Scala Driver"
 +++
 
+## Update - [now released!]({{< relref "mongodb-scala-driver-released.md" >}})
+
 I'm really pleased to announce the first release candidate of a new MongoDB Scala Driver!
 
 <img style="float:right;" src="http://mongodb.github.io/mongo-scala-driver/s/img/mongoScalaLogo.png">
@@ -42,7 +44,7 @@ val query = Document("user" -> "Martin")  // "Martin" becomes BsonString("Martin
 // Lets run a query for all Martins and print out the json representation of each document
 collection.find(query).subscribe(
   (user: Document) => println(user.toJson()),                         // onNext
-  (error: Throwable) => println("Query failed: ${error.getMessage}"), // onError
+  (error: Throwable) => println(s"Query failed: ${error.getMessage}"), // onError
   () => println("Done")                                               // onComplete
 )
 
