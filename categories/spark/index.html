@@ -86,7 +86,14 @@
                     </header>
 
                     <div class="post-description">
-                        Following on from the official announcement yesterday, I&rsquo;m really excited to write a few words about new MongoDB Spark Connector. Getting started Before I go into detail about the hows and whys, first have a look at a quick usage example: import com.mongodb.spark._ import com.mongodb.spark.sql._ // Loading data is simple: val rdd = sc.loadFromMongoDB() // Uses the SparkConf for configuration println(rdd.count) println(rdd.first.toJson) // DataFrames and DataSets made simple: // Infers the schema (samples the collection) val df = sqlContext.loadFromMongoDB().toDF() df.filter(df(&quot;age&quot;) &lt; 100).show() // Passes filter to MongoDB // Schema provided via a Case Class val dataframeExplicit = sqlContext.loadFromMongoDB().toDF[Character]() val dataSet = sqlContext.loadFromMongoDB().toDS[Character]() // Writing data to MongoDB is also easy: val centenarians = sqlContext.sql(&quot;SELECT name, age FROM characters WHERE age &gt;= 100&quot;) centenarians.write.option(&quot;collection&quot;, &quot;hundredClub&quot;).mongo() The MongoDB Spark Connector supports Spark 1.6.1 and Scala 2.10 or 2.11.
+                        <p><img style="max-width: 100%;" src="/images/sparks.jpg"></p>
+
+<p>Following on from the <a href="https://www.mongodb.com/blog/post/mongodb-connector-for-apache-spark-announcing-early-access-program-and-new-spark-training">official announcement</a> yesterday, I&rsquo;m really excited to write a few words about new <strong>MongoDB Spark Connector</strong>.</p>
+
+<h2 id="getting-started:b4450e2a5da78ad49e7021b6ad22ca92">Getting started</h2>
+
+<p>Before I go into detail about the hows and whys, first have a look at a quick usage example:</p>
+
                     </div>
 
                     <footer class="post-footer">
