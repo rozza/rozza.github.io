@@ -6,8 +6,80 @@
     <description>Recent content in Scala on Ross Lawley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 20 Oct 2015 13:10:30 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 18 May 2016 13:43:25 +0100</lastBuildDate>
     <atom:link href="http://rosslawley.co.uk/categories/scala/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Introducing a new MongoDB Spark Connector</title>
+      <link>http://rosslawley.co.uk/introducing-a-new=mongodb-spark-connector/</link>
+      <pubDate>Wed, 18 May 2016 13:43:25 +0100</pubDate>
+      
+      <guid>http://rosslawley.co.uk/introducing-a-new=mongodb-spark-connector/</guid>
+      <description>
+
+&lt;p&gt;&lt;img style=&#34;max-width: 100%;&#34; src=&#34;http://rosslawley.co.uk/images/sparks.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;Following on from the &lt;a href=&#34;https://www.mongodb.com/blog/post/mongodb-connector-for-apache-spark-announcing-early-access-program-and-new-spark-training&#34;&gt;official announcement&lt;/a&gt; yesterday, I&amp;rsquo;m really excited to write a few words about new &lt;strong&gt;MongoDB Spark Connector&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-started:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Getting started&lt;/h2&gt;
+
+&lt;p&gt;Before I go into detail about the hows and whys, first have a look at a quick usage example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import com.mongodb.spark._
+import com.mongodb.spark.sql._
+
+// Loading data is simple:
+val rdd = sc.loadFromMongoDB()     // Uses the SparkConf for configuration
+println(rdd.count)
+println(rdd.first.toJson)
+
+// DataFrames and DataSets made simple:
+// Infers the schema (samples the collection)
+val df = sqlContext.loadFromMongoDB().toDF()
+df.filter(df(&amp;quot;age&amp;quot;) &amp;lt; 100).show()  // Passes filter to MongoDB
+
+// Schema provided via a Case Class
+val dataframeExplicit = sqlContext.loadFromMongoDB().toDF[Character]()
+val dataSet = sqlContext.loadFromMongoDB().toDS[Character]()
+
+// Writing data to MongoDB is also easy:
+val centenarians = sqlContext.sql(&amp;quot;SELECT name, age FROM characters WHERE age &amp;gt;= 100&amp;quot;)
+centenarians.write.option(&amp;quot;collection&amp;quot;, &amp;quot;hundredClub&amp;quot;).mongo()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The MongoDB Spark Connector supports Spark 1.6.1 and Scala 2.10 or 2.11. You can download it from Sonatype with these coordinates:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;&amp;quot;org.mongodb.spark&amp;quot; %% &amp;quot;mongo-spark-connector&amp;quot; % &amp;quot;0.2&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;backstory:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Backstory&lt;/h2&gt;
+
+&lt;p&gt;Since January writing a new shiny Spark Connector designed from the ground up. Having initially played with Spark during one of our Skunkworks days over a year ago, I knew we could make a great connector to combine these two wonderful technologies. Last summer we welcomed Marko Vojvodic to the JVM team and during his internship he worked on prototyping a connector in Java. Marko looked at some of the hard problems when writing a great connector; type cohersion, data partitioning and data locality to name a few.&lt;/p&gt;
+
+&lt;p&gt;We have a few JVM projects keeping us busy at &lt;a href=&#34;http://www.mongodb.com&#34;&gt;MongoDB&lt;/a&gt;, but in January I got time to start focusing on building the Spark connector. I started with Scala and ported some of Marko&amp;rsquo;s code, wrote new code and built a new API from the ground up.&lt;/p&gt;
+
+&lt;p&gt;In April we quietly released the first beta version and solicited feedback from a select group of MongoDB power users. Since then a number of kinks have been ironed out resulting in the 0.2 release. Now we&amp;rsquo;re opening up the beta and asking the wider community for feedback, before we release a 1.0 version.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-build-a-new-mongodb-spark-connector:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Why build a new MongoDB Spark Connector?&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve been asked this a few times, after all the Hadoop connector supports Spark. The reason for a native connector is simple; Spark has quickly grown in popularity and use. It&amp;rsquo;s growth reminds me of MongoDBs and naturally users want to combine both products. So it&amp;rsquo;s only logical to create a &lt;em&gt;first class experience&lt;/em&gt; and let these users get the most out of combining both technologies.
+I really hope we have gone a long way to achieving that with this new connector.&lt;/p&gt;
+
+&lt;h2 id=&#34;language-support:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Language support&lt;/h2&gt;
+
+&lt;p&gt;The MongoDB Spark Connector supports all the languages Spark supports: Scala, Java, Python and R but under the hood it&amp;rsquo;s written in Scala. This helped keep the API clean because we can make full use of Scala magic like implicits. To keep Java folk happy there&amp;rsquo;s also a special Java API that hides some of the &amp;ldquo;Scala-ness&amp;rdquo; such as strange method names from Java users. Hat-tip to the Databricks &lt;a href=&#34;https://github.com/databricks/scala-style-guide#java-interoperability&#34;&gt;Java interoperability&lt;/a&gt; guide, it&amp;rsquo;s super helpful when considering how to consume a Scala API from Java.&lt;/p&gt;
+
+&lt;h2 id=&#34;feedback-wanted:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Feedback wanted!&lt;/h2&gt;
+
+&lt;p&gt;I hope that has got you interested, I would love to have your feedback on the new connector good or bad. So please feel free to email me directly or post to the &lt;a href=&#34;https://groups.google.com/forum/#!forum/mongodb-user&#34;&gt;MongoDB User&lt;/a&gt; mailing list. If you are currently using an alternative connector for MongoDB and Spark, I&amp;rsquo;d &lt;strong&gt;really interested&lt;/strong&gt; in any feedback.&lt;/p&gt;
+
+&lt;p&gt;The connector is still in Beta, so there maybe changes to the API, but I&amp;rsquo;m hoping it&amp;rsquo;s stable now. If you do encounter any problems or find a bug please report it by opening an issue at &lt;a href=&#34;https://jira.mongodb.org/browse/SPARK&#34;&gt;jira.mongodb.org/browse/SPARK&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The quickest way to get up and running with the new connector is via the &lt;a href=&#34;https://github.com/mongodb/mongo-spark/blob/master/doc/0-introduction.md&#34;&gt;introduction&lt;/a&gt; on github. There is also the &lt;a href=&#34;https://university.mongodb.com/courses/M233/about&#34;&gt;M233: Getting Started with Spark and MongoDB&lt;/a&gt; course over at the MongoDB University.&lt;/p&gt;
+
+&lt;p&gt;Happy Big Data Computing.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>MongoDB Scala Driver Released</title>

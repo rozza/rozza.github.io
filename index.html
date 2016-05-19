@@ -69,6 +69,31 @@
             
             <div class="posts">
                 
+                <h1 class="content-subhead">18 May 2016, 13:43</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/introducing-a-new=mongodb-spark-connector/" class="post-title">Introducing a new MongoDB Spark Connector</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under
+                                
+                                <a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-spark" href="http://rosslawley.co.uk/categories/spark">spark</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a><a class="post-category post-category-python" href="http://rosslawley.co.uk/categories/python">python</a><a class="post-category post-category-R" href="http://rosslawley.co.uk/categories/r">R</a><a class="post-category post-category-jvm" href="http://rosslawley.co.uk/categories/jvm">jvm</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        Following on from the official announcement yesterday, I&rsquo;m really excited to write a few words about new MongoDB Spark Connector. Getting started Before I go into detail about the hows and whys, first have a look at a quick usage example: import com.mongodb.spark._ import com.mongodb.spark.sql._ // Loading data is simple: val rdd = sc.loadFromMongoDB() // Uses the SparkConf for configuration println(rdd.count) println(rdd.first.toJson) // DataFrames and DataSets made simple: // Infers the schema (samples the collection) val df = sqlContext.loadFromMongoDB().toDF() df.filter(df(&quot;age&quot;) &lt; 100).show() // Passes filter to MongoDB // Schema provided via a Case Class val dataframeExplicit = sqlContext.loadFromMongoDB().toDF[Character]() val dataSet = sqlContext.loadFromMongoDB().toDS[Character]() // Writing data to MongoDB is also easy: val centenarians = sqlContext.sql(&quot;SELECT name, age FROM characters WHERE age &gt;= 100&quot;) centenarians.write.option(&quot;collection&quot;, &quot;hundredClub&quot;).mongo() The MongoDB Spark Connector supports Spark 1.6.1 and Scala 2.10 or 2.11.
+                    </div>
+
+                    <footer class="post-footer">
+                    <a href='http://rosslawley.co.uk/introducing-a-new=mongodb-spark-connector/' class="pull-right">Read more &GreaterGreater;</a>
+                  </footer>
+                </section>
+                
                 <h1 class="content-subhead">20 Nov 2015, 12:06</h1>
                 <section class="post">
                     <header class="post-header">
@@ -374,58 +399,6 @@ well as turning off dereferencing</li>
 
                     <footer class="post-footer">
                     <a href='http://rosslawley.co.uk/mongoengine-0-dot-8-dot-0/' class="pull-right">Read more &GreaterGreater;</a>
-                  </footer>
-                </section>
-                
-                <h1 class="content-subhead">01 May 2013, 00:00</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="http://rosslawley.co.uk/mongoengine-0-dot-8-rc1-released/" class="post-title">MongoEngine 0.8 RC1 Released</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under
-                                
-                                <a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-mongoengine" href="http://rosslawley.co.uk/categories/mongoengine">mongoengine</a><a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-nosql" href="http://rosslawley.co.uk/categories/nosql">nosql</a><a class="post-category post-category-python" href="http://rosslawley.co.uk/categories/python">python</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p><strong>Notice:</strong> 0.8.0RC3 has been released fixing a couple of small bugs and extra improvements.</p>
-
-<p><strong>Notice:</strong> 0.8.0RC2 has been released fixing an obscure queryset cursor cloning issue.</p>
-
-<p>I&rsquo;m really pleased to annouce the release candidate for <a href="https://pypi.python.org/pypi/mongoengine/0.8.0RC1">MongoEngine 0.8</a>!
-Its been a <em>long process</em> due to work and life commitments but the latest version
-of MongoEngine is ready for testing and feedback.</p>
-
-<h2 id="why-a-release-candidate:381e651998269fc0201485acd98bed22">Why a release candidate?</h2>
-
-<p>There have been massive changes in the internals, requiring thought and
-<strong>testing</strong> before upgrading and releasing to the wild - so please
-read the <a href="http://docs.mongoengine.org/en/latest/upgrade.html#to-0-8">upgrade</a>
-docs carefully!</p>
-
-<p>The changes are worth it and make using <a href="http://mongoengine.org">MongoEngine</a>
-even better.</p>
-
-<p>Please test 0.8.0RC1 on your test systems and staging systems and any feedback
-please email the <a href="https://groups.google.com/group/mongoengine-users">user group</a>
-or if you&rsquo;d prefer to message me directly you can via
-<a href="https://github.com/rozza">https://github.com/rozza</a></p>
-
-<h2 id="whats-changed:381e651998269fc0201485acd98bed22">Whats changed?</h2>
-
-<p>There have been loads of fixes, improvements and changes in 0.8.
-The headliners are:</p>
-
-                    </div>
-
-                    <footer class="post-footer">
-                    <a href='http://rosslawley.co.uk/mongoengine-0-dot-8-rc1-released/' class="pull-right">Read more &GreaterGreater;</a>
                   </footer>
                 </section>
                 
