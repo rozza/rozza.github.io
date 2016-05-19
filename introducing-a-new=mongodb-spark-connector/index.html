@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducing a new MongoDB Spark Connector &middot; Ross Lawley</title>
+
+    <meta name="description" content="Introducing a new MongoDB Spark Connector">
+
+    <meta name="generator" content="Hugo 0.14" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Introducing a new MongoDB Spark Connector &middot; Ross Lawley">
+    <meta name="twitter:description" content="Introducing a new MongoDB Spark Connector">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Introducing a new MongoDB Spark Connector &middot; Ross Lawley">
+    <meta property="og:description" content="Introducing a new MongoDB Spark Connector">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="http://rosslawley.co.uk/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Ross Lawley" href="http://rosslawley.co.uk/index.xml" />
+    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://rosslawley.co.uk">Ross Lawley</a></h1>
+            <h2 class="brand-tagline"> Some techincal musings </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/RossC0"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/rozza "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://rosslawley.co.uk/index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">18 May 2016, 13:43</h1>
+                <section class="post">
+                    <header class="post-header pure-g">
+                        <div class="pure-u-4-5">
+                        <a href="http://rosslawley.co.uk/introducing-a-new=mongodb-spark-connector/" class="post-title">Introducing a new MongoDB Spark Connector</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under
+                                
+                                <a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-spark" href="http://rosslawley.co.uk/categories/spark">spark</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a><a class="post-category post-category-python" href="http://rosslawley.co.uk/categories/python">python</a><a class="post-category post-category-R" href="http://rosslawley.co.uk/categories/r">R</a><a class="post-category post-category-jvm" href="http://rosslawley.co.uk/categories/jvm">jvm</a>
+                            
+                        </p>
+                        </div>
+                        <div class="post-share pure-u-1-5">
+                            <div class="post-share-links">
+                                <h4 style="">Share</h4>
+                                
+                                <a href="#" data-type="twitter" data-url="http://rosslawley.co.uk/introducing-a-new=mongodb-spark-connector/" data-description="Introducing a new MongoDB Spark Connector" data-via="RossC0" class="prettySocial fa fa-twitter"></a>
+                                
+                            </div>
+                          </div>
+                    </header>
+                    <div class="post-description">
+                        
+
+<p><img style="max-width: 100%;" src="/images/sparks.jpg"></p>
+
+<p>Following on from the <a href="https://www.mongodb.com/blog/post/mongodb-connector-for-apache-spark-announcing-early-access-program-and-new-spark-training">official announcement</a> yesterday, I&rsquo;m really excited to write a few words about new <strong>MongoDB Spark Connector</strong>.</p>
+
+<h2 id="getting-started:b4450e2a5da78ad49e7021b6ad22ca92">Getting started</h2>
+
+<p>Before I go into detail about the hows and whys, first have a look at a quick usage example:</p>
+
+<pre><code class="language-scala">import com.mongodb.spark._
+import com.mongodb.spark.sql._
+
+// Loading data is simple:
+val rdd = sc.loadFromMongoDB()     // Uses the SparkConf for configuration
+println(rdd.count)
+println(rdd.first.toJson)
+
+// DataFrames and DataSets made simple:
+// Infers the schema (samples the collection)
+val df = sqlContext.loadFromMongoDB().toDF()
+df.filter(df(&quot;age&quot;) &lt; 100).show()  // Passes filter to MongoDB
+
+// Schema provided via a Case Class
+val dataframeExplicit = sqlContext.loadFromMongoDB().toDF[Character]()
+val dataSet = sqlContext.loadFromMongoDB().toDS[Character]()
+
+// Writing data to MongoDB is also easy:
+val centenarians = sqlContext.sql(&quot;SELECT name, age FROM characters WHERE age &gt;= 100&quot;)
+centenarians.write.option(&quot;collection&quot;, &quot;hundredClub&quot;).mongo()
+</code></pre>
+
+<p>The MongoDB Spark Connector supports Spark 1.6.1 and Scala 2.10 or 2.11. You can download it from Sonatype with these coordinates:</p>
+
+<pre><code class="language-scala">&quot;org.mongodb.spark&quot; %% &quot;mongo-spark-connector&quot; % &quot;0.2&quot;
+</code></pre>
+
+<h2 id="backstory:b4450e2a5da78ad49e7021b6ad22ca92">Backstory</h2>
+
+<p>Since January writing a new shiny Spark Connector designed from the ground up. Having initially played with Spark during one of our Skunkworks days over a year ago, I knew we could make a great connector to combine these two wonderful technologies. Last summer we welcomed Marko Vojvodic to the JVM team and during his internship he worked on prototyping a connector in Java. Marko looked at some of the hard problems when writing a great connector; type cohersion, data partitioning and data locality to name a few.</p>
+
+<p>We have a few JVM projects keeping us busy at <a href="http://www.mongodb.com">MongoDB</a>, but in January I got time to start focusing on building the Spark connector. I started with Scala and ported some of Marko&rsquo;s code, wrote new code and built a new API from the ground up.</p>
+
+<p>In April we quietly released the first beta version and solicited feedback from a select group of MongoDB power users. Since then a number of kinks have been ironed out resulting in the 0.2 release. Now we&rsquo;re opening up the beta and asking the wider community for feedback, before we release a 1.0 version.</p>
+
+<h2 id="why-build-a-new-mongodb-spark-connector:b4450e2a5da78ad49e7021b6ad22ca92">Why build a new MongoDB Spark Connector?</h2>
+
+<p>I&rsquo;ve been asked this a few times, after all the Hadoop connector supports Spark. The reason for a native connector is simple; Spark has quickly grown in popularity and use. It&rsquo;s growth reminds me of MongoDBs and naturally users want to combine both products. So it&rsquo;s only logical to create a <em>first class experience</em> and let these users get the most out of combining both technologies.
+I really hope we have gone a long way to achieving that with this new connector.</p>
+
+<h2 id="language-support:b4450e2a5da78ad49e7021b6ad22ca92">Language support</h2>
+
+<p>The MongoDB Spark Connector supports all the languages Spark supports: Scala, Java, Python and R but under the hood it&rsquo;s written in Scala. This helped keep the API clean because we can make full use of Scala magic like implicits. To keep Java folk happy there&rsquo;s also a special Java API that hides some of the &ldquo;Scala-ness&rdquo; such as strange method names from Java users. Hat-tip to the Databricks <a href="https://github.com/databricks/scala-style-guide#java-interoperability">Java interoperability</a> guide, it&rsquo;s super helpful when considering how to consume a Scala API from Java.</p>
+
+<h2 id="feedback-wanted:b4450e2a5da78ad49e7021b6ad22ca92">Feedback wanted!</h2>
+
+<p>I hope that has got you interested, I would love to have your feedback on the new connector good or bad. So please feel free to email me directly or post to the <a href="https://groups.google.com/forum/#!forum/mongodb-user">MongoDB User</a> mailing list. If you are currently using an alternative connector for MongoDB and Spark, I&rsquo;d <strong>really interested</strong> in any feedback.</p>
+
+<p>The connector is still in Beta, so there maybe changes to the API, but I&rsquo;m hoping it&rsquo;s stable now. If you do encounter any problems or find a bug please report it by opening an issue at <a href="https://jira.mongodb.org/browse/SPARK">jira.mongodb.org/browse/SPARK</a>.</p>
+
+<p>The quickest way to get up and running with the new connector is via the <a href="https://github.com/mongodb/mongo-spark/blob/master/doc/0-introduction.md">introduction</a> on github. There is also the <a href="https://university.mongodb.com/courses/M233/about">M233: Getting Started with Spark and MongoDB</a> course over at the MongoDB University.</p>
+
+<p>Happy Big Data Computing.</p>
+
+                    </div>
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rozza';
+    var disqus_identifier = 'http:\/\/rosslawley.co.uk\/introducing-a-new=mongodb-spark-connector\/';
+    var disqus_title = 'Introducing a new MongoDB Spark Connector';
+    var disqus_url = 'http:\/\/rosslawley.co.uk\/introducing-a-new=mongodb-spark-connector\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="http://rosslawley.co.uk/js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-716284-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
