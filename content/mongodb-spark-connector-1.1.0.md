@@ -2,7 +2,7 @@
 Categories = ["scala", "mongodb", "spark", "BigData", "jvm"]
 Description = "The new MongoDB Spark connector releases!"
 Tags = ["scala", "mongodb", "spark", "bigdata"]
-date = "2016-06-27T22:10:30+01:00"
+date = "2016-09-06T17:10:30+01:00"
 title = "MongoDB Scala Connector releases!"
 +++
 
