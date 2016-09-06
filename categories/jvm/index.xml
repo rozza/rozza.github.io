@@ -6,8 +6,130 @@
     <description>Recent content in Jvm on Ross Lawley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Wed, 18 May 2016 13:43:25 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jun 2016 22:10:30 +0100</lastBuildDate>
     <atom:link href="http://rosslawley.co.uk/categories/jvm/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>MongoDB Scala Connector Released</title>
+      <link>http://rosslawley.co.uk/mongodb-spark-connector-released/</link>
+      <pubDate>Mon, 27 Jun 2016 22:10:30 +0100</pubDate>
+      
+      <guid>http://rosslawley.co.uk/mongodb-spark-connector-released/</guid>
+      <description>
+
+&lt;p&gt;&lt;img style=&#34;max-width: 100%;&#34; src=&#34;http://rosslawley.co.uk/images/sparks.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;The new MongoDB Spark connector has been released!&lt;/p&gt;
+
+&lt;p&gt;Last month I &lt;a href=&#34;http://rosslawley.co.uk/introducing-a-new=mongodb-spark-connector/&#34;&gt;announced&lt;/a&gt;
+ that the new Spark connector for &lt;a href=&#34;http://mongodb.org&#34;&gt;MongoDB&lt;/a&gt; was in beta. After some invaluable
+ testing by the community, I&amp;rsquo;m excited to announce that the first official release is now available from
+ &lt;a href=&#34;https://spark-packages.org/package/mongodb/mongo-spark&#34;&gt;spark-packages&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;&amp;gt; $SPARK_HOME/bin/spark-shell --packages org.mongodb.spark:mongo-spark-connector_2.10:1.0.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;a-clean-simple-connector:8a624a4e7030bfeca46590a8e6ef01b3&#34;&gt;A clean, simple connector.&lt;/h2&gt;
+
+&lt;p&gt;At &lt;a href=&#34;http://mongodb.org/&#34;&gt;MongoDB&lt;/a&gt; we&amp;rsquo;ve been listening to your feedback about what you would like from a new mongodb connector.
+With that in mind we&amp;rsquo;ve written a totally new idiomatic connector for spark:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import com.mongodb.spark._
+import com.mongodb.spark.sql._
+
+// Loading data is simple:
+val rdd = sc.loadFromMongoDB()     // Uses the SparkConf for configuration
+println(rdd.count)
+println(rdd.first.toJson)
+
+// DataFrames and DataSets made simple:
+// Infers the schema (samples the collection)
+val df = sqlContext.loadFromMongoDB().toDF()
+df.filter(df(&amp;quot;age&amp;quot;) &amp;lt; 100).show()  // Passes filter to MongoDB
+
+// Schema provided via a Case Class
+val dataframeExplicit = sqlContext.loadFromMongoDB().toDF[Character]()
+val dataSet = sqlContext.loadFromMongoDB().toDS[Character]()
+
+// Writing data to MongoDB is also easy:
+val centenarians = sqlContext.sql(&amp;quot;SELECT name, age FROM characters WHERE age &amp;gt;= 100&amp;quot;)
+centenarians.write.option(&amp;quot;collection&amp;quot;, &amp;quot;hundredClub&amp;quot;).mongo()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;More examples and full documentation can be found on the &lt;a href=&#34;https://docs.mongodb.com/spark-connector/&#34;&gt;documentation&lt;/a&gt; site.&lt;/p&gt;
+
+&lt;h2 id=&#34;feedback-wanted:8a624a4e7030bfeca46590a8e6ef01b3&#34;&gt;Feedback wanted&lt;/h2&gt;
+
+&lt;p&gt;We would love to have your feedback on the new driver, so please feel free to post to the &lt;a href=&#34;https://groups.google.com/forum/#!forum/mongodb-user&#34;&gt;MongoDB User&lt;/a&gt; mailing list or
+add feature requests to the &lt;a href=&#34;https://jira.mongodb.org/browse/SPARK/&#34;&gt;Jira project&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Enjoy!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>MongoDB Scala Connector releases!</title>
+      <link>http://rosslawley.co.uk/mongodb-spark-connector-1.1.0/</link>
+      <pubDate>Mon, 27 Jun 2016 22:10:30 +0100</pubDate>
+      
+      <guid>http://rosslawley.co.uk/mongodb-spark-connector-1.1.0/</guid>
+      <description>
+
+&lt;p&gt;Version 1.1.0 of the &lt;a href=&#34;https://docs.mongodb.com/spark-connector/&#34;&gt;MongoDB Spark connector&lt;/a&gt; has been released. As well as the
+MongoDB Spark Connector 2.0.0-rc0, bring Spark 2.0 support.&lt;/p&gt;
+
+&lt;h2 id=&#34;1-1-0:989f2bc3ab8dd607253fcfdcaa7b362d&#34;&gt;1.1.0&lt;/h2&gt;
+
+&lt;p&gt;This is the first release after the 1.0.0 driver and contains some API improvements and updates based on feedback from users.
+Many thanks to all those that have provided feedback either through the MongoDB User &lt;a href=&#34;https://groups.google.com/forum/#!forum/mongodb-user&#34;&gt;mailing list&lt;/a&gt;,
+via  &lt;a href=&#34;stackoverflow.com/questions/tagged/apache-spark+mongodb&#34;&gt;StackOverflow&lt;/a&gt; or via the &lt;a href=&#34;https://jira.mongodb.org/browse/SPARK/&#34;&gt;Spark Jira project&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s been thrilling to get such great feedback and find out about some of the real world scenarios the connector has been used for. One of my
+favourites so far has been about how &lt;a href=&#34;https://www.mongodb.com/blog/post/mongodb-and-apache-spark-at-china-eastern-airlines&#34;&gt;China Eastern Airlines&lt;/a&gt; and how they
+use the connector to save time and money.  But wether you&amp;rsquo;re a big or small user of the connector, I&amp;rsquo;d really appreciate your feedback and comments. It really is central to making this connector
+even better and more accessible.&lt;/p&gt;
+
+&lt;h3 id=&#34;improvements-in-1-1-0:989f2bc3ab8dd607253fcfdcaa7b362d&#34;&gt;Improvements in 1.1.0&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Saving DataFrames with an &lt;code&gt;_id&lt;/code&gt; field will updated in place, rather than error.&lt;/li&gt;
+&lt;li&gt;You can now use SQL to &lt;code&gt;INSERT INTO&lt;/code&gt; a collection.&lt;/li&gt;
+&lt;li&gt;Added support for Spark MapTypes in schemas.&lt;/li&gt;
+&lt;li&gt;IsNotNull filter improved so that it also checks the field exists&lt;/li&gt;
+&lt;li&gt;Added helpers for defining the schemas and querying unsupported MongoDB datatypes.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;See the full &lt;a href=&#34;https://github.com/mongodb/mongo-spark/blob/1.x/doc/7-Changelog.md&#34;&gt;changelog&lt;/a&gt; for detailed information and links to the Jira tickets.&lt;/p&gt;
+
+&lt;p&gt;The new&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;&amp;gt; $SPARK_HOME/bin/spark-shell --packages org.mongodb.spark:mongo-spark-connector_2.10:1.1.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;spark-2-0-support:989f2bc3ab8dd607253fcfdcaa7b362d&#34;&gt;Spark 2.0 support&lt;/h2&gt;
+
+&lt;p&gt;The 2.0.0.rc-0 connector is available from &lt;a href=&#34;http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.mongodb.spark%22&#34;&gt;maven central&lt;/a&gt; and provides support for Spark 2.0, as well as
+all the improvements from the 1.1.0 generation of the driver.&lt;/p&gt;
+
+&lt;p&gt;There were a few minor API changes required to support Spark 2.0:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;DataFrame and Dataset are now unified.
+In Scala and Java, DataFrame and Dataset have been unified, i.e. DataFrame is just a type alias for Dataset of Row.&lt;/li&gt;
+&lt;li&gt;SparkSession
+The new entry point that replaces the old SQLContext and HiveContext for DataFrame and Dataset APIs.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The actual code changes to interact with MongoDB should be minimal and are designed to be as unobtrusive as possible.&lt;/p&gt;
+
+&lt;h2 id=&#34;feedback-wanted:989f2bc3ab8dd607253fcfdcaa7b362d&#34;&gt;Feedback wanted&lt;/h2&gt;
+
+&lt;p&gt;We would love to have your feedback on the connector, so please feel free to post to the &lt;a href=&#34;https://groups.google.com/forum/#!forum/mongodb-user&#34;&gt;MongoDB User&lt;/a&gt; mailing list or
+add feature requests to the &lt;a href=&#34;https://jira.mongodb.org/browse/SPARK/&#34;&gt;Jira project&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Enjoy!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Introducing a new MongoDB Spark Connector</title>
@@ -17,7 +139,12 @@
       <guid>http://rosslawley.co.uk/introducing-a-new=mongodb-spark-connector/</guid>
       <description>
 
-&lt;p&gt;&lt;img style=&#34;max-width: 100%;&#34; src=&#34;http://rosslawley.co.uk/images/sparks.jpg&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;update:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Update!&lt;/h2&gt;
+
+&lt;p&gt;The MongoDB Spark connector has been &lt;a href=&#34;http://rosslawley.co.uk/mongodb-spark-connector-released/&#34;&gt;released&lt;/a&gt;! See the official
+&lt;a href=&#34;https://docs.mongodb.com/spark-connector/&#34;&gt;documentation&lt;/a&gt; for more information on getting started!&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;p&gt;Following on from the &lt;a href=&#34;https://www.mongodb.com/blog/post/mongodb-connector-for-apache-spark-announcing-early-access-program-and-new-spark-training&#34;&gt;official announcement&lt;/a&gt; yesterday, I&amp;rsquo;m really excited to write a few words about new &lt;strong&gt;MongoDB Spark Connector&lt;/strong&gt;.&lt;/p&gt;
 

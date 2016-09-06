@@ -17,7 +17,12 @@
       <guid>http://rosslawley.co.uk/introducing-a-new=mongodb-spark-connector/</guid>
       <description>
 
-&lt;p&gt;&lt;img style=&#34;max-width: 100%;&#34; src=&#34;http://rosslawley.co.uk/images/sparks.jpg&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;update:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Update!&lt;/h2&gt;
+
+&lt;p&gt;The MongoDB Spark connector has been &lt;a href=&#34;http://rosslawley.co.uk/mongodb-spark-connector-released/&#34;&gt;released&lt;/a&gt;! See the official
+&lt;a href=&#34;https://docs.mongodb.com/spark-connector/&#34;&gt;documentation&lt;/a&gt; for more information on getting started!&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;p&gt;Following on from the &lt;a href=&#34;https://www.mongodb.com/blog/post/mongodb-connector-for-apache-spark-announcing-early-access-program-and-new-spark-training&#34;&gt;official announcement&lt;/a&gt; yesterday, I&amp;rsquo;m really excited to write a few words about new &lt;strong&gt;MongoDB Spark Connector&lt;/strong&gt;.&lt;/p&gt;
 
