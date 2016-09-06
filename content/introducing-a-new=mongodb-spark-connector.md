@@ -6,7 +6,13 @@ date = "2016-05-18T13:43:25+01:00"
 title = "Introducing a new MongoDB Spark Connector"
 +++
 
-<img style="max-width: 100%;" src="/images/sparks.jpg">
+## Update!
+
+The MongoDB Spark connector has been [released]({{< relref "mongodb-spark-connector-released.md" >}})! See the official 
+[documentation](https://docs.mongodb.com/spark-connector/) for more information on getting started!
+
+----
+
 
 Following on from the [official announcement](https://www.mongodb.com/blog/post/mongodb-connector-for-apache-spark-announcing-early-access-program-and-new-spark-training) yesterday, I'm really excited to write a few words about new **MongoDB Spark Connector**.
 
