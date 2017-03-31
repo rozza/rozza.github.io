@@ -6,8 +6,99 @@
     <description>Recent content on Ross Lawley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 06 Sep 2016 17:10:30 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 31 Mar 2017 13:15:28 +0100</lastBuildDate>
     <atom:link href="http://rosslawley.co.uk/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>MongoDB Scala Driver 2.0 released</title>
+      <link>http://rosslawley.co.uk/mongodb-scala-driver-2.0/</link>
+      <pubDate>Fri, 31 Mar 2017 13:15:28 +0100</pubDate>
+      
+      <guid>http://rosslawley.co.uk/mongodb-scala-driver-2.0/</guid>
+      <description>
+
+&lt;p&gt;The 2.0.0 version of the official Scala Driver for MongoDB has been released!&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&#34;max-width: 100%;&#34; src=&#34;http://rosslawley.co.uk/images/scala.jpg&#34;&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;case-class-support:f6e2133bab10204926d960626000d5d7&#34;&gt;Case Class support&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;m really happy to announce the introduction of case class support, making it much easier to use your domain models with MongoDB. Internally Codecs are used to convert datatypes to and from &lt;a href=&#34;http://bsonspec.org&#34;&gt;BSON&lt;/a&gt; - the internal data format for MongoDB. The 2.0 release includes a Macro that can create a codecs from case classes. The encoding and decoding the values of each field still uses the codec registry, so any users with custom codecs can still happily use these Macro based codecs.&lt;/p&gt;
+
+&lt;p&gt;To show how simple it is we can use the following &lt;code&gt;Person&lt;/code&gt; case class as an example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;case class Person(_id: ObjectId, firstName: String, lastName: String)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notice, the &lt;code&gt;_id&lt;/code&gt; field, this is a special field in MongoDB because it represents the primary key. It&amp;rsquo;s advisable to include &lt;code&gt;_id&lt;/code&gt; field in your case classes as it gives access to the primary key. When inserting a BSON document into MongoDB if it doesn&amp;rsquo;t contain the &lt;code&gt;_id&lt;/code&gt; field one is added automatically. By adding a companion object an &lt;code&gt;_id&lt;/code&gt; can be automatically generated:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;object Person {
+  def apply(firstName: String, lastName: String): Person =
+    Person(new ObjectId(), firstName, lastName)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Creating a CodecProvider for &lt;code&gt;Person&lt;/code&gt; is simple:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val personCodecProvider = Macros.createCodecProvider[Person]()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There is also an implicit helper that will create codec providers for your case classes by just passing in the class eg:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import org.mongodb.scala.bson.codecs.Macros._
+import org.mongodb.scala.bson.codecs.DEFAULT_CODEC_REGISTRY
+import org.bson.codecs.configuration.CodecRegistries.{fromRegistries, fromProviders}
+
+val codecRegistry = fromRegistries(fromProviders(classOf[Person], classOf[MyOtherCaseClass]), DEFAULT_CODEC_REGISTRY)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Inserting an instance into MongoDB is simple:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;val collection = database.getCollection[Person](&amp;quot;People&amp;quot;).withCodecRegistry(codecRegistry)
+val person: Person = Person(&amp;quot;Ada&amp;quot;, &amp;quot;Lovelace&amp;quot;)
+collection.insertOne(person).results() // results() is the custom blocking implicit used in the quick tour.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Querying and retrieving &lt;code&gt;Person&lt;/code&gt; instances is also super simple:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;collection.find().printResults() // printResults is the helper also used in the quick tour.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;sealed-classes-and-adts:f6e2133bab10204926d960626000d5d7&#34;&gt;Sealed classes and ADTs&lt;/h3&gt;
+
+&lt;p&gt;Hierarchical class structures are supported via sealed classes. Each subclass is handled specifically by the generated codec, so you only
+need create a &lt;code&gt;CodecProvider&lt;/code&gt; for the parent sealed class. Internally an extra field (&lt;code&gt;_t&lt;/code&gt;) is stored alongside the data so that
+the correct subclass can be hydrated when decoding the data.  Below is an example of a tree like structure containing branch and leaf nodes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;sealed class Tree
+case class Branch(b1: Tree, b2: Tree, value: Int) extends Tree
+case class Leaf(value: Int) extends Tree
+
+val codecRegistry = fromRegistries( fromProviders(classOf[Tree]), DEFAULT_CODEC_REGISTRY )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;breaking-changes:f6e2133bab10204926d960626000d5d7&#34;&gt;Breaking changes&lt;/h2&gt;
+
+&lt;p&gt;The scala driver follows semantic versioning, so the 2.0.0 release indicidates there have been some API breaking changes. However, they really are minimal and shouldn&amp;rsquo;t impact most users of the driver.&lt;/p&gt;
+
+&lt;p&gt;The implicit default type for various methods in the &lt;code&gt;MongoCollection&lt;/code&gt; class in 1.0 was &lt;code&gt;Document&lt;/code&gt;. This was a bug as they should have been
+the same type as the collection itself. For example with &lt;code&gt;MongoCollection[Person].find()&lt;/code&gt; in 1.0 it would have returned an &lt;code&gt;Observable[Document]&lt;/code&gt;. This is obviously incorrect and has been fixed in 2.0 to return an &lt;code&gt;Observable[Person]&lt;/code&gt;. Not many people have been impacted by this as it was only an implicit type and could explicity be declared: &lt;code&gt;MongoCollection[Person].find[Person]()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The other potentially breaking change is the introduction of a &lt;code&gt;SingleObservable&lt;/code&gt; which represents an &lt;code&gt;Observable&lt;/code&gt; containing only a single item. The implicit &lt;code&gt;SingleObservable[T].toFuture()&lt;/code&gt; method returns &lt;code&gt;Future[T]&lt;/code&gt;, whereas &lt;code&gt;Observable[T].toFuture()&lt;/code&gt; returns &lt;code&gt;Future[Seq[T]]&lt;/code&gt;. This may catch some users out however, most users of these single result Observables used the &lt;code&gt;head()&lt;/code&gt; method to get a single item future, so won&amp;rsquo;t be impacted.&lt;/p&gt;
+
+&lt;h2 id=&#34;changable-executioncontexts:f6e2133bab10204926d960626000d5d7&#34;&gt;Changable ExecutionContexts&lt;/h2&gt;
+
+&lt;p&gt;The other main change is the introduction of the &lt;code&gt;Observable[T].observeOn(context: ExecutionContext)&lt;/code&gt; implicit. This allows for computation to take place on alternative ExecutionContexts, handy for some long running or computationally heavy Observables.&lt;/p&gt;
+
+&lt;h2 id=&#34;feedback-wanted:f6e2133bab10204926d960626000d5d7&#34;&gt;Feedback wanted&lt;/h2&gt;
+
+&lt;p&gt;The 2.0 driver is available from:  &lt;code&gt;&amp;quot;org.mongodb.scala&amp;quot; %% &amp;quot;mongo-scala-driver&amp;quot; % &amp;quot;2.0.0&amp;quot;&lt;/code&gt;. For more information and examples see the &lt;a href=&#34;http://mongodb.github.io/mongo-scala-driver/2.0/&#34;&gt;driver documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We would love to have your feedback on the new driver, so please feel free to post to the &lt;a href=&#34;https://groups.google.com/forum/#!forum/mongodb-user&#34;&gt;MongoDB User&lt;/a&gt; mailing list.  For feature requests or bug reports please use &lt;a href=&#34;https://jira.mongodb.org/browse/SCALA/&#34;&gt;Jira project&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Enjoy!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>MongoDB Scala Connector releases!</title>

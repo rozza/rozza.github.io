@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB Scala Driver 2.0 released &middot; Ross Lawley</title>
+
+    <meta name="description" content="MongoDB Scala Driver 2.0 released">
+
+    <meta name="generator" content="Hugo 0.14" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="MongoDB Scala Driver 2.0 released &middot; Ross Lawley">
+    <meta name="twitter:description" content="MongoDB Scala Driver 2.0 released">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="MongoDB Scala Driver 2.0 released &middot; Ross Lawley">
+    <meta property="og:description" content="MongoDB Scala Driver 2.0 released">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="http://rosslawley.co.uk/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Ross Lawley" href="http://rosslawley.co.uk/index.xml" />
+    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://rosslawley.co.uk">Ross Lawley</a></h1>
+            <h2 class="brand-tagline"> Some techincal musings </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/RossC0"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/rozza "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://rosslawley.co.uk/index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">31 Mar 2017, 13:15</h1>
+                <section class="post">
+                    <header class="post-header pure-g">
+                        <div class="pure-u-4-5">
+                        <a href="http://rosslawley.co.uk/mongodb-scala-driver-2.0/" class="post-title">MongoDB Scala Driver 2.0 released</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under
+                                
+                                <a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-reactive" href="http://rosslawley.co.uk/categories/reactive">reactive</a><a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-jvm" href="http://rosslawley.co.uk/categories/jvm">jvm</a>
+                            
+                        </p>
+                        </div>
+                        <div class="post-share pure-u-1-5">
+                            <div class="post-share-links">
+                                <h4 style="">Share</h4>
+                                
+                                <a href="#" data-type="twitter" data-url="http://rosslawley.co.uk/mongodb-scala-driver-2.0/" data-description="MongoDB Scala Driver 2.0 released" data-via="RossC0" class="prettySocial fa fa-twitter"></a>
+                                
+                            </div>
+                          </div>
+                    </header>
+                    <div class="post-description">
+                        
+
+<p>The 2.0.0 version of the official Scala Driver for MongoDB has been released!</p>
+
+<p><img style="max-width: 100%;" src="/images/scala.jpg"></p>
+
+<h2 id="case-class-support:f6e2133bab10204926d960626000d5d7">Case Class support</h2>
+
+<p>I&rsquo;m really happy to announce the introduction of case class support, making it much easier to use your domain models with MongoDB. Internally Codecs are used to convert datatypes to and from <a href="http://bsonspec.org">BSON</a> - the internal data format for MongoDB. The 2.0 release includes a Macro that can create a codecs from case classes. The encoding and decoding the values of each field still uses the codec registry, so any users with custom codecs can still happily use these Macro based codecs.</p>
+
+<p>To show how simple it is we can use the following <code>Person</code> case class as an example:</p>
+
+<pre><code class="language-scala">case class Person(_id: ObjectId, firstName: String, lastName: String)
+</code></pre>
+
+<p>Notice, the <code>_id</code> field, this is a special field in MongoDB because it represents the primary key. It&rsquo;s advisable to include <code>_id</code> field in your case classes as it gives access to the primary key. When inserting a BSON document into MongoDB if it doesn&rsquo;t contain the <code>_id</code> field one is added automatically. By adding a companion object an <code>_id</code> can be automatically generated:</p>
+
+<pre><code class="language-scala">object Person {
+  def apply(firstName: String, lastName: String): Person =
+    Person(new ObjectId(), firstName, lastName)
+}
+</code></pre>
+
+<p>Creating a CodecProvider for <code>Person</code> is simple:</p>
+
+<pre><code class="language-scala">val personCodecProvider = Macros.createCodecProvider[Person]()
+</code></pre>
+
+<p>There is also an implicit helper that will create codec providers for your case classes by just passing in the class eg:</p>
+
+<pre><code class="language-scala">import org.mongodb.scala.bson.codecs.Macros._
+import org.mongodb.scala.bson.codecs.DEFAULT_CODEC_REGISTRY
+import org.bson.codecs.configuration.CodecRegistries.{fromRegistries, fromProviders}
+
+val codecRegistry = fromRegistries(fromProviders(classOf[Person], classOf[MyOtherCaseClass]), DEFAULT_CODEC_REGISTRY)
+</code></pre>
+
+<p>Inserting an instance into MongoDB is simple:</p>
+
+<pre><code class="language-scala">val collection = database.getCollection[Person](&quot;People&quot;).withCodecRegistry(codecRegistry)
+val person: Person = Person(&quot;Ada&quot;, &quot;Lovelace&quot;)
+collection.insertOne(person).results() // results() is the custom blocking implicit used in the quick tour.
+</code></pre>
+
+<p>Querying and retrieving <code>Person</code> instances is also super simple:</p>
+
+<pre><code class="language-scala">collection.find().printResults() // printResults is the helper also used in the quick tour.
+</code></pre>
+
+<h3 id="sealed-classes-and-adts:f6e2133bab10204926d960626000d5d7">Sealed classes and ADTs</h3>
+
+<p>Hierarchical class structures are supported via sealed classes. Each subclass is handled specifically by the generated codec, so you only
+need create a <code>CodecProvider</code> for the parent sealed class. Internally an extra field (<code>_t</code>) is stored alongside the data so that
+the correct subclass can be hydrated when decoding the data.  Below is an example of a tree like structure containing branch and leaf nodes:</p>
+
+<pre><code class="language-scala">sealed class Tree
+case class Branch(b1: Tree, b2: Tree, value: Int) extends Tree
+case class Leaf(value: Int) extends Tree
+
+val codecRegistry = fromRegistries( fromProviders(classOf[Tree]), DEFAULT_CODEC_REGISTRY )
+</code></pre>
+
+<h2 id="breaking-changes:f6e2133bab10204926d960626000d5d7">Breaking changes</h2>
+
+<p>The scala driver follows semantic versioning, so the 2.0.0 release indicidates there have been some API breaking changes. However, they really are minimal and shouldn&rsquo;t impact most users of the driver.</p>
+
+<p>The implicit default type for various methods in the <code>MongoCollection</code> class in 1.0 was <code>Document</code>. This was a bug as they should have been
+the same type as the collection itself. For example with <code>MongoCollection[Person].find()</code> in 1.0 it would have returned an <code>Observable[Document]</code>. This is obviously incorrect and has been fixed in 2.0 to return an <code>Observable[Person]</code>. Not many people have been impacted by this as it was only an implicit type and could explicity be declared: <code>MongoCollection[Person].find[Person]()</code>.</p>
+
+<p>The other potentially breaking change is the introduction of a <code>SingleObservable</code> which represents an <code>Observable</code> containing only a single item. The implicit <code>SingleObservable[T].toFuture()</code> method returns <code>Future[T]</code>, whereas <code>Observable[T].toFuture()</code> returns <code>Future[Seq[T]]</code>. This may catch some users out however, most users of these single result Observables used the <code>head()</code> method to get a single item future, so won&rsquo;t be impacted.</p>
+
+<h2 id="changable-executioncontexts:f6e2133bab10204926d960626000d5d7">Changable ExecutionContexts</h2>
+
+<p>The other main change is the introduction of the <code>Observable[T].observeOn(context: ExecutionContext)</code> implicit. This allows for computation to take place on alternative ExecutionContexts, handy for some long running or computationally heavy Observables.</p>
+
+<h2 id="feedback-wanted:f6e2133bab10204926d960626000d5d7">Feedback wanted</h2>
+
+<p>The 2.0 driver is available from:  <code>&quot;org.mongodb.scala&quot; %% &quot;mongo-scala-driver&quot; % &quot;2.0.0&quot;</code>. For more information and examples see the <a href="http://mongodb.github.io/mongo-scala-driver/2.0/">driver documentation</a>.</p>
+
+<p>We would love to have your feedback on the new driver, so please feel free to post to the <a href="https://groups.google.com/forum/#!forum/mongodb-user">MongoDB User</a> mailing list.  For feature requests or bug reports please use <a href="https://jira.mongodb.org/browse/SCALA/">Jira project</a>.</p>
+
+<p>Enjoy!</p>
+
+                    </div>
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rozza';
+    var disqus_identifier = 'http:\/\/rosslawley.co.uk\/mongodb-scala-driver-2.0\/';
+    var disqus_title = 'MongoDB Scala Driver 2.0 released';
+    var disqus_url = 'http:\/\/rosslawley.co.uk\/mongodb-scala-driver-2.0\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="http://rosslawley.co.uk/js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-716284-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

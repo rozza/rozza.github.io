@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://rosslawley.co.uk/</loc>
-    <lastmod>2016-09-06T17:10:30+01:00</lastmod>
+    <lastmod>2017-03-31T13:15:28+01:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://rosslawley.co.uk/mongodb-scala-driver-2.0/</loc>
+    <lastmod>2017-03-31T13:15:28+01:00</lastmod>
   </url>
   
   <url>
