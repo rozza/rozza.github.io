@@ -69,6 +69,43 @@
             
             <div class="posts">
                 
+                <h1 class="content-subhead">04 Aug 2017, 10:10</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/mongodb-pojo-support/" class="post-title">MongoDB POJO Support</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under
+                                
+                                <a class="post-category post-category-java" href="http://rosslawley.co.uk/categories/java">java</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-nosql" href="http://rosslawley.co.uk/categories/nosql">nosql</a><a class="post-category post-category-jvm" href="http://rosslawley.co.uk/categories/jvm">jvm</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>I&rsquo;m really pleased to announce that version 3.5.0 of the <a href="http://mongodb.github.io/mongo-java-driver/3.5/">MongoDB Java Driver</a> has been released with POJO (Plain Old Java Object) support!</p>
+
+<h2 id="codecs:ea33a3f7b0c8cdb3fb02a66bec2ef879">Codecs</h2>
+
+<p>MongoDB uses <a href="http://bsonspec.org">BSON</a>, a binary super set of JSON, for its wire protocol and storage format. The
+3.0 series of the Mongo Java Driver introduced <code>Codecs</code> - an improved way of translating these BSON into the native Java  objects eg: <code>Document</code> or <code>BsonDocument</code>.</p>
+
+<p>Codecs are an abstraction that determine how BSON data is converted and into what type.  As an abstraction, it can be quite verbose to write your own custom POJO Codecs. As each POJO requires a <code>Codec</code> implementation to be registered in the <code>CodecRegistry</code>. The amount of code required to support an application with tens of POJOs was often seen as a barrier to entry.</p>
+
+<p>However, the benefits of using Codecs for handling your POJOs were numerous.  It could easily simplify your main application code, as POJOs can map directly to the domain, making the code easier to reason. Another benefit is speed, Codecs can negate the need to use an intermediate map-like object before hyrdating your domain object. For this reason, it has been a long requested feature to make the creation of Codecs from POJOs automatic.</p>
+
+<h2 id="pojocodecprovider:ea33a3f7b0c8cdb3fb02a66bec2ef879">PojoCodecProvider</h2>
+
+                    </div>
+
+                    <footer class="post-footer">
+                    <a href='http://rosslawley.co.uk/mongodb-pojo-support/' class="pull-right">Read more &GreaterGreater;</a>
+                  </footer>
+                </section>
+                
                 <h1 class="content-subhead">31 Mar 2017, 13:15</h1>
                 <section class="post">
                     <header class="post-header">

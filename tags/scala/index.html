@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mongodb &middot; Ross Lawley</title>
+    <title>Scala &middot; Ross Lawley</title>
 
     <meta name="description" content="Some techincal musings">
 
     <meta name="generator" content="Hugo 0.14" />
     <meta name="twitter:card" content="summary">
     
-    <meta name="twitter:title" content="Mongodb &middot; Ross Lawley">
+    <meta name="twitter:title" content="Scala &middot; Ross Lawley">
     <meta name="twitter:description" content="Some techincal musings">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Mongodb &middot; Ross Lawley">
+    <meta property="og:title" content="Scala &middot; Ross Lawley">
     <meta property="og:description" content="Some techincal musings">
 
     <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
@@ -68,43 +68,6 @@
         <div>
             
             <div class="posts">
-                
-                <h1 class="content-subhead">04 Aug 2017, 10:10</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="http://rosslawley.co.uk/mongodb-pojo-support/" class="post-title">MongoDB POJO Support</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under
-                                
-                                <a class="post-category post-category-java" href="http://rosslawley.co.uk/categories/java">java</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-nosql" href="http://rosslawley.co.uk/categories/nosql">nosql</a><a class="post-category post-category-jvm" href="http://rosslawley.co.uk/categories/jvm">jvm</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p>I&rsquo;m really pleased to announce that version 3.5.0 of the <a href="http://mongodb.github.io/mongo-java-driver/3.5/">MongoDB Java Driver</a> has been released with POJO (Plain Old Java Object) support!</p>
-
-<h2 id="codecs:ea33a3f7b0c8cdb3fb02a66bec2ef879">Codecs</h2>
-
-<p>MongoDB uses <a href="http://bsonspec.org">BSON</a>, a binary super set of JSON, for its wire protocol and storage format. The
-3.0 series of the Mongo Java Driver introduced <code>Codecs</code> - an improved way of translating these BSON into the native Java  objects eg: <code>Document</code> or <code>BsonDocument</code>.</p>
-
-<p>Codecs are an abstraction that determine how BSON data is converted and into what type.  As an abstraction, it can be quite verbose to write your own custom POJO Codecs. As each POJO requires a <code>Codec</code> implementation to be registered in the <code>CodecRegistry</code>. The amount of code required to support an application with tens of POJOs was often seen as a barrier to entry.</p>
-
-<p>However, the benefits of using Codecs for handling your POJOs were numerous.  It could easily simplify your main application code, as POJOs can map directly to the domain, making the code easier to reason. Another benefit is speed, Codecs can negate the need to use an intermediate map-like object before hyrdating your domain object. For this reason, it has been a long requested feature to make the creation of Codecs from POJOs automatic.</p>
-
-<h2 id="pojocodecprovider:ea33a3f7b0c8cdb3fb02a66bec2ef879">PojoCodecProvider</h2>
-
-                    </div>
-
-                    <footer class="post-footer">
-                    <a href='http://rosslawley.co.uk/mongodb-pojo-support/' class="pull-right">Read more &GreaterGreater;</a>
-                  </footer>
-                </section>
                 
                 <h1 class="content-subhead">31 Mar 2017, 13:15</h1>
                 <section class="post">
@@ -306,123 +269,8 @@ With that in mind we&rsquo;ve written a totally new idiomatic connector for spar
                   </footer>
                 </section>
                 
-                <h1 class="content-subhead">23 Apr 2014, 00:00</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/" class="post-title">How to: Handle multiple Scala versions</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under
-                                
-                                <a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-library" href="http://rosslawley.co.uk/categories/library">library</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a><a class="post-category post-category-jvm" href="http://rosslawley.co.uk/categories/jvm">jvm</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p>I recently upgraded <a href="http://mongodb.github.io/casbah/">Casbah</a> to support the latest Scala 2.11 release and for the first time when supporting multiple Scala versions I hit a stumbling block.  If you&rsquo;re writing a library that wants to support multiple versions of Scala in a single code base, it&rsquo;s generally easy isn&rsquo;t it? Thankfully, it is as <a href="http://www.scala-sbt.org/">sbt</a> can do the heavy lifting for you.</p>
-
-<h2 id="three-steps-to-success:7a5c4c34d420fcc6185eaa05487dbc11">Three steps to success</h2>
-
-<p>The sbt documentation covers the basics nicely in their <a href="http://www.scala-sbt.org/release/docs/Detailed-Topics/Cross-Build.html">cross build</a> documentation.  But what&rsquo;s the path to success?</p>
-
-                    </div>
-
-                    <footer class="post-footer">
-                    <a href='http://rosslawley.co.uk/how-to-handle-multiple-scala-versions/' class="pull-right">Read more &GreaterGreater;</a>
-                  </footer>
-                </section>
-                
-                <h1 class="content-subhead">06 Nov 2013, 00:00</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="http://rosslawley.co.uk/rx-java/" class="post-title">RxJava - understandably reactive</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under
-                                
-                                <a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-RxJava" href="http://rosslawley.co.uk/categories/rxjava">RxJava</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-reactive" href="http://rosslawley.co.uk/categories/reactive">reactive</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a><a class="post-category post-category-jvm" href="http://rosslawley.co.uk/categories/jvm">jvm</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p>Reactive programing is hot stuff at the moment and the
-<a href="https://www.coursera.org/course/reactive">Coursera Principles of Reactive Programming</a>
-course has <strong>just</strong> started (its not too late to enroll).</p>
-
-<p>Recently, I&rsquo;ve been hearing good things about <a href="https://github.com/Netflix/RxJava">RxJava</a> (
-a port of .Net&rsquo;s <a href="http://msdn.microsoft.com/en-gb/data/gg577609.aspx">Reactive extensions</a>
-) so I wanted to learn some more. Then I stumbled upon a video from a recent
-<a href="http://www.meetup.com/SF-Scala/">SF Scala</a> meetup
-which covered what it is and how they implemented the core and then added
-support for other JVM languages.</p>
-
-                    </div>
-
-                    <footer class="post-footer">
-                    <a href='http://rosslawley.co.uk/rx-java/' class="pull-right">Read more &GreaterGreater;</a>
-                  </footer>
-                </section>
-                
-                <h1 class="content-subhead">24 Sep 2013, 00:00</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="http://rosslawley.co.uk/typesafe-activator/" class="post-title">Typesafe&#39;s Activator</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under
-                                
-                                <a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-play" href="http://rosslawley.co.uk/categories/play">play</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-reactive" href="http://rosslawley.co.uk/categories/reactive">reactive</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a><a class="post-category post-category-jvm" href="http://rosslawley.co.uk/categories/jvm">jvm</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p>Yesterday the <a href="http://typesafe.com/blog/announcing-activator-10-create-reactive-apps-in-minutes">Typesafe Activator</a>
-hit 1.0. If you haven&rsquo;t heard about it and use scala or the jvm then take five
-minutes and check it out - its worth it.</p>
-
-<h1 id="what-is-it:8f899c775a0faeb02adf96bdfce96cff">What is it?</h1>
-
-<p>My recommendation alone not enough and you what to know more about it before
-installing it?  No problems, let me convince you.</p>
-
-<blockquote>
-<p>Typesafe Activator is a local web &amp; command-line tool that helps developers
-get started with the Typesafe Platform.</p>
-</blockquote>
-
-                    </div>
-
-                    <footer class="post-footer">
-                    <a href='http://rosslawley.co.uk/typesafe-activator/' class="pull-right">Read more &GreaterGreater;</a>
-                  </footer>
-                </section>
-                
             </div>
             
-<div class="pagination">
-  <nav role="pagination" class="post-list-pagination">
-      
-    <span class="post-list-pagination-item post-list-pagination-item-current">Page 1 of 2</span>
-    
-      <a href="/categories/mongodb/page/2/" class="post-list-pagination-item pure-button post-list-pagination-item-next">
-        Older&nbsp;<i class="fa fa-angle-double-right"></i>
-      </a>
-    
-  </nav>
-</div>
-
 
             <div class="footer">
     <div class="pure-menu pure-menu-horizontal pure-menu-open">

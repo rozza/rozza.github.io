@@ -6,8 +6,71 @@
     <description>Recent content on Ross Lawley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 31 Mar 2017 13:15:28 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 04 Aug 2017 10:10:30 +0100</lastBuildDate>
     <atom:link href="http://rosslawley.co.uk/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>MongoDB POJO Support</title>
+      <link>http://rosslawley.co.uk/mongodb-pojo-support/</link>
+      <pubDate>Fri, 04 Aug 2017 10:10:30 +0100</pubDate>
+      
+      <guid>http://rosslawley.co.uk/mongodb-pojo-support/</guid>
+      <description>
+
+&lt;p&gt;I&amp;rsquo;m really pleased to announce that version 3.5.0 of the &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/&#34;&gt;MongoDB Java Driver&lt;/a&gt; has been released with POJO (Plain Old Java Object) support!&lt;/p&gt;
+
+&lt;h2 id=&#34;codecs:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;Codecs&lt;/h2&gt;
+
+&lt;p&gt;MongoDB uses &lt;a href=&#34;http://bsonspec.org&#34;&gt;BSON&lt;/a&gt;, a binary super set of JSON, for its wire protocol and storage format. The
+3.0 series of the Mongo Java Driver introduced &lt;code&gt;Codecs&lt;/code&gt; - an improved way of translating these BSON into the native Java  objects eg: &lt;code&gt;Document&lt;/code&gt; or &lt;code&gt;BsonDocument&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Codecs are an abstraction that determine how BSON data is converted and into what type.  As an abstraction, it can be quite verbose to write your own custom POJO Codecs. As each POJO requires a &lt;code&gt;Codec&lt;/code&gt; implementation to be registered in the &lt;code&gt;CodecRegistry&lt;/code&gt;. The amount of code required to support an application with tens of POJOs was often seen as a barrier to entry.&lt;/p&gt;
+
+&lt;p&gt;However, the benefits of using Codecs for handling your POJOs were numerous.  It could easily simplify your main application code, as POJOs can map directly to the domain, making the code easier to reason. Another benefit is speed, Codecs can negate the need to use an intermediate map-like object before hyrdating your domain object. For this reason, it has been a long requested feature to make the creation of Codecs from POJOs automatic.&lt;/p&gt;
+
+&lt;h2 id=&#34;pojocodecprovider:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;PojoCodecProvider&lt;/h2&gt;
+
+&lt;p&gt;The mechanims for POJO support is via the &lt;code&gt;PojoCodecProvider&lt;/code&gt; which provides a builder for configuring how and what POJOs to support. The builder allows registering of classes and packages, there is even a setting that means the provider to automatically try and handle any POJO it sees. The example below will create a &lt;code&gt;CodecRegistry&lt;/code&gt; that will handle any POJO that meets the Java bean specification:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import org.bson.codecs.configuration.CodecProvider;
+import org.bson.codecs.configuration.CodecRegistry;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+
+// Create a CodecRegistry containing the PojoCodecProvider instance.
+CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
+CodecRegistry pojoCodecRegistry = fromRegistries(defaultCodecRegistry, fromProviders(pojoCodecProvider));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; When using the automatic setting with &lt;code&gt;PojoCodecProvider&lt;/code&gt; always ensure that its the last &lt;code&gt;CodecProvider&lt;/code&gt; or &lt;code&gt;CodecRegistry&lt;/code&gt;. Otherwise it will try and handle any type it sees that has at least one serializable or deserializable property.&lt;/p&gt;
+
+&lt;h2 id=&#34;fun-with-pojos:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;Fun with POJOs&lt;/h2&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve configured your &lt;code&gt;CodecRegistry&lt;/code&gt; it can be used when creating a &lt;code&gt;MongoClient&lt;/code&gt;, a &lt;code&gt;MongoDatabase&lt;/code&gt; or a &lt;code&gt;MongoCollection&lt;/code&gt;.  The following example gets a list of all &lt;code&gt;members&lt;/code&gt; from MongoDB:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;MongoDatabase database = mongoClient.getDatabase(&amp;quot;members&amp;quot;).withCodecRegistry(pojoCodecRegistry);
+MongoCollection&amp;lt;Person&amp;gt; collection = database.getCollection(&amp;quot;members&amp;quot;, Person.class);
+
+List&amp;lt;Person&amp;gt; members = collection.find().into(new ArrayList&amp;lt;Person&amp;gt;());
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, using POJOs with MongoDB is super simple! And using the &lt;code&gt;automatic&lt;/code&gt; setting you can use &lt;em&gt;any&lt;/em&gt; Java bean!&lt;/p&gt;
+
+&lt;h2 id=&#34;customising-pojos:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;Customising POJOs&lt;/h2&gt;
+
+&lt;p&gt;There are two main ways to customise how POJOs are serialised / deserialised: &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/bson/pojos/#conventions&#34;&gt;Conventions&lt;/a&gt; and ClassModels.   The underlying abstractions used by the &lt;code&gt;PojoCodecProvider&lt;/code&gt; are ClassModels and PropertyModels.  As ClassModels are complex, its not recommended that users build and create them from scratch, but rather modify them via the Conventions mechanism.&lt;/p&gt;
+
+&lt;p&gt;Conventions are a handy abstraction that take and modify the &lt;code&gt;ClassModelBuilder&lt;/code&gt; before its made into an immutable &lt;code&gt;ClassModel&lt;/code&gt;. The default Conventions handle the &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/bson/pojos/#annotations&#34;&gt;default annotations&lt;/a&gt; and have special handling for &lt;code&gt;id&lt;/code&gt; properties.  Writing a custom &lt;code&gt;Convention&lt;/code&gt; is trivial so supporting alternative annotations is easy. Conventions can be registered on the &lt;code&gt;PojoCodecProvider&lt;/code&gt; and they will be run in order they are supplied.&lt;/p&gt;
+
+&lt;h2 id=&#34;available-now:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;Available now&lt;/h2&gt;
+
+&lt;p&gt;POJO support is available now! It includes support for Java beans, as well as abstract classes, interfaces and nested generic types. So please try it out!&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s loads more information in the &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/bson/pojos/&#34;&gt;POJO documentation&lt;/a&gt; as well as a &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/driver/getting-started/quick-start-pojo/&#34;&gt;quick-start guide&lt;/a&gt; to get you started.&lt;/p&gt;
+
+&lt;p&gt;Enjoy!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>MongoDB Scala Driver 2.0 released</title>
@@ -1012,82 +1075,6 @@ that have been fixed as part of this release.&lt;/p&gt;
 All being well 0.8.0RC1 will be released as 0.8.0 in a week.&lt;/p&gt;
 
 &lt;p&gt;&lt;small&gt;* Want to get involved in MongoEngine? We&amp;rsquo;re looking for help so please ping me!&lt;/small&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Automate all the things</title>
-      <link>http://rosslawley.co.uk/automate-all-the-things/</link>
-      <pubDate>Wed, 20 Mar 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://rosslawley.co.uk/automate-all-the-things/</guid>
-      <description>
-
-&lt;h1 id=&#34;disaster-strikes:d0d5301291dac9bc7676a826a8ff4f68&#34;&gt;Disaster Strikes&lt;/h1&gt;
-
-&lt;p&gt;Last week my Mac book ran out of space again, this had been going on for some time and I&amp;rsquo;d had enough.
-I was spending an ever increasing amount of much time hunting down rogue space invaders on my small 120gb hard drive.  So &lt;strong&gt;something&lt;/strong&gt; had to be done.&lt;/p&gt;
-
-&lt;p class=&#34;text-center&#34;&gt;
-    &lt;strong&gt;In times like this there is only one solution!&lt;/strong&gt;&lt;br&gt;
-    &lt;img src=&#34;http://rosslawley.co.uk/images/mrragequit.jpg&#34; title=&#34;Original image: http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&#34; /&gt; &lt;br&gt;
-    &lt;small&gt; Source: &lt;a href=&#34;http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&#34;/&gt;http://leviathyn.com/games/news/2012/06/14/your-worst-rage-quit-moment/&lt;/a&gt;&lt;/small&gt;
-&lt;/p&gt;
-
-&lt;p&gt;When upgrading to Mountain Lion I decided to start afresh and reformat my hard drive.
-Normally starting from scratch would be a royal pain in the backside, taking many days to get things installed and allow me to get back to coding.
-Then I remembered hearing about &lt;a href=&#34;http://boxen.github.com&#34;&gt;boxen&lt;/a&gt; which could give me an easy way to rebuild and &lt;em&gt;maintain&lt;/em&gt; the software on my Mac and hatched a plan of devops style automation!&lt;/p&gt;
-
-&lt;h1 id=&#34;my-automation-trifecta:d0d5301291dac9bc7676a826a8ff4f68&#34;&gt;My automation trifecta&lt;/h1&gt;
-
-&lt;h2 id=&#34;boxen:d0d5301291dac9bc7676a826a8ff4f68&#34;&gt;Boxen&lt;/h2&gt;
-
-&lt;p&gt;Boxen is built on top of &lt;a href=&#34;https://puppetlabs.com/&#34;&gt;puppet&lt;/a&gt; and it allows you to describe in code your Mac configuration and what software to install on it. To get started just copy githubs&amp;rsquo; starter &lt;a href=&#34;https://github.com/boxen/our-boxen&#34;&gt;boxen repo&lt;/a&gt; and then add your requirements.
-I had to do two things to get my software stack automated:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;In the main puppetfile link to the github sources and versions&lt;/li&gt;
-&lt;li&gt;In my personal puppet manifest (modules/people/manifests/rozza.pp) include the classes for the software I want installed.&lt;/li&gt;
-&lt;li&gt;Profit?!&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Check it into github and run boxen. Volia a few minutes later my initial stack comprising; &lt;em&gt;Adium, Chrome, Dropbox, Intellij, Iterm2, Skype, Slate, Spotify, Sublime Text 2, Vagrant, Virtualbox, wget and Zsh&lt;/em&gt; were all installed and ready to use.
-No wasting time hunting down .dmgs and navigating through their respective websites to download them.
-If you want to know more about boxen then check out this &lt;a href=&#34;https://speakerdeck.com/wfarr/boxen&#34;&gt;presentation&lt;/a&gt;.
-All my configuration is now on github &lt;a href=&#34;https://github.com/rozza/my-boxen/&#34;&gt;my-boxen&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;dotfiles:d0d5301291dac9bc7676a826a8ff4f68&#34;&gt;dotfiles&lt;/h2&gt;
-
-&lt;p&gt;Boxen is great as it automates the software installed on my mac but what about my general configuration? I could use Boxen and puppet to define and create &lt;em&gt;all&lt;/em&gt; my configuration files - but that seems unnecessarily complex and to me there is a separation of concerns. So when I asked on twitter what other folk do &lt;a href=&#34;http://intranation.com&#34;&gt;Brad Wright&lt;/a&gt; pointed me to his dotfiles.&lt;/p&gt;
-
-&lt;p&gt;After a quick investigation I duly &lt;span style=&#34;text-decoration:line-through;&#34;&gt;raided and plundered&lt;/span&gt; took inspiration from and now I have all my personal dot file configurations for things like &lt;em&gt;github, slate and zsh&lt;/em&gt; backed up on github.  What about private configuration files? Where it makes sense any files with a &lt;code&gt;.local_&lt;/code&gt; prefix will be sourced by their respective core configuration file.  That way I can have different configrations across machines - I can have a core &lt;code&gt;.bashrc&lt;/code&gt; and a local version on each machine eg &lt;code&gt;.local_bashrc&lt;/code&gt;.  All my public &lt;a href=&#34;https://github.com/rozza/dotfiles&#34;&gt;dotfiles&lt;/a&gt; are on github so plunder away!&lt;/p&gt;
-
-&lt;h2 id=&#34;vagrant:d0d5301291dac9bc7676a826a8ff4f68&#34;&gt;Vagrant&lt;/h2&gt;
-
-&lt;p&gt;The final piece in my automation puzzle is Vagrant.
-I&amp;rsquo;ve been a huge fan of using vm&amp;rsquo;s for development for years and more recently &lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;vagrant&lt;/a&gt; has been my tool of choice.
-Installing things with apt-get on a linux vm just saves me time and pre-&lt;a href=&#34;http://10gen.com&#34;&gt;10gen&lt;/a&gt; my vms used to mirror my production environment.
-As its a vm all I had to do is back it up before I wiped the hard drive and I could use that to get up and running
-(I know its vagrant and had I been more diligent all I would have needed was the vagrant file and base box).&lt;/p&gt;
-
-&lt;p&gt;When working on a vm, I still like to use sublime text on my mac to code.  So the way to achieve this is to nfs the code directory from the Mac into the vm - I used to do it the other way round, but having the code local to the mac makes editing very snappy.  The last thing to do was back up my code directory - I was surprised that all my checked out code weighs in at a hefty 13 gigs!&lt;/p&gt;
-
-&lt;h1 id=&#34;automation-heaven:d0d5301291dac9bc7676a826a8ff4f68&#34;&gt;Automation heaven&lt;/h1&gt;
-
-&lt;p class=&#34;text-center&#34;&gt;
-    &lt;img src=&#34;http://rosslawley.co.uk/images/make-a-boxen.png&#34; /&gt;&lt;br&gt;
-    &lt;small&gt; Source: &lt;a href=&#34;https://speakerdeck.com/wfarr/boxen&#34;/&gt;https://speakerdeck.com/wfarr/boxen&lt;/a&gt;&lt;/small&gt;
-&lt;/p&gt;
-
-&lt;p&gt;By using a combination of boxen, vagrant and dotfiles I massively reduced the time needed to rebuild my mac and get productive.
-By backing up 13gb of source code, it meant I managed to reformat, install Mountain Lion and configure my Mac and get coding again in under 3 hours!
-That included the time it took me to learn how to use boxen and setup dotfiles!&lt;/p&gt;
-
-&lt;p&gt;Of course I will tweak those repositories overtime but all my core configuration for my Mac is now in a git repo on github &lt;a href=&#34;https://github.com/rozza/my-boxen/&#34;&gt;my-boxen&lt;/a&gt; for the software and &lt;a href=&#34;https://github.com/rozza/dotfiles&#34;&gt;dotfiles&lt;/a&gt; for configuration.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m loving this adventure and if want to backup your software configuration or you&amp;rsquo;re getting a new Mac, then jump on board and automate all the things&amp;trade;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;. Feel free to clone / copy my repo&amp;rsquo;s all I ask is if you add something cool you either comment below or &lt;a href=&#34;http://twitter.com/RossC0&#34;&gt;tweet me&lt;/a&gt; so I can use it to should I need to!&lt;/p&gt;
 </description>
     </item>
     

@@ -6,8 +6,71 @@
     <description>Recent content in Mongodb on Ross Lawley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 31 Mar 2017 13:15:28 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 04 Aug 2017 10:10:30 +0100</lastBuildDate>
     <atom:link href="http://rosslawley.co.uk/categories/mongodb/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>MongoDB POJO Support</title>
+      <link>http://rosslawley.co.uk/mongodb-pojo-support/</link>
+      <pubDate>Fri, 04 Aug 2017 10:10:30 +0100</pubDate>
+      
+      <guid>http://rosslawley.co.uk/mongodb-pojo-support/</guid>
+      <description>
+
+&lt;p&gt;I&amp;rsquo;m really pleased to announce that version 3.5.0 of the &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/&#34;&gt;MongoDB Java Driver&lt;/a&gt; has been released with POJO (Plain Old Java Object) support!&lt;/p&gt;
+
+&lt;h2 id=&#34;codecs:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;Codecs&lt;/h2&gt;
+
+&lt;p&gt;MongoDB uses &lt;a href=&#34;http://bsonspec.org&#34;&gt;BSON&lt;/a&gt;, a binary super set of JSON, for its wire protocol and storage format. The
+3.0 series of the Mongo Java Driver introduced &lt;code&gt;Codecs&lt;/code&gt; - an improved way of translating these BSON into the native Java  objects eg: &lt;code&gt;Document&lt;/code&gt; or &lt;code&gt;BsonDocument&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Codecs are an abstraction that determine how BSON data is converted and into what type.  As an abstraction, it can be quite verbose to write your own custom POJO Codecs. As each POJO requires a &lt;code&gt;Codec&lt;/code&gt; implementation to be registered in the &lt;code&gt;CodecRegistry&lt;/code&gt;. The amount of code required to support an application with tens of POJOs was often seen as a barrier to entry.&lt;/p&gt;
+
+&lt;p&gt;However, the benefits of using Codecs for handling your POJOs were numerous.  It could easily simplify your main application code, as POJOs can map directly to the domain, making the code easier to reason. Another benefit is speed, Codecs can negate the need to use an intermediate map-like object before hyrdating your domain object. For this reason, it has been a long requested feature to make the creation of Codecs from POJOs automatic.&lt;/p&gt;
+
+&lt;h2 id=&#34;pojocodecprovider:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;PojoCodecProvider&lt;/h2&gt;
+
+&lt;p&gt;The mechanims for POJO support is via the &lt;code&gt;PojoCodecProvider&lt;/code&gt; which provides a builder for configuring how and what POJOs to support. The builder allows registering of classes and packages, there is even a setting that means the provider to automatically try and handle any POJO it sees. The example below will create a &lt;code&gt;CodecRegistry&lt;/code&gt; that will handle any POJO that meets the Java bean specification:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import org.bson.codecs.configuration.CodecProvider;
+import org.bson.codecs.configuration.CodecRegistry;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+
+// Create a CodecRegistry containing the PojoCodecProvider instance.
+CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
+CodecRegistry pojoCodecRegistry = fromRegistries(defaultCodecRegistry, fromProviders(pojoCodecProvider));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; When using the automatic setting with &lt;code&gt;PojoCodecProvider&lt;/code&gt; always ensure that its the last &lt;code&gt;CodecProvider&lt;/code&gt; or &lt;code&gt;CodecRegistry&lt;/code&gt;. Otherwise it will try and handle any type it sees that has at least one serializable or deserializable property.&lt;/p&gt;
+
+&lt;h2 id=&#34;fun-with-pojos:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;Fun with POJOs&lt;/h2&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve configured your &lt;code&gt;CodecRegistry&lt;/code&gt; it can be used when creating a &lt;code&gt;MongoClient&lt;/code&gt;, a &lt;code&gt;MongoDatabase&lt;/code&gt; or a &lt;code&gt;MongoCollection&lt;/code&gt;.  The following example gets a list of all &lt;code&gt;members&lt;/code&gt; from MongoDB:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;MongoDatabase database = mongoClient.getDatabase(&amp;quot;members&amp;quot;).withCodecRegistry(pojoCodecRegistry);
+MongoCollection&amp;lt;Person&amp;gt; collection = database.getCollection(&amp;quot;members&amp;quot;, Person.class);
+
+List&amp;lt;Person&amp;gt; members = collection.find().into(new ArrayList&amp;lt;Person&amp;gt;());
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, using POJOs with MongoDB is super simple! And using the &lt;code&gt;automatic&lt;/code&gt; setting you can use &lt;em&gt;any&lt;/em&gt; Java bean!&lt;/p&gt;
+
+&lt;h2 id=&#34;customising-pojos:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;Customising POJOs&lt;/h2&gt;
+
+&lt;p&gt;There are two main ways to customise how POJOs are serialised / deserialised: &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/bson/pojos/#conventions&#34;&gt;Conventions&lt;/a&gt; and ClassModels.   The underlying abstractions used by the &lt;code&gt;PojoCodecProvider&lt;/code&gt; are ClassModels and PropertyModels.  As ClassModels are complex, its not recommended that users build and create them from scratch, but rather modify them via the Conventions mechanism.&lt;/p&gt;
+
+&lt;p&gt;Conventions are a handy abstraction that take and modify the &lt;code&gt;ClassModelBuilder&lt;/code&gt; before its made into an immutable &lt;code&gt;ClassModel&lt;/code&gt;. The default Conventions handle the &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/bson/pojos/#annotations&#34;&gt;default annotations&lt;/a&gt; and have special handling for &lt;code&gt;id&lt;/code&gt; properties.  Writing a custom &lt;code&gt;Convention&lt;/code&gt; is trivial so supporting alternative annotations is easy. Conventions can be registered on the &lt;code&gt;PojoCodecProvider&lt;/code&gt; and they will be run in order they are supplied.&lt;/p&gt;
+
+&lt;h2 id=&#34;available-now:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;Available now&lt;/h2&gt;
+
+&lt;p&gt;POJO support is available now! It includes support for Java beans, as well as abstract classes, interfaces and nested generic types. So please try it out!&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s loads more information in the &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/bson/pojos/&#34;&gt;POJO documentation&lt;/a&gt; as well as a &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/driver/getting-started/quick-start-pojo/&#34;&gt;quick-start guide&lt;/a&gt; to get you started.&lt;/p&gt;
+
+&lt;p&gt;Enjoy!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>MongoDB Scala Driver 2.0 released</title>

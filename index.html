@@ -69,6 +69,43 @@
             
             <div class="posts">
                 
+                <h1 class="content-subhead">04 Aug 2017, 10:10</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="http://rosslawley.co.uk/mongodb-pojo-support/" class="post-title">MongoDB POJO Support</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under
+                                
+                                <a class="post-category post-category-java" href="http://rosslawley.co.uk/categories/java">java</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-nosql" href="http://rosslawley.co.uk/categories/nosql">nosql</a><a class="post-category post-category-jvm" href="http://rosslawley.co.uk/categories/jvm">jvm</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>I&rsquo;m really pleased to announce that version 3.5.0 of the <a href="http://mongodb.github.io/mongo-java-driver/3.5/">MongoDB Java Driver</a> has been released with POJO (Plain Old Java Object) support!</p>
+
+<h2 id="codecs:ea33a3f7b0c8cdb3fb02a66bec2ef879">Codecs</h2>
+
+<p>MongoDB uses <a href="http://bsonspec.org">BSON</a>, a binary super set of JSON, for its wire protocol and storage format. The
+3.0 series of the Mongo Java Driver introduced <code>Codecs</code> - an improved way of translating these BSON into the native Java  objects eg: <code>Document</code> or <code>BsonDocument</code>.</p>
+
+<p>Codecs are an abstraction that determine how BSON data is converted and into what type.  As an abstraction, it can be quite verbose to write your own custom POJO Codecs. As each POJO requires a <code>Codec</code> implementation to be registered in the <code>CodecRegistry</code>. The amount of code required to support an application with tens of POJOs was often seen as a barrier to entry.</p>
+
+<p>However, the benefits of using Codecs for handling your POJOs were numerous.  It could easily simplify your main application code, as POJOs can map directly to the domain, making the code easier to reason. Another benefit is speed, Codecs can negate the need to use an intermediate map-like object before hyrdating your domain object. For this reason, it has been a long requested feature to make the creation of Codecs from POJOs automatic.</p>
+
+<h2 id="pojocodecprovider:ea33a3f7b0c8cdb3fb02a66bec2ef879">PojoCodecProvider</h2>
+
+                    </div>
+
+                    <footer class="post-footer">
+                    <a href='http://rosslawley.co.uk/mongodb-pojo-support/' class="pull-right">Read more &GreaterGreater;</a>
+                  </footer>
+                </section>
+                
                 <h1 class="content-subhead">31 Mar 2017, 13:15</h1>
                 <section class="post">
                     <header class="post-header">
@@ -356,44 +393,6 @@ support for other JVM languages.</p>
 
                     <footer class="post-footer">
                     <a href='http://rosslawley.co.uk/rx-java/' class="pull-right">Read more &GreaterGreater;</a>
-                  </footer>
-                </section>
-                
-                <h1 class="content-subhead">24 Sep 2013, 00:00</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="http://rosslawley.co.uk/typesafe-activator/" class="post-title">Typesafe&#39;s Activator</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under
-                                
-                                <a class="post-category post-category-tech" href="http://rosslawley.co.uk/categories/tech">tech</a><a class="post-category post-category-play" href="http://rosslawley.co.uk/categories/play">play</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-reactive" href="http://rosslawley.co.uk/categories/reactive">reactive</a><a class="post-category post-category-scala" href="http://rosslawley.co.uk/categories/scala">scala</a><a class="post-category post-category-jvm" href="http://rosslawley.co.uk/categories/jvm">jvm</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p>Yesterday the <a href="http://typesafe.com/blog/announcing-activator-10-create-reactive-apps-in-minutes">Typesafe Activator</a>
-hit 1.0. If you haven&rsquo;t heard about it and use scala or the jvm then take five
-minutes and check it out - its worth it.</p>
-
-<h1 id="what-is-it:8f899c775a0faeb02adf96bdfce96cff">What is it?</h1>
-
-<p>My recommendation alone not enough and you what to know more about it before
-installing it?  No problems, let me convince you.</p>
-
-<blockquote>
-<p>Typesafe Activator is a local web &amp; command-line tool that helps developers
-get started with the Typesafe Platform.</p>
-</blockquote>
-
-                    </div>
-
-                    <footer class="post-footer">
-                    <a href='http://rosslawley.co.uk/typesafe-activator/' class="pull-right">Read more &GreaterGreater;</a>
                   </footer>
                 </section>
                 

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB POJO Support &middot; Ross Lawley</title>
+
+    <meta name="description" content="MongoDB Java Driver POJOs">
+
+    <meta name="generator" content="Hugo 0.14" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="MongoDB POJO Support &middot; Ross Lawley">
+    <meta name="twitter:description" content="MongoDB Java Driver POJOs">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="MongoDB POJO Support &middot; Ross Lawley">
+    <meta property="og:description" content="MongoDB Java Driver POJOs">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" href="http://rosslawley.co.uk/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="Ross Lawley" href="http://rosslawley.co.uk/index.xml" />
+    <link href="http://rosslawley.co.uk/favicon.png" rel="icon">
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="http://rosslawley.co.uk">Ross Lawley</a></h1>
+            <h2 class="brand-tagline"> Some techincal musings </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/RossC0"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/rozza "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="http://rosslawley.co.uk/index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">04 Aug 2017, 10:10</h1>
+                <section class="post">
+                    <header class="post-header pure-g">
+                        <div class="pure-u-4-5">
+                        <a href="http://rosslawley.co.uk/mongodb-pojo-support/" class="post-title">MongoDB POJO Support</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under
+                                
+                                <a class="post-category post-category-java" href="http://rosslawley.co.uk/categories/java">java</a><a class="post-category post-category-mongodb" href="http://rosslawley.co.uk/categories/mongodb">mongodb</a><a class="post-category post-category-nosql" href="http://rosslawley.co.uk/categories/nosql">nosql</a><a class="post-category post-category-jvm" href="http://rosslawley.co.uk/categories/jvm">jvm</a>
+                            
+                        </p>
+                        </div>
+                        <div class="post-share pure-u-1-5">
+                            <div class="post-share-links">
+                                <h4 style="">Share</h4>
+                                
+                                <a href="#" data-type="twitter" data-url="http://rosslawley.co.uk/mongodb-pojo-support/" data-description="MongoDB Java Driver POJOs" data-via="RossC0" class="prettySocial fa fa-twitter"></a>
+                                
+                            </div>
+                          </div>
+                    </header>
+                    <div class="post-description">
+                        
+
+<p>I&rsquo;m really pleased to announce that version 3.5.0 of the <a href="http://mongodb.github.io/mongo-java-driver/3.5/">MongoDB Java Driver</a> has been released with POJO (Plain Old Java Object) support!</p>
+
+<h2 id="codecs:ea33a3f7b0c8cdb3fb02a66bec2ef879">Codecs</h2>
+
+<p>MongoDB uses <a href="http://bsonspec.org">BSON</a>, a binary super set of JSON, for its wire protocol and storage format. The
+3.0 series of the Mongo Java Driver introduced <code>Codecs</code> - an improved way of translating these BSON into the native Java  objects eg: <code>Document</code> or <code>BsonDocument</code>.</p>
+
+<p>Codecs are an abstraction that determine how BSON data is converted and into what type.  As an abstraction, it can be quite verbose to write your own custom POJO Codecs. As each POJO requires a <code>Codec</code> implementation to be registered in the <code>CodecRegistry</code>. The amount of code required to support an application with tens of POJOs was often seen as a barrier to entry.</p>
+
+<p>However, the benefits of using Codecs for handling your POJOs were numerous.  It could easily simplify your main application code, as POJOs can map directly to the domain, making the code easier to reason. Another benefit is speed, Codecs can negate the need to use an intermediate map-like object before hyrdating your domain object. For this reason, it has been a long requested feature to make the creation of Codecs from POJOs automatic.</p>
+
+<h2 id="pojocodecprovider:ea33a3f7b0c8cdb3fb02a66bec2ef879">PojoCodecProvider</h2>
+
+<p>The mechanims for POJO support is via the <code>PojoCodecProvider</code> which provides a builder for configuring how and what POJOs to support. The builder allows registering of classes and packages, there is even a setting that means the provider to automatically try and handle any POJO it sees. The example below will create a <code>CodecRegistry</code> that will handle any POJO that meets the Java bean specification:</p>
+
+<pre><code class="language-java">import org.bson.codecs.configuration.CodecProvider;
+import org.bson.codecs.configuration.CodecRegistry;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+
+// Create a CodecRegistry containing the PojoCodecProvider instance.
+CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
+CodecRegistry pojoCodecRegistry = fromRegistries(defaultCodecRegistry, fromProviders(pojoCodecProvider));
+</code></pre>
+
+<p><strong>Note:</strong> When using the automatic setting with <code>PojoCodecProvider</code> always ensure that its the last <code>CodecProvider</code> or <code>CodecRegistry</code>. Otherwise it will try and handle any type it sees that has at least one serializable or deserializable property.</p>
+
+<h2 id="fun-with-pojos:ea33a3f7b0c8cdb3fb02a66bec2ef879">Fun with POJOs</h2>
+
+<p>Once you&rsquo;ve configured your <code>CodecRegistry</code> it can be used when creating a <code>MongoClient</code>, a <code>MongoDatabase</code> or a <code>MongoCollection</code>.  The following example gets a list of all <code>members</code> from MongoDB:</p>
+
+<pre><code class="language-java">MongoDatabase database = mongoClient.getDatabase(&quot;members&quot;).withCodecRegistry(pojoCodecRegistry);
+MongoCollection&lt;Person&gt; collection = database.getCollection(&quot;members&quot;, Person.class);
+
+List&lt;Person&gt; members = collection.find().into(new ArrayList&lt;Person&gt;());
+</code></pre>
+
+<p>As you can see, using POJOs with MongoDB is super simple! And using the <code>automatic</code> setting you can use <em>any</em> Java bean!</p>
+
+<h2 id="customising-pojos:ea33a3f7b0c8cdb3fb02a66bec2ef879">Customising POJOs</h2>
+
+<p>There are two main ways to customise how POJOs are serialised / deserialised: <a href="http://mongodb.github.io/mongo-java-driver/3.5/bson/pojos/#conventions">Conventions</a> and ClassModels.   The underlying abstractions used by the <code>PojoCodecProvider</code> are ClassModels and PropertyModels.  As ClassModels are complex, its not recommended that users build and create them from scratch, but rather modify them via the Conventions mechanism.</p>
+
+<p>Conventions are a handy abstraction that take and modify the <code>ClassModelBuilder</code> before its made into an immutable <code>ClassModel</code>. The default Conventions handle the <a href="http://mongodb.github.io/mongo-java-driver/3.5/bson/pojos/#annotations">default annotations</a> and have special handling for <code>id</code> properties.  Writing a custom <code>Convention</code> is trivial so supporting alternative annotations is easy. Conventions can be registered on the <code>PojoCodecProvider</code> and they will be run in order they are supplied.</p>
+
+<h2 id="available-now:ea33a3f7b0c8cdb3fb02a66bec2ef879">Available now</h2>
+
+<p>POJO support is available now! It includes support for Java beans, as well as abstract classes, interfaces and nested generic types. So please try it out!</p>
+
+<p>There&rsquo;s loads more information in the <a href="http://mongodb.github.io/mongo-java-driver/3.5/bson/pojos/">POJO documentation</a> as well as a <a href="http://mongodb.github.io/mongo-java-driver/3.5/driver/getting-started/quick-start-pojo/">quick-start guide</a> to get you started.</p>
+
+<p>Enjoy!</p>
+
+                    </div>
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'rozza';
+    var disqus_identifier = 'http:\/\/rosslawley.co.uk\/mongodb-pojo-support\/';
+    var disqus_title = 'MongoDB POJO Support';
+    var disqus_url = 'http:\/\/rosslawley.co.uk\/mongodb-pojo-support\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="http://hugo.spf13.com/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="http://rosslawley.co.uk/js/all.min.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-716284-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

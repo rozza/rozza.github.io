@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jvm on Ross Lawley</title>
+    <link>http://rosslawley.co.uk/tags/jvm/</link>
+    <description>Recent content in Jvm on Ross Lawley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 04 Aug 2017 10:10:30 +0100</lastBuildDate>
+    <atom:link href="http://rosslawley.co.uk/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>MongoDB POJO Support</title>
+      <link>http://rosslawley.co.uk/mongodb-pojo-support/</link>
+      <pubDate>Fri, 04 Aug 2017 10:10:30 +0100</pubDate>
+      
+      <guid>http://rosslawley.co.uk/mongodb-pojo-support/</guid>
+      <description>
+
+&lt;p&gt;I&amp;rsquo;m really pleased to announce that version 3.5.0 of the &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/&#34;&gt;MongoDB Java Driver&lt;/a&gt; has been released with POJO (Plain Old Java Object) support!&lt;/p&gt;
+
+&lt;h2 id=&#34;codecs:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;Codecs&lt;/h2&gt;
+
+&lt;p&gt;MongoDB uses &lt;a href=&#34;http://bsonspec.org&#34;&gt;BSON&lt;/a&gt;, a binary super set of JSON, for its wire protocol and storage format. The
+3.0 series of the Mongo Java Driver introduced &lt;code&gt;Codecs&lt;/code&gt; - an improved way of translating these BSON into the native Java  objects eg: &lt;code&gt;Document&lt;/code&gt; or &lt;code&gt;BsonDocument&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Codecs are an abstraction that determine how BSON data is converted and into what type.  As an abstraction, it can be quite verbose to write your own custom POJO Codecs. As each POJO requires a &lt;code&gt;Codec&lt;/code&gt; implementation to be registered in the &lt;code&gt;CodecRegistry&lt;/code&gt;. The amount of code required to support an application with tens of POJOs was often seen as a barrier to entry.&lt;/p&gt;
+
+&lt;p&gt;However, the benefits of using Codecs for handling your POJOs were numerous.  It could easily simplify your main application code, as POJOs can map directly to the domain, making the code easier to reason. Another benefit is speed, Codecs can negate the need to use an intermediate map-like object before hyrdating your domain object. For this reason, it has been a long requested feature to make the creation of Codecs from POJOs automatic.&lt;/p&gt;
+
+&lt;h2 id=&#34;pojocodecprovider:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;PojoCodecProvider&lt;/h2&gt;
+
+&lt;p&gt;The mechanims for POJO support is via the &lt;code&gt;PojoCodecProvider&lt;/code&gt; which provides a builder for configuring how and what POJOs to support. The builder allows registering of classes and packages, there is even a setting that means the provider to automatically try and handle any POJO it sees. The example below will create a &lt;code&gt;CodecRegistry&lt;/code&gt; that will handle any POJO that meets the Java bean specification:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import org.bson.codecs.configuration.CodecProvider;
+import org.bson.codecs.configuration.CodecRegistry;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+
+// Create a CodecRegistry containing the PojoCodecProvider instance.
+CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
+CodecRegistry pojoCodecRegistry = fromRegistries(defaultCodecRegistry, fromProviders(pojoCodecProvider));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; When using the automatic setting with &lt;code&gt;PojoCodecProvider&lt;/code&gt; always ensure that its the last &lt;code&gt;CodecProvider&lt;/code&gt; or &lt;code&gt;CodecRegistry&lt;/code&gt;. Otherwise it will try and handle any type it sees that has at least one serializable or deserializable property.&lt;/p&gt;
+
+&lt;h2 id=&#34;fun-with-pojos:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;Fun with POJOs&lt;/h2&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve configured your &lt;code&gt;CodecRegistry&lt;/code&gt; it can be used when creating a &lt;code&gt;MongoClient&lt;/code&gt;, a &lt;code&gt;MongoDatabase&lt;/code&gt; or a &lt;code&gt;MongoCollection&lt;/code&gt;.  The following example gets a list of all &lt;code&gt;members&lt;/code&gt; from MongoDB:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;MongoDatabase database = mongoClient.getDatabase(&amp;quot;members&amp;quot;).withCodecRegistry(pojoCodecRegistry);
+MongoCollection&amp;lt;Person&amp;gt; collection = database.getCollection(&amp;quot;members&amp;quot;, Person.class);
+
+List&amp;lt;Person&amp;gt; members = collection.find().into(new ArrayList&amp;lt;Person&amp;gt;());
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, using POJOs with MongoDB is super simple! And using the &lt;code&gt;automatic&lt;/code&gt; setting you can use &lt;em&gt;any&lt;/em&gt; Java bean!&lt;/p&gt;
+
+&lt;h2 id=&#34;customising-pojos:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;Customising POJOs&lt;/h2&gt;
+
+&lt;p&gt;There are two main ways to customise how POJOs are serialised / deserialised: &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/bson/pojos/#conventions&#34;&gt;Conventions&lt;/a&gt; and ClassModels.   The underlying abstractions used by the &lt;code&gt;PojoCodecProvider&lt;/code&gt; are ClassModels and PropertyModels.  As ClassModels are complex, its not recommended that users build and create them from scratch, but rather modify them via the Conventions mechanism.&lt;/p&gt;
+
+&lt;p&gt;Conventions are a handy abstraction that take and modify the &lt;code&gt;ClassModelBuilder&lt;/code&gt; before its made into an immutable &lt;code&gt;ClassModel&lt;/code&gt;. The default Conventions handle the &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/bson/pojos/#annotations&#34;&gt;default annotations&lt;/a&gt; and have special handling for &lt;code&gt;id&lt;/code&gt; properties.  Writing a custom &lt;code&gt;Convention&lt;/code&gt; is trivial so supporting alternative annotations is easy. Conventions can be registered on the &lt;code&gt;PojoCodecProvider&lt;/code&gt; and they will be run in order they are supplied.&lt;/p&gt;
+
+&lt;h2 id=&#34;available-now:ea33a3f7b0c8cdb3fb02a66bec2ef879&#34;&gt;Available now&lt;/h2&gt;
+
+&lt;p&gt;POJO support is available now! It includes support for Java beans, as well as abstract classes, interfaces and nested generic types. So please try it out!&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s loads more information in the &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/bson/pojos/&#34;&gt;POJO documentation&lt;/a&gt; as well as a &lt;a href=&#34;http://mongodb.github.io/mongo-java-driver/3.5/driver/getting-started/quick-start-pojo/&#34;&gt;quick-start guide&lt;/a&gt; to get you started.&lt;/p&gt;
+
+&lt;p&gt;Enjoy!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introducing a new MongoDB Spark Connector</title>
+      <link>http://rosslawley.co.uk/introducing-a-new=mongodb-spark-connector/</link>
+      <pubDate>Wed, 18 May 2016 13:43:25 +0100</pubDate>
+      
+      <guid>http://rosslawley.co.uk/introducing-a-new=mongodb-spark-connector/</guid>
+      <description>
+
+&lt;h2 id=&#34;update:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Update!&lt;/h2&gt;
+
+&lt;p&gt;The MongoDB Spark connector has been &lt;a href=&#34;http://rosslawley.co.uk/mongodb-spark-connector-released/&#34;&gt;released&lt;/a&gt;! See the official
+&lt;a href=&#34;https://docs.mongodb.com/spark-connector/&#34;&gt;documentation&lt;/a&gt; for more information on getting started!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Following on from the &lt;a href=&#34;https://www.mongodb.com/blog/post/mongodb-connector-for-apache-spark-announcing-early-access-program-and-new-spark-training&#34;&gt;official announcement&lt;/a&gt; yesterday, I&amp;rsquo;m really excited to write a few words about new &lt;strong&gt;MongoDB Spark Connector&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-started:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Getting started&lt;/h2&gt;
+
+&lt;p&gt;Before I go into detail about the hows and whys, first have a look at a quick usage example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;import com.mongodb.spark._
+import com.mongodb.spark.sql._
+
+// Loading data is simple:
+val rdd = sc.loadFromMongoDB()     // Uses the SparkConf for configuration
+println(rdd.count)
+println(rdd.first.toJson)
+
+// DataFrames and DataSets made simple:
+// Infers the schema (samples the collection)
+val df = sqlContext.loadFromMongoDB().toDF()
+df.filter(df(&amp;quot;age&amp;quot;) &amp;lt; 100).show()  // Passes filter to MongoDB
+
+// Schema provided via a Case Class
+val dataframeExplicit = sqlContext.loadFromMongoDB().toDF[Character]()
+val dataSet = sqlContext.loadFromMongoDB().toDS[Character]()
+
+// Writing data to MongoDB is also easy:
+val centenarians = sqlContext.sql(&amp;quot;SELECT name, age FROM characters WHERE age &amp;gt;= 100&amp;quot;)
+centenarians.write.option(&amp;quot;collection&amp;quot;, &amp;quot;hundredClub&amp;quot;).mongo()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The MongoDB Spark Connector supports Spark 1.6.1 and Scala 2.10 or 2.11. You can download it from Sonatype with these coordinates:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scala&#34;&gt;&amp;quot;org.mongodb.spark&amp;quot; %% &amp;quot;mongo-spark-connector&amp;quot; % &amp;quot;0.2&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;backstory:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Backstory&lt;/h2&gt;
+
+&lt;p&gt;Since January writing a new shiny Spark Connector designed from the ground up. Having initially played with Spark during one of our Skunkworks days over a year ago, I knew we could make a great connector to combine these two wonderful technologies. Last summer we welcomed Marko Vojvodic to the JVM team and during his internship he worked on prototyping a connector in Java. Marko looked at some of the hard problems when writing a great connector; type cohersion, data partitioning and data locality to name a few.&lt;/p&gt;
+
+&lt;p&gt;We have a few JVM projects keeping us busy at &lt;a href=&#34;http://www.mongodb.com&#34;&gt;MongoDB&lt;/a&gt;, but in January I got time to start focusing on building the Spark connector. I started with Scala and ported some of Marko&amp;rsquo;s code, wrote new code and built a new API from the ground up.&lt;/p&gt;
+
+&lt;p&gt;In April we quietly released the first beta version and solicited feedback from a select group of MongoDB power users. Since then a number of kinks have been ironed out resulting in the 0.2 release. Now we&amp;rsquo;re opening up the beta and asking the wider community for feedback, before we release a 1.0 version.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-build-a-new-mongodb-spark-connector:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Why build a new MongoDB Spark Connector?&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve been asked this a few times, after all the Hadoop connector supports Spark. The reason for a native connector is simple; Spark has quickly grown in popularity and use. It&amp;rsquo;s growth reminds me of MongoDBs and naturally users want to combine both products. So it&amp;rsquo;s only logical to create a &lt;em&gt;first class experience&lt;/em&gt; and let these users get the most out of combining both technologies.
+I really hope we have gone a long way to achieving that with this new connector.&lt;/p&gt;
+
+&lt;h2 id=&#34;language-support:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Language support&lt;/h2&gt;
+
+&lt;p&gt;The MongoDB Spark Connector supports all the languages Spark supports: Scala, Java, Python and R but under the hood it&amp;rsquo;s written in Scala. This helped keep the API clean because we can make full use of Scala magic like implicits. To keep Java folk happy there&amp;rsquo;s also a special Java API that hides some of the &amp;ldquo;Scala-ness&amp;rdquo; such as strange method names from Java users. Hat-tip to the Databricks &lt;a href=&#34;https://github.com/databricks/scala-style-guide#java-interoperability&#34;&gt;Java interoperability&lt;/a&gt; guide, it&amp;rsquo;s super helpful when considering how to consume a Scala API from Java.&lt;/p&gt;
+
+&lt;h2 id=&#34;feedback-wanted:b4450e2a5da78ad49e7021b6ad22ca92&#34;&gt;Feedback wanted!&lt;/h2&gt;
+
+&lt;p&gt;I hope that has got you interested, I would love to have your feedback on the new connector good or bad. So please feel free to email me directly or post to the &lt;a href=&#34;https://groups.google.com/forum/#!forum/mongodb-user&#34;&gt;MongoDB User&lt;/a&gt; mailing list. If you are currently using an alternative connector for MongoDB and Spark, I&amp;rsquo;d &lt;strong&gt;really interested&lt;/strong&gt; in any feedback.&lt;/p&gt;
+
+&lt;p&gt;The connector is still in Beta, so there maybe changes to the API, but I&amp;rsquo;m hoping it&amp;rsquo;s stable now. If you do encounter any problems or find a bug please report it by opening an issue at &lt;a href=&#34;https://jira.mongodb.org/browse/SPARK&#34;&gt;jira.mongodb.org/browse/SPARK&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The quickest way to get up and running with the new connector is via the &lt;a href=&#34;https://github.com/mongodb/mongo-spark/blob/master/doc/0-introduction.md&#34;&gt;introduction&lt;/a&gt; on github. There is also the &lt;a href=&#34;https://university.mongodb.com/courses/M233/about&#34;&gt;M233: Getting Started with Spark and MongoDB&lt;/a&gt; course over at the MongoDB University.&lt;/p&gt;
+
+&lt;p&gt;Happy Big Data Computing.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

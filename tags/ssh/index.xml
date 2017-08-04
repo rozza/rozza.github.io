@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ssh on Ross Lawley</title>
+    <link>http://rosslawley.co.uk/tags/ssh/</link>
+    <description>Recent content in Ssh on Ross Lawley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 20 Nov 2015 12:06:46 +0000</lastBuildDate>
+    <atom:link href="http://rosslawley.co.uk/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>El Capitan and key_load_public: invalid format</title>
+      <link>http://rosslawley.co.uk/key_load_public/</link>
+      <pubDate>Fri, 20 Nov 2015 12:06:46 +0000</pubDate>
+      
+      <guid>http://rosslawley.co.uk/key_load_public/</guid>
+      <description>&lt;p&gt;I upgraded to El Capitan on my Mac and it all went smoothly apart from one hitch. When pulling or pushing to Github I would get the following error: &lt;code&gt;key_load_public: invalid format&lt;/code&gt;.  Everything worked but opaque error messages are annoying.&lt;/p&gt;
+
+&lt;p&gt;I tried googling and all I found was this  &lt;a href=&#34;http://rcmdnk.github.io/blog/2015/10/09/computer-github-mac/&#34;&gt;article&lt;/a&gt;. It seemed to solve the issue but I didn&amp;rsquo;t like the solution, mainly because it didn&amp;rsquo;t help me understand the problem! So I persevered and &lt;em&gt;ignored the message&lt;/em&gt;, until it became too annoying.&lt;/p&gt;
+
+&lt;p&gt;After more investigation it turns out it was caused by my public key: &lt;code&gt;~/.ssh/id_rsa.pub&lt;/code&gt;, somehow it been corrupted during the upgrade. The good news is you can regenerate it easy enough with &lt;code&gt;ssh-keygen&lt;/code&gt; like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  ssh-keygen -f ~/.ssh/id_rsa -y &amp;gt; ~/.ssh/id_rsa.pub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And now I don&amp;rsquo;t get &lt;code&gt;key_load_public: invalid format&lt;/code&gt; messages anymore. Happy days.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
