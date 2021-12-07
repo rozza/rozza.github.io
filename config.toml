@@ -29,7 +29,7 @@ paginate = 5
 [languages]
   [languages.en]
     title = "Rozza"
-    subtitle = "rozza.github.io"
+    subtitle = "https://rozza.github.io"
     keywords = ""
     copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
     readOtherPosts = "Read other posts"
